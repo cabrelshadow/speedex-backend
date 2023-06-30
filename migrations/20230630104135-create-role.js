@@ -9,6 +9,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      isAdmin: {
+        type: Sequelize.BOOLEAN,
+        default:false
+      },
       name: {
         type: Sequelize.STRING
       },

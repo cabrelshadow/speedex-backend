@@ -14,7 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Role.init({
-    name: DataTypes.STRING
+    name: DataTypes.STRING,
+    isAdmin:DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'Role',

@@ -14,7 +14,6 @@ app.use(
     extended: false,
   }),
 );
-
 app.use((err, req, res, next) => {
   // Handle the error
   res.status(500).json({ error: "Internal Server Error" });
@@ -23,7 +22,6 @@ app.use(function (req, res, next) {
   res.locals.user = req.user || null;
   next();
 });
-
 app.use(
   session({
     secret: "secret",
@@ -32,7 +30,6 @@ app.use(
     maxAge: new Date(Date.now() + 3600000),
   }),
 );
-
 app.use(passport.initialize());
 app.use(passport.session());
 jwtAuth(passport);

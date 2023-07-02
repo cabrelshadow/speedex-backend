@@ -18,24 +18,36 @@ module.exports = {
 				{
 					name: "Administrateur",
 					isAdmin: true,
+					createdAt: new Date(),
+					updatedAt: new Date(),
 				},
 				{
 					name: "Superviseur",
+					createdAt: new Date(),
+					updatedAt: new Date(),
 				},
 				{
 					name: "Livreur",
+					createdAt: new Date(),
+					updatedAt: new Date(),
 				},
-				,
+
 				{
 					name: "CallCenter",
+					createdAt: new Date(),
+					updatedAt: new Date(),
 				},
-				,
+
 				{
 					name: "Partenaire",
+					createdAt: new Date(),
+					updatedAt: new Date(),
 				},
-				,
+
 				{
 					name: "Client",
+					createdAt: new Date(),
+					updatedAt: new Date(),
 				},
 			],
 			{},
@@ -49,6 +61,6 @@ module.exports = {
 		 * Example:
 		 * await queryInterface.bulkDelete('People', null, {});
 		 */
-    await queryInterface.bulkDelete('Roles', null, {});
+		await queryInterface.bulkDelete("Roles", null, {});
 	},
 };

@@ -2,18 +2,20 @@ const router = require("express").Router();
 const { compareSync, hashSync } = require("bcryptjs");
 const db = require("../models");
 const jwt = require("jsonwebtoken");
-router.get("/", (req, res) => {
-	const users = db.User.findAll({
+router.get("/", async (req, res) => {
+	const users = await db.User.findAll({
 		include: ["Role"],
+		raw: true,
 	});
-	res.status(200).json(users);
+	const roles = await db.Role.findAll({ raw: true });
+	res.status(200).render("settings/user", { users, roles });
 });
 
-router.post("/add-user", (req, res) => {
+router.post("/add-user", async (req, res, next) => {
 	req.body.password = hashSync(req.body.password, 10);
-	db.User.create(req.body)
+	await db.User.create(req.body)
 		.then((result) => {
-			return res.status(201).json(result);
+			return res.redirect(req.headers.referer);
 		})
 		.catch((err) => {
 			next(err);

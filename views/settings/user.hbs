@@ -1,0 +1,130 @@
+<div class="m-2 text-gray-700">
+    <h4>
+        Ajouter un client
+    </h4>
+    <button class="btn btn-secondary m-3" data-bs-toggle="modal" data-bs-target="#add_type">
+        <i class="fas fa-plus    "></i> Ajouter un type de souscription
+    </button>
+</div>
+<div class="container">
+    <div class="table-responsive">
+        <table class="table table-striped-columns
+        align-middle">
+            <thead>
+                <caption>Utilisateurs</caption>
+                <tr>
+                    <th>Nom complet</th>
+                    <th>Adresse</th>
+                    <th>Ville</th>
+                    <th>Quartier</th>
+                    <th>Nom d'Utilisateur</th>
+                    <th>Role</th>
+                </tr>
+                </thead>
+                <tbody >
+                    {{#each users}}
+                        <tr>
+                            <td scope="row">{{fullname}}</td>
+                            <td>{{address}}</td>
+                            <td>{{ville}}</td>
+                            <td>{{street_address}}</td>
+                            <td><span class="badge bg-info">{{username}}</span></td>
+                            <td>{{"Role.name"}}</td>
+                        </tr>
+                    {{/each}}
+                    
+                </tbody>
+                <tfoot>
+                    
+                </tfoot>
+        </table>
+    </div>
+    
+</div>
+<!-- Modal -->
+<div class="modal fade" id="add_type" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Ajouter un Utilisateur</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <form action="/admin/user/add-user" method="post">
+                        <div class="mb-3">
+                            <label for="fullname" class="form-label">Nom complet</label>
+                            <input type="text" class="form-control" name="fullname" id="fullname" aria-describedby="helpId"
+                                placeholder="" required>
+                            <small id="helpId" class="form-text text-muted"></small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Nom d'Utilisateur</label>
+                            <input type="text" class="form-control" name="username" id="username" aria-describedby="helpId" placeholder="">
+                            <small id="helpId" class="form-text text-muted"></small>
+                        </div>
+                        <div class="mb-3">
+                          <label for="address" class="form-label">Adresse</label>
+                          <input type="text"
+                            class="form-control" name="address" id="address" aria-describedby="helpId" placeholder="">
+                          <small id="helpId" class="form-text text-muted"></small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="ville" class="form-label">Ville</label>
+                            <input type="text" class="form-control" name="ville" id="ville" aria-describedby="helpId" placeholder="">
+                            <small id="helpId" class="form-text text-muted"></small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="street_address" class="form-label">Adresse du quartier</label>
+                            <input type="text" class="form-control" name="street_address" id="street_address" aria-describedby="helpId" placeholder="">
+                            <small id="helpId" class="form-text text-muted"></small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="cni" class="form-label">CNI</label>
+                            <input type="text" class="form-control" name="cni" id="cni" aria-describedby="helpId" placeholder="">
+                            <small id="helpId" class="form-text text-muted"></small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="date_delivrance" class="form-label">Date de délivrance</label>
+                            <input type="date" class="form-control" name="date_delivrance" id="date_delivrance" aria-describedby="helpId" placeholder="">
+                            <small id="helpId" class="form-text text-muted"></small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="lieu_delivrance" class="form-label">Lieu de délivrance</label>
+                            <input type="text" class="form-control" name="lieu_delivrance" id="lieu_delivrance" aria-describedby="helpId" placeholder="">
+                            <small id="helpId" class="form-text text-muted"></small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="role_id" class="form-label">Role</label>
+                            <select class="form-select" name="role_id" id="role_id">
+                                <option selected value="">Selectionner un rôle</option>
+                                {{#each roles}}
+                                    <option value="{{id}}">{{name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Mot de passe</label>
+                            <input type="password" class="form-control" name="password" id="password" aria-describedby="helpId"
+                                placeholder="">
+                            <small id="helpId" class="form-text text-muted"></small>
+                        </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="Enregistrer" class="btn btn-primary">Enregister</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const fullname = document.querySelector("#fullname")
+    fullname.addEventListener("keyup",(e)=>{
+        e.preventDefault();
+        document.querySelector("#username").value = String(fullname.value).substr(0,Math.round(String(fullname.value).length/2)).trim() +(Math.ceil(Math.random(300000)*1000)+9000)
+    })
+</script>

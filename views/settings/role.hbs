@@ -4,33 +4,37 @@
 <div class="mb-3">
     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addRole"><i class="fas fa-plus"></i> Ajouter un rôle</button>
 </div>
-<div class="table-responsive">
-    <table class="table table-striped-columns table-bordered
-    align-middle">
-        <thead class="">
-            <caption>Role</caption>
-            <tr>
-                <th>Role</th>
-                <th>Permissions</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody >
-                {{#each role}}
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead>
                     <tr>
-                        <td scope="row">{{name}}</td>
-                        <td>{{#if isAdmin}}
-                            <span class="badge bg-success">Administrateur</span>
-                            {{else}}
-                            <span class="badge bg-info">Standart</span>
-                        {{/if}}</td>
-                        <td></td>
+                        <th>Role</th>
+                        <th>Permissions</th>
+                        <th></th>
                     </tr>
-                {{/each}}
-               
-            </tbody>
-    </table>
+                </thead>
+                <tbody>
+                    {{#each role}}
+                        <tr>
+                            <td scope="row">{{name}}</td>
+                            <td>
+                                {{#if isAdmin}}
+                                    <span class="badge bg-success">Administrateur</span>
+                                {{else}}
+                                    <span class="badge bg-info">Standard</span>
+                                {{/if}}
+                            </td>
+                            <td></td>
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
+
 
 <!-- Modal Body -->
 <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->

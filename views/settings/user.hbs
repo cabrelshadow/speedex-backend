@@ -1,17 +1,19 @@
 <div class="m-2 text-gray-700">
     <h4>
-        Ajouter un client
+        Ajouter un Utilisateur
     </h4>
-    <button class="btn btn-secondary m-3" data-bs-toggle="modal" data-bs-target="#add_type">
-        <i class="fas fa-plus    "></i> Ajouter un type de souscription
+    <button class="btn btn-outline-success m-3" data-bs-toggle="modal" data-bs-target="#add_type">
+        <i class="fas fa-plus    "></i> Ajouter
     </button>
 </div>
 <div class="container">
-    <div class="table-responsive">
-        <table class="table table-striped-columns
+    <div class="card">
+        <div class="card-body">
+             <div class="table-responsive">
+        <table class="table 
         align-middle">
             <thead>
-                <caption>Utilisateurs</caption>
+             
                 <tr>
                     <th>Nom complet</th>
                     <th>Adresse</th>
@@ -39,6 +41,9 @@
                 </tfoot>
         </table>
     </div>
+        </div>
+    </div>
+  
     
 </div>
 <!-- Modal -->
@@ -47,7 +52,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Ajouter un Utilisateur</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-primary" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="container-fluid">

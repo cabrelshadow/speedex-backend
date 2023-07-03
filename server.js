@@ -7,6 +7,7 @@ const session = require("express-session");
 const passport = require("passport");
 const { jwtAuth } = require("./config/passport");
 const { engine } = require("express-handlebars");
+const { Server } = require("socket.io");
 app.use(cors());
 app.use(express.static("public"));
 app.use(express.json());
@@ -45,6 +46,35 @@ app.use("/admin/user", require("./routes/user"));
 app.use("/admin/role", require("./routes/role"));
 app.use("/admin/categories", require("./routes/categorie"));
 app.use("/admin/articles", require("./routes/article"));
-http.createServer(app).listen(port, () => {
+
+const httpServer = http.createServer(app);
+
+const io = new Server(httpServer, { cors: { origin: "*" } });
+
+io.on("connection", async (socket) => {
+	// const active = await getActive();
+	// io.emit("user connect", commandes);
+
+	/*   socket.on("new", (data) => {
+    console.log("data of commandes", data);
+    //return data;
+  });
+
+  socket.on("test", (data) => {
+    console.log("data of commandes", data);
+    //return data;
+  }); */
+
+	socket.on("disconnect", () => {
+		// clearInterval(interval);
+		console.log("user disconnected  ");
+	});
+});
+
+/* const socketIoObject = io;
+module.exports.ioObject = socketIoObject; */
+
+app.io = io;
+httpServer.listen(port, () => {
 	console.log("Run server on port " + port);
 });

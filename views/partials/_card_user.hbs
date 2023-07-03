@@ -152,26 +152,47 @@
 
   <script>
     // Fonction d'initialisation de la carte
-    function initMap() {
-      // Coordonnées de Douala, Cameroun
-      var douala = { lat: 4.051056, lng: 9.767868 };
+function initMap() {
+  // Coordonnées de Douala, Cameroun
+  var douala = { lat: 4.051056, lng: 9.767868 };
 
-      // Options de la carte
-      var mapOptions = {
-        center: douala,
-        zoom: 12
+  // Options de la carte
+  var mapOptions = {
+    center: douala,
+    zoom: 12
+  };
+
+  // Créer la carte
+  var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+  // Récupérer la position de l'utilisateur
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var userLatLng = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
       };
-
-      // Créer la carte
-      var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
-      // Marqueur pour la position à Douala
-      var marker = new google.maps.Marker({
-        position: douala,
+      
+      // Marqueur pour la position de l'utilisateur
+      var userMarker = new google.maps.Marker({
+        position: userLatLng,
         map: map,
-        title: "Douala, Cameroun"
+        title: "Votre position"
       });
-    }
+      
+      // Centrer la carte sur la position de l'utilisateur
+      map.setCenter(userLatLng);
+    });
+  }
+
+  // Marqueur pour la position à Douala
+  var marker = new google.maps.Marker({
+    position: douala,
+    map: map,
+    title: "Douala, Cameroun"
+  });
+}
+
   </script>
   <!-- Charger l'API Google Maps -->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAB2rGzlhCEFY-8uNNkJTd3AkVAIRpQbIg&callback=initMap" async defer></script>

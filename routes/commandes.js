@@ -3,8 +3,7 @@ const db = require("../models");
 const router = require("express").Router();
 
 router.get("/", async (req, res) => {
-	const commandes = await db.Article_commande.findAll({
-		include: ["Commande", "Article"],
+	const commandes = await db.Commande.findAll({
 		raw: true,
 	});
 	const articles = await db.Article.findAll({

@@ -46,7 +46,7 @@ app.use("/admin/user", require("./routes/user"));
 app.use("/admin/role", require("./routes/role"));
 app.use("/admin/categories", require("./routes/categorie"));
 app.use("/admin/articles", require("./routes/article"));
-
+app.use("/commandes", require("./routes/commandes"));
 const httpServer = http.createServer(app);
 
 const io = new Server(httpServer, { cors: { origin: "*" } });

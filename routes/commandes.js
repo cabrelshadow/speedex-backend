@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
 });
 router.get("/live", async (req, res) => {
 	const commandes = await db.Article_commande.findAll({
-		include: ["Commande", "Article"],
+		//include: ["Commande", "Article"],
 		raw: true,
 	});
 	const articles = await db.Article.findAll({

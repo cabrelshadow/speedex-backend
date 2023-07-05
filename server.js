@@ -6,7 +6,11 @@ const http = require("http");
 const session = require("express-session");
 const passport = require("passport");
 const { jwtAuth } = require("./config/passport");
-const { engine } = require("express-handlebars");
+const expressHandlebars = require("express-handlebars");
+const {
+	allowInsecurePrototypeAccess,
+} = require("@handlebars/allow-prototype-access");
+const Handlebars = require("handlebars");
 const { Server } = require("socket.io");
 app.use(cors());
 app.use(express.static("public"));
@@ -17,7 +21,55 @@ app.use(
 		extended: false,
 	}),
 );
-app.engine(".hbs", engine({ extname: ".hbs" }));
+/* expressHandlebars.create({
+	
+}); */
+app.engine(
+	".hbs",
+	expressHandlebars.engine({
+		defaultLayout: "main",
+		extname: ".hbs",
+		handlebars: allowInsecurePrototypeAccess(Handlebars),
+		helpers: {
+			selected: function (option, value) {
+				if (parseInt(option) === parseInt(value)) {
+					return "selected";
+				} else {
+					return "";
+				}
+			},
+			multiplyBy: function (valueOne, valueTwo) {
+				return valueOne * valueTwo;
+			},
+			checkStatus: function (status) {},
+			if_not: function (val1, val2, opts) {
+				if (val1 !== val2) {
+					return opts.fn(this);
+				} else {
+					return opts.inverse(this);
+				}
+			},
+			addition: (val1, value2) => {
+				return parseInt(val1) + parseInt(value2);
+			},
+			if_equal: function (val1, val2, opts) {
+				if (val1 === val2) {
+					return opts.fn(this);
+				} else {
+					return opts.inverse(this);
+				}
+			},
+			formDate: function (val1) {
+				return FormatDate(val1);
+			},
+			lessThan: function (val1, val2) {
+				if (val2 <= val1) {
+					return "background-color: #e74c3c; color: white; font-size: 20px; text-align: center";
+				}
+			},
+		},
+	}),
+);
 app.set("view engine", ".hbs");
 app.set("views", "./views");
 app.use((err, req, res, next) => {
@@ -48,6 +100,8 @@ app.use("/admin/categories", require("./routes/categorie"));
 app.use("/admin/articles", require("./routes/article"));
 app.use("/commandes", require("./routes/commandes"));
 app.use("/admin/stocks", require("./routes/stocks"));
+app.use("/livreur", require("./routes/livreur"));
+app.use("/livraison", require("./routes/livraison"));
 const httpServer = http.createServer(app);
 
 const io = new Server(httpServer, { cors: { origin: "*" } });

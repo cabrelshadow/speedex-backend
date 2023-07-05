@@ -6,7 +6,7 @@
         <i class="fas fa-plus    "></i> Ajouter
     </button>
 </div>
-<div class="container">
+<div class="container-fluid">
     <div class="card">
         <div class="card-body">
              <div class="table-responsive">
@@ -32,6 +32,96 @@
                             <td>{{street_address}}</td>
                             <td><span class="badge bg-info">{{username}}</span></td>
                             <td>{{"Role.name"}}</td>
+                            <td><button class="btn btn-sm btn-warning"  data-bs-target="#edit_user{{id}}" data-bs-toggle="modal"><i class="fas fa-edit"></i></button></td>
+                        
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="edit_user{{id}}" tabindex="-1" role="dialog" aria-labelledby="modelTitleId{{id}}" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Modifier</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="container-fluid">
+                                            <form action="/admin/user/edit-user/{{id}}" method="post">
+                                                <div class="mb-3">
+                                                    <label for="fullname" class="form-label">Nom complet</label>
+                                                    <input type="text" class="form-control" name="fullname" id="fullname"
+                                                        aria-describedby="helpId" placeholder="" required value="{{fullname}}">
+                                                    <small id="helpId" class="form-text text-muted"></small>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="edit-username" class="form-label">Nom d'Utilisateur</label>
+                                                    <input type="text" class="form-control" name="username" id="edit-username"
+                                                        aria-describedby="helpId" placeholder="" value="{{username}}" readonly>
+                                                    <small id="helpId" class="form-text text-muted"></small>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="address" class="form-label">Adresse</label>
+                                                    <input type="text" class="form-control" name="address" id="address"
+                                                        aria-describedby="helpId" placeholder="" value="{{address}}">
+                                                    <small id="helpId" class="form-text text-muted"></small>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="ville" class="form-label">Ville</label>
+                                                    <input type="text" class="form-control" name="ville" id="ville" aria-describedby="helpId"
+                                                        placeholder="" value="{{ville}}">
+                                                    <small id="helpId" class="form-text text-muted"></small>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="street_address" class="form-label">Adresse du quartier</label>
+                                                    <input type="text" class="form-control" name="street_address" id="street_address"
+                                                        aria-describedby="helpId" placeholder="" value="{{street_address}}">
+                                                    <small id="helpId" class="form-text text-muted"></small>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="cni" class="form-label">CNI</label>
+                                                    <input type="text" class="form-control" name="cni" id="cni" aria-describedby="helpId"
+                                                        placeholder="" value="{{cni}}">
+                                                    <small id="helpId" class="form-text text-muted"></small>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="date_delivrance" class="form-label">Date de délivrance</label>
+                                                    <input type="date" class="form-control" name="date_delivrance" id="date_delivrance"
+                                                        aria-describedby="helpId" placeholder="" value="{{date_delivrance}}">
+                                                    <small id="helpId" class="form-text text-muted"></small>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="lieu_delivrance" class="form-label">Lieu de délivrance</label>
+                                                    <input type="text" class="form-control" name="lieu_delivrance" id="lieu_delivrance"
+                                                        aria-describedby="helpId" placeholder="" value="{{lieu_delivrance}}">
+                                                    <small id="helpId" class="form-text text-muted"></small>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="role_id" class="form-label">Role</label>
+                                                    <select class="form-select" name="role_id" id="role_id">
+                                                        <option selected value="">Selectionner un rôle</option>
+                                                        {{#each ../roles}}
+                                                            <option {{#if_equal ../role_id id}}
+                                                                selected
+                                                            {{/if_equal}} value="{{id}}">{{name}}</option>
+                                                        {{/each}}
+                                                    </select>
+                                                </div>
+                                                {{!-- <div class="mb-3">
+                                                    <label for="password" class="form-label">Mot de passe</label>
+                                                    <input type="password" class="form-control" name="password" id="password"
+                                                        aria-describedby="helpId" placeholder="">
+                                                    <small id="helpId" class="form-text text-muted"></small>
+                                                </div> --}}
+                        
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                        <button type="submit" class="btn btn-primary">Enregister</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         </tr>
                     {{/each}}
                     

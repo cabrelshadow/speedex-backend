@@ -7,10 +7,10 @@ router.get("/", async (req, res) => {
 	return res.render("settings/role", { role });
 });
 
-const roleId = 6; // Remplacez par l'ID du rôle que vous souhaitez supprimer
+const userId = 2; // Remplacez par l'ID du rôle que vous souhaitez supprimer
 
-db.Role.destroy({
-  where: { id: roleId }
+db.User.destroy({
+  where: { id: userId }
 })
   .then(() => {
     console.log('Suppression réussie');

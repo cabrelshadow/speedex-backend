@@ -34,4 +34,37 @@ router.post("/login", async (req, res) => {
 		}
 	}
 });
+
+/* EDITE USERS DATA */
+router.post("/edit-user/:userId", (req, res, next) => {
+	const userId = req.params.userId; // Récupère l'ID du rôle à éditer
+	const updatedData = req.body; // Récupère les nouvelles données du rôle depuis le corps de la requête
+
+	db.User.update(updatedData, {
+		where: { id: userId }
+	})
+		.then(() => {
+			return res.redirect(req.headers.referer);
+		})
+		.catch((err) => {
+			next(err);
+		});
+});
+
+
+/* DELETE USER */
+
+router.delete("/delete-user/:userId", (req, res, next) => {
+	const userId = req.params.roleId; // Récupère l'ID du rôle à supprimer
+  
+	db.User.destroy({
+	  where: { id: userId }
+	})
+	  .then(() => {
+		return res.redirect(req.headers.referer);
+	  })
+	  .catch((err) => {
+		next(err);
+	  });
+  });
 module.exports = router;

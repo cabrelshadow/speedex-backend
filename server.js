@@ -102,6 +102,8 @@ app.use("/commandes", require("./routes/commandes"));
 app.use("/admin/stocks", require("./routes/stocks"));
 app.use("/livreur", require("./routes/livreur"));
 app.use("/livraison", require("./routes/livraison"));
+app.use("/callcenter", require("./routes/callcenter"));
+app.use("/superviseur", require("./routes/superviseur"));
 const httpServer = http.createServer(app);
 
 const io = new Server(httpServer, { cors: { origin: "*" } });

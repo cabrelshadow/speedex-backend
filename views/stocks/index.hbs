@@ -1,0 +1,81 @@
+<h3 class="mb-3">Stocks</h3>
+<!-- Modal trigger button -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addStocks">
+    <i class="fas fa-plus"></i> Ajouter un stock
+</button>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">client</th>
+                <th scope="col">crticle</th>
+                <th scope="col">quantite</th>
+                <th scope="col">prix</th>
+            </tr>
+        </thead>
+        <tbody>
+           {{#each stocks}}
+            <tr class="">
+                <td scope="row">{{"User.fullname"}}</td>
+                <td>{{"Article.name"}}</td>
+                <td>{{quantite}}</td>*
+                <td>{{"Article.price"}}</td>
+            </tr>
+           {{/each}}
+            
+        </tbody>
+    </table>
+</div>
+
+
+
+<!-- Modal Body -->
+<!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+<div class="modal fade" id="addStocks" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleStocks" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitleStocks">Ajouter un stocks</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/admin/stocks/add" method="post">
+                    <div class="mb-3">
+                        <label for="article" class="form-label">Article</label>
+                        <select class="form-select" name="article_id" id="article">
+                            <option value="" selected>Selectionner un article</option>
+                            {{#each articles}}
+                                <option value="{{id}}">{{name}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                      <label for="quantite" class="form-label">quantite</label>
+                      <input type="number"
+                        class="form-control" name="quantite" id="quantite" aria-describedby="helpId" placeholder="">
+                      <small id="helpId" class="form-text text-muted"></small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="user" class="form-label">Partenaire</label>
+                        <select class="form-select" name="user_id" id="user">
+                            <option value="" selected>Selectionner un partenaire</option>
+                            {{#each users}}
+                            <option value="{{id}}">{{fullname}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary">Ajouter</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Optional: Place to the bottom of scripts -->
+<script>
+    const myModal = new bootstrap.Modal(document.getElementById('addStocks'), options)
+</script>

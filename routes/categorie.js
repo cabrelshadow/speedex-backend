@@ -11,10 +11,14 @@ router.post("/add", (req, res) => {
 		Object.keys(req.body).length > 0 &&
 		Object.keys(req.body).at(0) === "name"
 	) {
-		db.Categorie.create(req.body);
-		return res.status(201).send("success");
+		db.Categorie.create(req.body)
+			.then(() => {
+				return res.redirect(req.headers.referer);
+			})
+			.catch((err) => {
+				next(err);
+			});
 	}
-	next();
 });
 
 router.put("/edit/:id", (req, res) => {
@@ -24,13 +28,16 @@ router.put("/edit/:id", (req, res) => {
 		req.params.id
 	) {
 		db.Categorie.update(req.body, { where: { id: req.params.id } });
-		return res.status(200).send("success");
+		return res.redirect(req.headers.referer);
 	}
 });
-router.delete("/delete/:id", (req, res) => {
+router.delete("/delete/:id", async (req, res) => {
 	if (req.params.id) {
 		db.Categorie.destroy({ where: { id: req.params.id } });
 		return res.status(200).send("success");
 	}
+	const categorie = await db.Categorie.findAll({ raw: true });
+	return res.redirect(req.headers.referer);
 });
+
 module.exports = router;

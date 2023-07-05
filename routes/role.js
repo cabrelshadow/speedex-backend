@@ -32,4 +32,20 @@ router.post("/edit/:roleId", (req, res, next) => {
 			next(err);
 		});
 });
+
+/* DELETE ROLE */
+ router.delete("/delete/:roleId", (req, res, next) => {
+	const roleId = req.params.roleId; // Récupère l'ID du rôle à supprimer
+  
+	db.Role.destroy({
+	  where: { id: roleId }
+	})
+	  .then(() => {
+		return res.redirect(req.headers.referer);
+	  })
+	  .catch((err) => {
+		next(err);
+	  });
+  });
+
 module.exports = router;

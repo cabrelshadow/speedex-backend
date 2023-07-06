@@ -23,4 +23,35 @@ router.post("/add", async (req, res, next) => {
 	}
 });
 
+/*  edite  stock*/
+router.post("/edit-stock/: stockId", (req, res, next) => {
+	const roleId = req.params.roleId; // Récupère l'ID du rôle à éditer
+	const updatedData = req.body; // Récupère les nouvelles données du rôle depuis le corps de la requête
+
+	db.Stock.update(updatedData, {
+		where: { id:  stockId },
+	})
+		.then(() => {
+			return res.redirect(req.headers.referer);
+		})
+		.catch((err) => {
+			next(err);
+		});
+});
+
+/* DELETE STOCK */
+router.get("/delete-stock/: stockId", (req, res, next) => {
+	const stockId = req.params.roleId; // Récupère l'ID du rôle à supprimer
+
+	db.Stock.destroy({
+		where: { id:  stockId },
+	})
+		.then(() => {
+			return res.redirect(req.headers.referer);
+		})
+		.catch((err) => {
+			next(err);
+		});
+});
+
 module.exports = router;

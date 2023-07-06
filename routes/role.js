@@ -1,8 +1,9 @@
+const { ensureAuthenticated } = require("../config/auth");
 const db = require("../models");
 
 const router = require("express").Router();
 
-router.get("/", async (req, res) => {
+router.get("/", ensureAuthenticated, async (req, res) => {
 	const role = await db.Role.findAll({ raw: true });
 	return res.render("settings/role", { role });
 });
@@ -18,7 +19,7 @@ router.post("/add", (req, res, next) => {
 });
 
 /*  edite  role*/
-router.post("/edit/:roleId", (req, res, next) => {
+router.post("/edit/:roleId", ensureAuthenticated, (req, res, next) => {
 	const roleId = req.params.roleId; // Récupère l'ID du rôle à éditer
 	const updatedData = req.body; // Récupère les nouvelles données du rôle depuis le corps de la requête
 
@@ -34,7 +35,7 @@ router.post("/edit/:roleId", (req, res, next) => {
 });
 
 /* DELETE ROLE */
-router.get("/delete/:roleId", (req, res, next) => {
+router.get("/delete/:roleId", ensureAuthenticated, (req, res, next) => {
 	const roleId = req.params.roleId; // Récupère l'ID du rôle à supprimer
 
 	db.Role.destroy({

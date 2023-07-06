@@ -6,8 +6,11 @@ const http = require("http");
 const session = require("express-session");
 const passport = require("passport");
 const Handlebars = require("handlebars");
+var sqlite = require("better-sqlite3");
+var SqliteStore = require("better-sqlite3-session-store")(session);
+var sessionsDB = new sqlite("db/sessions.db");
 const { engine } = require("express-handlebars");
-const { jwtAuth } = require("./config/passport");
+const { jwtAuth, localAuth } = require("./config/passport");
 const expressHandlebars = require("express-handlebars");
 const {
 	allowInsecurePrototypeAccess,
@@ -91,15 +94,20 @@ app.use(
 		resave: true,
 		saveUninitialized: false,
 		maxAge: new Date(Date.now() + 3600000),
+		store: new SqliteStore({
+			client: sessionsDB,
+		}),
 	}),
 );
 app.use(passport.initialize());
 app.use(passport.session());
 jwtAuth(passport);
+localAuth(passport);
 const port = process.env.PORT || 8000;
 
 app.use("/", require("./routes/index"));
 app.use("/admin/user", require("./routes/user"));
+app.use("/auth", require("./routes/auth"));
 app.use("/admin/role", require("./routes/role"));
 app.use("/admin/categories", require("./routes/categorie"));
 app.use("/admin/articles", require("./routes/article"));

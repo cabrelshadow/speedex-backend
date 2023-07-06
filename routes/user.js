@@ -2,7 +2,9 @@ const router = require("express").Router();
 const { compareSync, hashSync } = require("bcryptjs");
 const db = require("../models");
 const jwt = require("jsonwebtoken");
-router.get("/", async (req, res) => {
+const passport = require("passport");
+const { ensureAuthenticated } = require("../config/auth");
+router.get("/", ensureAuthenticated, async (req, res) => {
 	const users = await db.User.findAll({
 		include: ["Role"],
 		raw: true,
@@ -11,7 +13,7 @@ router.get("/", async (req, res) => {
 	res.status(200).render("settings/user", { users, roles });
 });
 
-router.post("/add-user", async (req, res, next) => {
+router.post("/add-user", ensureAuthenticated, async (req, res, next) => {
 	req.body.password = hashSync(req.body.password, 10);
 	await db.User.create(req.body)
 		.then((result) => {
@@ -21,7 +23,7 @@ router.post("/add-user", async (req, res, next) => {
 			next(err);
 		});
 });
-router.post("/login", async (req, res) => {
+router.post("/sign-in", async (req, res) => {
 	const { username, password } = req.body;
 	if (username !== "" && password !== "") {
 		const user = await db.User.findOne({ where: { username } });
@@ -35,13 +37,22 @@ router.post("/login", async (req, res) => {
 	}
 });
 
+router.post("/login", async (req, res) => {
+	passport.authenticate("local", {
+		failureRedirect: "/users/login",
+		//successRedirect: "/",
+		successRedirect: "/users/redirectLogin",
+		// failureFlash: true,
+	})(req, res, next);
+});
+
 /* EDITE USERS DATA */
-router.post("/edit-user/:userId", (req, res, next) => {
+router.post("/edit-user/:userId", ensureAuthenticated, (req, res, next) => {
 	const userId = req.params.userId; // Récupère l'ID du rôle à éditer
 	const updatedData = req.body; // Récupère les nouvelles données du rôle depuis le corps de la requête
 
 	db.User.update(updatedData, {
-		where: { id: userId }
+		where: { id: userId },
 	})
 		.then(() => {
 			return res.redirect(req.headers.referer);
@@ -51,20 +62,19 @@ router.post("/edit-user/:userId", (req, res, next) => {
 		});
 });
 
-
 /* DELETE USER */
 
-router.delete("/delete-user/:userId", (req, res, next) => {
+router.delete("/delete-user/:userId", ensureAuthenticated, (req, res, next) => {
 	const userId = req.params.roleId; // Récupère l'ID du rôle à supprimer
-  
+
 	db.User.destroy({
-	  where: { id: userId }
+		where: { id: userId },
 	})
-	  .then(() => {
-		return res.redirect(req.headers.referer);
-	  })
-	  .catch((err) => {
-		next(err);
-	  });
-  });
+		.then(() => {
+			return res.redirect(req.headers.referer);
+		})
+		.catch((err) => {
+			next(err);
+		});
+});
 module.exports = router;

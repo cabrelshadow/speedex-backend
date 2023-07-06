@@ -7,16 +7,11 @@ const session = require("express-session");
 const passport = require("passport");
 const Handlebars = require("handlebars");
 const { engine } = require("express-handlebars");
-const {
-	allowInsecurePrototypeAccess,
-} = require("@handlebars/allow-prototype-access");
-
 const { jwtAuth } = require("./config/passport");
 const expressHandlebars = require("express-handlebars");
 const {
 	allowInsecurePrototypeAccess,
 } = require("@handlebars/allow-prototype-access");
-const Handlebars = require("handlebars");
 const { Server } = require("socket.io");
 app.use(cors());
 app.use(express.static("public"));

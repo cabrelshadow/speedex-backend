@@ -14,8 +14,8 @@ function localAuth(passport) {
 					where: {
 						username: username,
 					},
+					raw: true,
 				}).then((user) => {
-					console.log(user);
 					if (!user) {
 						//console.log("No User Found");
 						return done(null, false, { message: "No User Found" });
@@ -51,7 +51,7 @@ function localAuth(passport) {
 	passport.deserializeUser(function (user, cb) {
 		const { id } = user;
 		//User.findByPk(id);
-		db.User.findByPk(id)
+		db.User.findByPk(id, { include: ["Role"], raw: true })
 			.then((user) => {
 				process.nextTick(function () {
 					return cb(null, user);

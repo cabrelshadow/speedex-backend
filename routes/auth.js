@@ -12,5 +12,12 @@ router.post("/login", async (req, res, next) => {
 		// failureFlash: true,
 	})(req, res, next);
 });
-
+router.get("/redirectLogin", (req, res, next) => {
+	if (req.user["Role.name"] === "Administrateur") return res.redirect("/");
+});
+router.get("/logout", (req, res) => {
+	req.logout(() => {
+		res.redirect("/auth/login");
+	});
+});
 module.exports = router;

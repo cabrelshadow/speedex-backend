@@ -5,6 +5,7 @@ const router = require("express").Router();
 
 router.get("/", ensureAuthenticated, async (req, res) => {
 	const commandes = await db.Commande.findAll({
+		include: db.Article,
 		raw: true,
 	});
 	const articles = await db.Article.findAll({
@@ -13,8 +14,8 @@ router.get("/", ensureAuthenticated, async (req, res) => {
 	return res.render("commandes/", { commandes, articles });
 });
 router.get("/live", ensureAuthenticated, async (req, res) => {
-	const commandes = await db.Article_commande.findAll({
-		//include: ["Commande", "Article"],
+	const commandes = await db.Commande.findAll({
+		include: db.Article,
 		raw: true,
 	});
 	const articles = await db.Article.findAll({

@@ -1,9 +1,11 @@
+const { ensureAuthenticated } = require("../config/auth");
 const db = require("../models");
 
 const router = require("express").Router();
 
-router.get("/", async (req, res) => {
+router.get("/", ensureAuthenticated, async (req, res) => {
 	const commandes = await db.Commande.findAll({
+		include: db.Article,
 		raw: true,
 	});
 	const articles = await db.Article.findAll({
@@ -11,9 +13,9 @@ router.get("/", async (req, res) => {
 	});
 	return res.render("commandes/", { commandes, articles });
 });
-router.get("/live", async (req, res) => {
-	const commandes = await db.Article_commande.findAll({
-		//include: ["Commande", "Article"],
+router.get("/live", ensureAuthenticated, async (req, res) => {
+	const commandes = await db.Commande.findAll({
+		include: db.Article,
 		raw: true,
 	});
 	const articles = await db.Article.findAll({
@@ -21,7 +23,7 @@ router.get("/live", async (req, res) => {
 	});
 	return res.render("commandes/live", { commandes, articles });
 });
-router.post("/add", (req, res, next) => {
+router.post("/add", ensureAuthenticated, (req, res, next) => {
 	db.Article.create(req.body)
 		.then(() => {
 			return res.redirect(req.headers.referer);

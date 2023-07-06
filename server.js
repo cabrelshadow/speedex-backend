@@ -80,10 +80,6 @@ app.use((err, req, res, next) => {
 	// Handle the error
 	res.status(500).json({ error: "Internal Server Error" });
 });
-
-app.engine(".hbs", engine({ extname: ".hbs" }));
-app.set("view engine", ".hbs");
-app.set("views", "./views");
 app.use(function (req, res, next) {
 	res.locals.user = req.user || null;
 	next();

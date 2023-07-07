@@ -5,7 +5,7 @@ const router = require("express").Router();
 
 router.get("/", ensureAuthenticated, async (req, res) => {
 	const categories = await db.Categorie.findAll({ raw: true });
-	return res.status(200).json(categories);
+	return res.render("settings/categorie", { categories });
 });
 router.post("/add", (req, res) => {
 	if (

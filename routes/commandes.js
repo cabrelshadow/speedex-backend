@@ -8,8 +8,9 @@ router.get("/", ensureAuthenticated, async (req, res) => {
 		include: db.Article,
 		raw: true,
 	});
-	const articles = await db.Article.findAll({
+	const articles = await db.Stock.findAll({
 		raw: true,
+		include: db.Article,
 	});
 	return res.render("commandes/", { commandes, articles });
 });

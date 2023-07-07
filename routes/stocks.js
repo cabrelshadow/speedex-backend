@@ -26,7 +26,7 @@ router.post("/add", async (req, res, next) => {
 
 /*  edite  stock*/
 router.post("/edit-stock/:stockId", ensureAuthenticated, (req, res, next) => {
-	const roleId = req.params.roleId; // Récupère l'ID du rôle à éditer
+	const { stockId } = req.params; // Récupère l'ID du rôle à éditer
 	const updatedData = req.body; // Récupère les nouvelles données du rôle depuis le corps de la requête
 
 	db.Stock.update(updatedData, {
@@ -42,7 +42,7 @@ router.post("/edit-stock/:stockId", ensureAuthenticated, (req, res, next) => {
 
 /* DELETE STOCK */
 router.get("/delete-stock/:stockId", ensureAuthenticated, (req, res, next) => {
-	const stockId = req.params.roleId; // Récupère l'ID du rôle à supprimer
+	const { stockId } = req.params; // Récupère l'ID du rôle à supprimer
 
 	db.Stock.destroy({
 		where: { id: stockId },

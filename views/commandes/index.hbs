@@ -1,6 +1,10 @@
 <h3>Commande</h3>
 
 <div class="mb-3">
+    <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#createCommande">
+        <i class="fas fa-plus"></i>
+        Créer une commande
+    </button>
     <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#addCommande">
         <i class="fas fa-plus"></i>
         Ajouter une commande
@@ -11,12 +15,10 @@
     </button>
 
 
-    <div class="container mt-5 px-2">
+    <div class=" mt-5 px-2">
         <div class="card">
             <div class="card-body">
-
                 <div class="mb-2 d-flex justify-content-between align-items-center">
-
                 </div>
                 <div class="table-responsive">
                     <table class="table table-striped-columns table-bordered align-middle ">
@@ -128,6 +130,84 @@
 
 <!-- Modal Body -->
 <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+<div class="modal fade" id="createCommande" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitleId">Créer une commande</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body stepper">
+                <div class="row">
+                    <div class="col">
+                        <h3>Information de la commande</h3>
+                        <div>
+                            <div class="mb-3">
+                              <label for="name" class="form-label">Nom du client</label>
+                              <input type="text"
+                                class="form-control" name="name" id="name" aria-describedby="helpId" placeholder="">
+                              <small id="helpId" class="form-text text-muted"></small>
+                            </div>
+                            <div class="mb-3">
+                                <label for="numero_client" class="form-label">Numero du client</label>
+                                <input type="text" class="form-control" name="numero_client" id="numero_client" aria-describedby="helpId"
+                                    placeholder="">
+                                <small id="helpId" class="form-text text-muted"></small>
+                            </div>
+                            <div class="mb-3">
+                                <label for="address_livraison" class="form-label">Adresse de livraison</label>
+                                <input type="text" class="form-control" name="address_livraison" id="address_livraison" aria-describedby="helpId" placeholder="">
+                                <small id="helpId" class="form-text text-muted"></small>
+                            </div>
+                            <div class="mb-3">
+                                <label for="numero_client" class="form-label">Numero du client</label>
+                                <input type="text" class="form-control" name="numero_client" id="numero_client" aria-describedby="helpId"
+                                    placeholder="">
+                                <small id="helpId" class="form-text text-muted"></small>
+                            </div>
+                           
+                        </div>
+                        <button class="btn btn-primary float-end next-button">Commencer</button>
+                    </div>
+                    <div class="col" style="display: none;">
+                        <h3>Choisir les articles</h3>
+                  
+                        <div>
+                            <div class="input-group mb-3" multi-input>
+                                {{!-- <label for="quartier" class="form-label">Quartier Recuperation</label> --}}
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected value="">Selectionner l'article</option>
+                                    {{#each articles}}
+                                    <option value="{{id}}">{{"Article.name"}}</option>
+                                    {{/each}}
+                            
+                                </select>
+                                <input type="number" class="form-control" placeholder="quantite" name="quantite" min="1">
+                                <button class="btn btn-primary" type="button"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+                     
+                        <button class="btn btn-secondary prev-button">Previous</button>
+                        <button class="btn btn-primary float-end next-button">Next</button>
+                    </div>
+                    <div class="col" style="display: none;">
+                        <h3>Step 3</h3>
+                        <p>This is the content of Step 3.</p>
+                        <button class="btn btn-primary prev-button">Previous</button>
+                    </div>
+                </div>
+            </div>
+            {{!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save</button>
+            </div> --}}
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Body -->
+<!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
 <div class="modal fade" id="addCommande" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
     aria-labelledby="addRoleTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
@@ -138,32 +218,18 @@
             </div>
             <div class="modal-body">
                 <form action="/admin/commandes/add" method="post">
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Nom Paternaire</label>
-                        <input type="text" class="form-control" name="name" id="name" aria-describedby="helpId"
-                            placeholder="">
-                        <small id="helpId" class="form-text text-muted"></small>
-                    </div>
-                    <div class="mb-3">
-                        <label for="adresse" class="form-label">Adresse Recuperation</label>
-                        <input type="text" class="form-control" name="adresse" id="adresse" aria-describedby="helpId"
-                            placeholder="">
-                        <small id="helpId" class="form-text text-muted"></small>
-                    </div>
-                    <div class="mb-3">
-                        <label for="quartier" class="form-label">Quartier Recuperation</label>
-                        <input type="text" class="form-control" name="quartier" id="quartier" aria-describedby="helpId"
-                            placeholder="">
-                        <small id="helpId" class="form-text text-muted"></small>
-                    </div>
-                    <div>
+                    
+                    <div class="input-group">
                         {{!-- <label for="quartier" class="form-label">Quartier Recuperation</label> --}}
                         <select class="form-select" aria-label="Default select example">
-                            <option selected>Selectionner le magasin</option>
-                            <option value="1">DBMMag</option>
-                            <option value="2">VlCMag</option>
-                            <option value="3">SpeedMag</option>
+                            <option selected value="">Selectionner l'article</option>
+                            {{#each articles}}
+                                <option value="{{id}}">{{"Article.name"}}</option>
+                            {{/each}}
+                           
                         </select>
+                        <input type="number" class="form-control" placeholder="quantite" name="quantite" min="1">
+                        <button class="btn btn-primary" type="button"><i class="fas fa-plus"></i></button>
                     </div>
 
 
@@ -205,3 +271,41 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var currentStep = 0;
+        var steps = document.querySelectorAll(".stepper .row .col");
+
+        // Hide all steps except the first one
+        for (var i = 1; i < steps.length; i++) {
+            steps[i].style.display = "none";
+        }
+
+        var nextButtons = document.querySelectorAll(".next-button");
+        var prevButtons = document.querySelectorAll(".prev-button");
+
+        // Add event listeners to next buttons
+        nextButtons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                if (currentStep < steps.length - 1) {
+                    steps[currentStep].style.display = "none";
+                    currentStep++;
+                    steps[currentStep].style.display = "block";
+                }
+            });
+        });
+
+        // Add event listeners to previous buttons
+        prevButtons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                if (currentStep > 0) {
+                    steps[currentStep].style.display = "none";
+                    currentStep--;
+                    steps[currentStep].style.display = "block";
+                }
+            });
+        });
+    });
+
+</script>

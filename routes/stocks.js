@@ -24,6 +24,16 @@ router.post("/add", async (req, res, next) => {
 	}
 });
 
+router.post("/:user_id", ensureAuthenticated, async (req, res) => {
+	const { user_id } = req.params;
+	const articles = await db.Stock.findAll({
+		include: ["Article"],
+		raw: true,
+		where: { user_id },
+	});
+	return res.status(200).json(articles);
+});
+
 /*  edite  stock*/
 router.post("/edit-stock/:stockId", ensureAuthenticated, (req, res, next) => {
 	const { stockId } = req.params; // Récupère l'ID du rôle à éditer

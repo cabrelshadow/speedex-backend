@@ -162,6 +162,15 @@
                                     aria-describedby="helpId" placeholder="">
                                 <small id="helpId" class="form-text text-muted"></small>
                             </div>
+                            <div class="mb-3">
+                                <label for="stock" class="form-label">Magasin de: </label>
+                                <select class="form-select form-select-lg" name="stock_id" id="stock">
+                                    <option selected>Selectionner le magasin</option>
+                                    {{#each users}}
+                                        <option value="{{id}}">{{fullname}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
                            <!-- <div class="mb-3">
                                 <label for="numero_client" class="form-label">Numero du client</label>
                                 <input type="text" class="form-control" name="numero_client" id="numero_client"
@@ -178,12 +187,11 @@
                         <div multi-input>
                             <div class="input-group mb-3" >
                                 {{!-- <label for="quartier" class="form-label">Quartier Recuperation</label> --}}
-                                <select class="form-select" name="article_id" aria-label="Default select example">
+                                <select class="form-select" name="article_id" id="article" aria-label="Default select example">
                                     <option selected value="">Selectionner l'article</option>
-                                    {{#each articles}}
-                                    <option value="{{id}}">{{"Article.name"}}</option>
-                                    {{/each}}
-
+                                    <!--{{#each articles}}
+                                     <option value="{{id}}">{{"Article.name"}}</option>
+                                    {{/each}}-->
                                 </select>
                                 <input type="number" class="form-control" placeholder="quantite" name="quantite"
                                     min="1">
@@ -239,8 +247,6 @@
         let inputs = {}
         const articles = []
         const name = document.querySelector("#name");
-        const numeroClient = document.querySelector("numero_client");
-        const address_livraison = document.querySelector("#address_livraison");
         const commande_info = [...document.querySelectorAll(".commande_info input"),...document.querySelectorAll(".commande_info select")];
         const multiInputs = document.querySelector("[multi-input]").children;
        multiInputs.forEach((multiInput)=>{
@@ -294,5 +300,26 @@
             });
         });
     });
+
+    document.querySelector("#stock").addEventListener("change",(e)=>{
+        const articleSelects = document.querySelectorAll("#article")
+        const value = e.target.value
+        fetch(`/admin/stocks/${value}`,{
+            method:"POST",
+        }).then(async(res)=>{
+            if(res.status===200){
+                const data = await res.json()
+                console.log(data)
+                data.map((articles)=>{
+                    articleSelects.forEach((articleSelect)=>{
+                        const option= document.createElement("option")
+                        option.value = articles.article_id
+                        option.innerText  = articles["Article.name"]
+                        articleSelect.append(option)
+                    })
+                })
+            }
+        })
+    })
 
 </script>

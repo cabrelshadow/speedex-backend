@@ -23,6 +23,8 @@ module.exports = {
 					username: "admin-admin",
 					password: hashSync("12345", 10),
 					role_id: role.id,
+					createdAt: new Date(),
+					updatedAt: new Date(),
 				},
 			],
 			{},

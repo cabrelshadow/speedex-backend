@@ -29,10 +29,10 @@
                                 <th scope="col" width="10%">Canal de Vente</th>
                                 <th scope="col" width="20%">Agent</th>
                                 <th scope="col" width="20%">Numero de suivi</th>
-                                <th scope="col" width="20%">Contenu produit</th>
+                                <th scope="col" width="20%">Article(s) commandé(s)</th>
                                 <th scope="col" width="20%">Prix total</th>
                                 <th scope="col" width="20%">Telephone client</th>
-                                <th scope="col" width="20%">Adresse client</th>
+                                <th scope="col" width="20%">Adresse de livraison</th>
                                 <th scope="col" width="20%">Ville client</th>
                                 <th scope="col" width="20%">Status commande</th>
                                 <th scope="col" width="20%">Livraison</th>
@@ -40,6 +40,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                            {{#each commandes}}
                             <tr>
                                 <th scope="row"><input class="form-check-input" type="checkbox"></th>
                                 <td>Valdez</td>
@@ -52,70 +53,16 @@
                                 <td>Douala</td>
                                 <td><span class="badge bg-danger">En cours</span></td>
                                 <td><span class="badge bg-danger">Reporte</span></td>
-                                 <td>
-                                    <button class="btn btn-sm btn-warning" data-bs-toggle="modal"><i class="fas fa-edit"></i></button>
-                                   
-                                   <button class="btn btn-sm btn-danger" data-bs-toggle="modal"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <th scope="row"><input class="form-check-input" type="checkbox"></th>
-                                 <td>Valdez</td>
-                                <td>Call center</td>
-                                <td>0122</td>
-                                <td>VVVV</td>
-                                <td>5000F</td>
-                                <td>698233443</td>
-                                <td>Makepe</td>
-                                <td>Douala</td>
-                                <td><span class="badge bg-danger">En cours</span></td>
-                                <td><span class="badge bg-danger">Annule</span></td>
                                 <td>
                                     <button class="btn btn-sm btn-warning" data-bs-toggle="modal"><i class="fas fa-edit"></i></button>
-                                   
-                                   <button class="btn btn-sm btn-danger" data-bs-toggle="modal"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                            
+                                    <button class="btn btn-sm btn-danger" data-bs-toggle="modal"><i class="fa fa-trash"
+                                            aria-hidden="true"></i></button>
                                 </td>
-
+                            
                             </tr>
-                            <tr>
-                                <th scope="row"><input class="form-check-input" type="checkbox"></th>
-                                 <td>Valdez</td>
-                                <td>Call center</td>
-                                <td>0122</td>
-                                <td>VVVV</td>
-                                <td>5000F</td>
-                                <td>698233443</td>
-                                <td>Makepe</td>
-                                <td>Douala</td>
-                                <td><span class="badge bg-danger">En cours</span></td>
-                                <td><span class="badge bg-success">Livre</span></td>
-                                <td>
-                                    <button class="btn btn-sm btn-warning" data-bs-toggle="modal"><i class="fas fa-edit"></i></button>
-                                   
-                                   <button class="btn btn-sm btn-danger" data-bs-toggle="modal"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <th scope="row"><input class="form-check-input" type="checkbox"></th>
-                                 <td>Valdez</td>
-                                <td>Call center</td>
-                                <td>0122</td>
-                                <td>VVVV</td>
-                                <td>5000F</td>
-                                <td>698233443</td>
-                                <td>Makepe</td>
-                                <td>Douala</td>
-                                <td><span class="badge bg-danger">En cours</span></td>
-                                <td><span class="badge bg-success">Expedié</span></td>
-                                <td>
-                                    <button class="btn btn-sm btn-warning" data-bs-toggle="modal"><i class="fas fa-edit"></i></button>
-                                   
-                                   <button class="btn btn-sm btn-danger" data-bs-toggle="modal"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                </td>
-
-
+                            {{/each}}
+                           
                         </tbody>
                     </table>
 
@@ -245,7 +192,7 @@
         let prepData = {}
         const multInput = []
         let inputs = {}
-        const articles = []
+        let articles = []
         const name = document.querySelector("#name");
         const commande_info = [...document.querySelectorAll(".commande_info input"),...document.querySelectorAll(".commande_info select")];
         const multiInputs = document.querySelector("[multi-input]").children;
@@ -255,7 +202,7 @@
            })
            multInput.push(prepData);
          })
-         articles.push(multInput)
+         articles=multInput
          commande_info.forEach((cmInfo)=>{
             inputs = {...inputs,[cmInfo.name]:cmInfo.value}
          })
@@ -263,7 +210,14 @@
             ...inputs,
             articles:articles
          }
-         console.log(data)
+        fetch("/commandes/add",{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify(data),
+            redirect:"follow"
+        }).then((res)=>res.status===201&&window.location.reload())
         
     }
     document.addEventListener("DOMContentLoaded", function () {
@@ -309,7 +263,6 @@
         }).then(async(res)=>{
             if(res.status===200){
                 const data = await res.json()
-                console.log(data)
                 data.map((articles)=>{
                     articleSelects.forEach((articleSelect)=>{
                         const option= document.createElement("option")

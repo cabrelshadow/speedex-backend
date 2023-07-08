@@ -18,7 +18,7 @@ multiInputs.forEach((multiInput) => {
 		.querySelector("button[type='button']")
 		.addEventListener("click", (e) => {
 			e.preventDefault();
-			const cloneForm = multiInput.cloneNode(true);
+			const cloneForm = multiInput.children[0].cloneNode(true);
 			cloneForm.querySelector("button").remove();
 			const rmBtn = document.createElement("button");
 			const rmIcon = document.createElement("i");
@@ -33,13 +33,11 @@ multiInputs.forEach((multiInput) => {
 			rmBtn.append(rmIcon);
 			rmBtn.setAttribute("rmbtn", true);
 			cloneForm.append(rmBtn);
-			multiInput.parentElement.append(cloneForm);
-			multiInput.parentElement
-				.querySelectorAll("[rmbtn]")
-				.forEach((removeBtn) => {
-					removeBtn.addEventListener("click", (e) => {
-						removeBtn.parentElement.remove();
-					});
+			multiInput.append(cloneForm);
+			multiInput.querySelectorAll("[rmbtn]").forEach((removeBtn) => {
+				removeBtn.addEventListener("click", (e) => {
+					removeBtn.parentElement.remove();
 				});
+			});
 		});
 });

@@ -25,13 +25,14 @@ router.get("/live", ensureAuthenticated, async (req, res) => {
 	return res.render("commandes/live", { commandes, articles });
 });
 router.post("/add", ensureAuthenticated, (req, res, next) => {
-	db.Article.create(req.body)
+	/* db.Article.create(req.body)
 		.then(() => {
 			return res.redirect(req.headers.referer);
 		})
 		.catch((err) => {
 			next(err);
-		});
+		}); */
+	console.log(req.body);
 });
 
 module.exports = router;

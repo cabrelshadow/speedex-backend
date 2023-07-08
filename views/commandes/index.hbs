@@ -1,6 +1,10 @@
 <h3>Commande</h3>
 
 <div class="mb-3">
+    <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#createCommande">
+        <i class="fas fa-plus"></i>
+        Créer une commande
+    </button>
     <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#addCommande">
         <i class="fas fa-plus"></i>
         Ajouter une commande
@@ -11,12 +15,10 @@
     </button>
 
 
-    <div class="container mt-5 px-2">
+    <div class=" mt-5 px-2">
         <div class="card">
             <div class="card-body">
-
                 <div class="mb-2 d-flex justify-content-between align-items-center">
-
                 </div>
                 <div class="table-responsive">
                     <table class="table table-striped-columns table-bordered align-middle ">
@@ -128,7 +130,7 @@
 
 <!-- Modal Body -->
 <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
-<div class="modal fade" id="addCommande" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
+<div class="modal fade" id="addCategorie" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
     aria-labelledby="addRoleTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -139,31 +141,52 @@
             <div class="modal-body">
                 <form action="/admin/commandes/add" method="post">
                     <div class="mb-3">
-                        <label for="name" class="form-label">Nom Paternaire</label>
+                        <label for="name" class="form-label">Nom</label>
                         <input type="text" class="form-control" name="name" id="name" aria-describedby="helpId"
                             placeholder="">
                         <small id="helpId" class="form-text text-muted"></small>
                     </div>
                     <div class="mb-3">
-                        <label for="adresse" class="form-label">Adresse Recuperation</label>
-                        <input type="text" class="form-control" name="adresse" id="adresse" aria-describedby="helpId"
+                        <label for="price" class="form-label">Numero client</label>
+                        <input type="text" class="form-control" name="price" id="price" aria-describedby="helpId"
                             placeholder="">
                         <small id="helpId" class="form-text text-muted"></small>
                     </div>
                     <div class="mb-3">
-                        <label for="quartier" class="form-label">Quartier Recuperation</label>
-                        <input type="text" class="form-control" name="quartier" id="quartier" aria-describedby="helpId"
+                        <label for="price" class="form-label">adresse livraison</label>
+                        <input type="text" class="form-control" name="price" id="price" aria-describedby="helpId"
                             placeholder="">
                         <small id="helpId" class="form-text text-muted"></small>
                     </div>
-                    <div>
-                        {{!-- <label for="quartier" class="form-label">Quartier Recuperation</label> --}}
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected>Selectionner le magasin</option>
-                            <option value="1">DBMMag</option>
-                            <option value="2">VlCMag</option>
-                            <option value="3">SpeedMag</option>
-                        </select>
+                    <div class="mb-3">
+                        <label for="price" class="form-label">date livraison</label>
+                        <input type="text" class="form-control" name="price" id="price" aria-describedby="helpId"
+                            placeholder="">
+                        <small id="helpId" class="form-text text-muted"></small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="price" class="form-label">date Assigniation</label>
+                        <input type="text" class="form-control" name="price" id="price" aria-describedby="helpId"
+                            placeholder="">
+                        <small id="helpId" class="form-text text-muted"></small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Frais Livraison</label>
+                        <input type="text" class="form-control" name="price" id="price" aria-describedby="helpId"
+                            placeholder="">
+                        <small id="helpId" class="form-text text-muted"></small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Frais Emballage</label>
+                        <input type="text" class="form-control" name="price" id="price" aria-describedby="helpId"
+                            placeholder="">
+                        <small id="helpId" class="form-text text-muted"></small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Total</label>
+                        <input type="text" class="form-control" name="price" id="price" aria-describedby="helpId"
+                            placeholder="">
+                        <small id="helpId" class="form-text text-muted"></small>
                     </div>
 
 
@@ -205,3 +228,41 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var currentStep = 0;
+        var steps = document.querySelectorAll(".stepper .row .col");
+
+        // Hide all steps except the first one
+        for (var i = 1; i < steps.length; i++) {
+            steps[i].style.display = "none";
+        }
+
+        var nextButtons = document.querySelectorAll(".next-button");
+        var prevButtons = document.querySelectorAll(".prev-button");
+
+        // Add event listeners to next buttons
+        nextButtons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                if (currentStep < steps.length - 1) {
+                    steps[currentStep].style.display = "none";
+                    currentStep++;
+                    steps[currentStep].style.display = "block";
+                }
+            });
+        });
+
+        // Add event listeners to previous buttons
+        prevButtons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                if (currentStep > 0) {
+                    steps[currentStep].style.display = "none";
+                    currentStep--;
+                    steps[currentStep].style.display = "block";
+                }
+            });
+        });
+    });
+
+</script>

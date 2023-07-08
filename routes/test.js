@@ -18,6 +18,6 @@ db.User.destroy({
     process.exit(0); // Quittez le processus Node.js
   })
   .catch((err) => {
-    console.error('Erreur lors de la suppression :', err);
+    console.error('Errer lors de la suppression :', err);
     process.exit(1); // Quittez le processus Node.js avec une erreur
   });

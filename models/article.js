@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
 				onDelete: "CASCADE",
 			});
 			this.belongsToMany(models.Commande, {
+				foreignKey: "commande_id",
 				through: models.Article_commande,
 			});
 		}

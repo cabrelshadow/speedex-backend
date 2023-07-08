@@ -1,10 +1,11 @@
+const { ensureAuthenticated } = require("../config/auth");
 const db = require("../models");
 
 const router = require("express").Router();
 
-router.get("/", async (req, res) => {
+router.get("/", ensureAuthenticated, async (req, res) => {
 	const categories = await db.Categorie.findAll({ raw: true });
-	return res.status(200).json(categories);
+	return res.render("settings/categorie", { categories });
 });
 router.post("/add", (req, res) => {
 	if (
@@ -21,7 +22,7 @@ router.post("/add", (req, res) => {
 	}
 });
 
-router.put("/edit/:id", (req, res) => {
+router.put("/edit/:id", ensureAuthenticated, (req, res) => {
 	if (
 		Object.keys(req.body).length > 0 &&
 		Object.keys(req.body).at(0) === "name" &&
@@ -31,7 +32,7 @@ router.put("/edit/:id", (req, res) => {
 		return res.redirect(req.headers.referer);
 	}
 });
-router.delete("/delete/:id", async (req, res) => {
+router.delete("/delete/:id", ensureAuthenticated, async (req, res) => {
 	if (req.params.id) {
 		db.Categorie.destroy({ where: { id: req.params.id } });
 		return res.status(200).send("success");

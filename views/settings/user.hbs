@@ -217,9 +217,11 @@
 </div>
 
 <script>
-    const fullname = document.querySelector("#fullname")
-    fullname.addEventListener("keyup",(e)=>{
-        e.preventDefault();
-        document.querySelector("#username").value = String(fullname.value).substr(0,Math.round(String(fullname.value).length/2)).trim() +(Math.ceil(Math.random(300000)*1000)+9000)
+    const fullnames = document.querySelectorAll("#fullname")
+    fullnames.forEach(fullname=>{
+        fullname.addEventListener("keyup", (e) => {
+            e.preventDefault();
+            document.querySelector("#username").value = String(fullname.value).substr(0, Math.round(String(fullname.value).length / 2)).trim() + (Math.ceil(Math.random(300000) * 1000) + 9000)
+        })
     })
 </script>

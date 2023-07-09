@@ -54,8 +54,8 @@ module.exports = {
 		});
 	},
 	async down(queryInterface, Sequelize) {
-		await queryInterface.dropTable("Livraisons");
 		await queryInterface.removeConstraint("Livraisons", "fk_article_livraison");
 		await queryInterface.removeConstraint("Livraisons", "fk_user_livraison");
+		await queryInterface.dropTable("Livraisons");
 	},
 };

@@ -35,6 +35,9 @@ module.exports = {
 				allowNull: false,
 				type: Sequelize.DATE,
 			},
+			reference: {
+				type: Sequelize.STRING,
+			},
 		});
 		await queryInterface.addConstraint("Articles", {
 			fields: ["categorie_id"],
@@ -50,7 +53,7 @@ module.exports = {
 	},
 
 	async down(queryInterface, Sequelize) {
-		await queryInterface.dropTable("Articles");
 		await queryInterface.removeConstraint("Articles", "fk_categorie_articles");
+		await queryInterface.dropTable("Articles");
 	},
 };

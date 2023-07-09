@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
 		static associate(models) {
 			// define association here
 			this.belongsToMany(models.Article, {
-				foreignKey:"article_id",
+				foreignKey: "article_id",
 				through: models.Article_commande,
 			});
 			this.belongsTo(models.User, {
@@ -19,6 +19,9 @@ module.exports = (sequelize, DataTypes) => {
 			});
 			this.belongsTo(models.User, {
 				foreignKey: "user_call_center",
+			});
+			this.belongsTo(models.User, {
+				foreignKey: "user_commande_id",
 			});
 		}
 	}
@@ -36,6 +39,7 @@ module.exports = (sequelize, DataTypes) => {
 			user_call_center: DataTypes.INTEGER,
 			user_id: DataTypes.INTEGER,
 			name: DataTypes.STRING,
+			user_commande_id: DataTypes.INTEGER,
 		},
 		{
 			sequelize,

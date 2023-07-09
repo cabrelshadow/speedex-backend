@@ -27,6 +27,7 @@ module.exports = (sequelize, DataTypes) => {
 			promoted: DataTypes.BOOLEAN,
 			promote_price: DataTypes.INTEGER,
 			categorie_id: DataTypes.INTEGER,
+			reference: DataTypes.STRING,
 		},
 		{
 			sequelize,

@@ -2,17 +2,20 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
 	async up(queryInterface, Sequelize) {
-		await queryInterface.createTable("Stocks", {
+		await queryInterface.createTable("Magasins", {
 			id: {
 				allowNull: false,
 				autoIncrement: true,
 				primaryKey: true,
 				type: Sequelize.INTEGER,
 			},
-			article_id: {
-				type: Sequelize.INTEGER,
+			name: {
+				type: Sequelize.STRING,
 			},
-			quantite: {
+			active: {
+				type: Sequelize.BOOLEAN,
+			},
+			stock_id: {
 				type: Sequelize.INTEGER,
 			},
 			user_id: {
@@ -27,32 +30,33 @@ module.exports = {
 				type: Sequelize.DATE,
 			},
 		});
-		await queryInterface.addConstraint("Stocks", {
-			fields: ["article_id"],
-			type: "foreign key",
-			name: "fk_stock_articles",
-			references: {
-				table: "Articles",
-				field: "id",
-			},
-			onDelete: "SET NULL",
-			onUpdate: "CASCADE",
-		});
-		await queryInterface.addConstraint("Stocks", {
+		await queryInterface.addConstraint("Magasins", {
 			fields: ["user_id"],
 			type: "foreign key",
-			name: "fk_user_stocks",
+			name: "fk_user_magasin_id",
 			references: {
 				table: "Users",
 				field: "id",
 			},
-			onDelete: "SET NULL",
+			onDelete: "CASCADE",
+			onUpdate: "CASCADE",
+		});
+		await queryInterface.addConstraint("Magasins", {
+			fields: ["stock_id"],
+			type: "foreign key",
+			name: "fk_magasin_stock_id",
+			references: {
+				table: "Stocks",
+				field: "id",
+			},
+			onDelete: "CASCADE",
 			onUpdate: "CASCADE",
 		});
 	},
+
 	async down(queryInterface, Sequelize) {
-		await queryInterface.removeConstraint("Stocks", "fk_stock_articles");
-		await queryInterface.removeConstraint("Stocks", "fk_user_stocks");
-		await queryInterface.dropTable("Stocks");
+		await queryInterface.dropTable("Magasins");
+		await queryInterface.removeConstraint("Magasins", "fk_user_magasin_id");
+		await queryInterface.removeConstraint("Magasins", "fk_magasin_stock_id");
 	},
 };

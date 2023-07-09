@@ -9,6 +9,9 @@ module.exports = {
 				primaryKey: true,
 				type: Sequelize.INTEGER,
 			},
+			numero_commande: {
+				type: Sequelize.STRING,
+			},
 			address_livraison: {
 				type: Sequelize.STRING,
 			},
@@ -40,6 +43,10 @@ module.exports = {
 				type: Sequelize.INTEGER,
 			},
 			user_id: {
+				type: Sequelize.INTEGER,
+			},
+			user_commande_id: {
+				allowNull: false,
 				type: Sequelize.INTEGER,
 			},
 			name: {
@@ -76,13 +83,28 @@ module.exports = {
 			onDelete: "SET NULL",
 			onUpdate: "CASCADE",
 		});
+		/* await queryInterface.addConstraint("Commandes", {
+			fields: ["user_commande_id"],
+			type: "foreign key",
+			name: "fk_user_commande_id_commande",
+			references: {
+				table: "Users",
+				field: "id",
+			},
+			onDelete: "SET NULL",
+			onUpdate: "CASCADE",
+		}); */
 	},
 	async down(queryInterface, Sequelize) {
-		await queryInterface.dropTable("Commandes");
 		await queryInterface.removeConstraint("Commandes", "fk_user_commande");
 		await queryInterface.removeConstraint(
 			"Commandes",
 			"fk_user_call_center_commande",
 		);
+		/* await queryInterface.removeConstraint(
+			"Commandes",
+			"fk_user_commande_id_commande",
+		); */
+		await queryInterface.dropTable("Commandes");
 	},
 };

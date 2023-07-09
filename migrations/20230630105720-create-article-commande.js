@@ -51,7 +51,6 @@ module.exports = {
 		});
 	},
 	async down(queryInterface, Sequelize) {
-		await queryInterface.dropTable("Article_commandes");
 		await queryInterface.removeConstraint(
 			"Article_commandes",
 			"fk_article_commande",
@@ -60,5 +59,6 @@ module.exports = {
 			"Article_commandes",
 			"fk_article_commande_commande",
 		);
+		await queryInterface.dropTable("Article_commandes");
 	},
 };

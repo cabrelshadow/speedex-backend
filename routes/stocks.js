@@ -2,14 +2,28 @@ const router = require("express").Router();
 const { ensureAuthenticated } = require("../config/auth");
 const db = require("../models");
 router.get("/", ensureAuthenticated, async (req, res) => {
-	const stocks = await db.Stock.findAll({
-		include: ["Article", "User"],
-		raw: true,
-	});
-	const articles = await db.Article.findAll({ raw: true });
-	const getUsers = await db.User.findAll({ include: ["Role"], raw: true });
-	const users = getUsers.filter((user) => !user["Role.isAdmin"]);
-	return res.render("stocks/", { stocks, articles, users });
+	if (req.user["Role.isAdmin"]) {
+		const stocks = await db.Stock.findAll({
+			include: ["Article", "User"],
+			raw: true,
+		});
+		const articles = await db.Article.findAll({ raw: true });
+		const getUsers = await db.User.findAll({ include: ["Role"], raw: true });
+		const users = getUsers.filter((user) => !user["Role.isAdmin"]);
+		return res.render("stocks/", { stocks, articles, users });
+	} else {
+		const stocks = await db.Stock.findAll({
+			include: ["Article", "User"],
+			raw: true,
+			where: {
+				user_id: req.user.id,
+			},
+		});
+		const articles = await db.Article.findAll({ raw: true });
+		const getUsers = await db.User.findAll({ include: ["Role"], raw: true });
+		const users = getUsers.filter((user) => !user["Role.isAdmin"]);
+		return res.render("stocks/", { stocks, articles, users });
+	}
 });
 
 router.post("/add", async (req, res, next) => {

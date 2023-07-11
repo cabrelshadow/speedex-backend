@@ -81,6 +81,7 @@
         </a>
       </li>
 
+     {{#if user.Role.isAdmin}}
       <li class="nav-item set-active">
         <a href="/admin/stocks/" class="nav-link">
           <span class="sidebar-icon">
@@ -89,6 +90,20 @@
           <span class="sidebar-text">Stocks</span>
         </a>
       </li>
+      {{else}}
+     
+     {{/if}}
+      {{#if_equal user.Role.name "Partenaire"}}
+      
+      <li class="nav-item set-active">
+        <a href="/admin/stocks/" class="nav-link">
+          <span class="sidebar-icon">
+            <i class="fas fa-clipboard"></i>
+          </span>
+          <span class="sidebar-text">Stocks</span>
+        </a>
+      </li>
+      {{/if_equal}}
         <li class="nav-item set-active">
         <a href="/callcenter" class="nav-link">
           <span class="sidebar-icon">
@@ -122,6 +137,9 @@
           <span class="sidebar-text">Commandes live</span>
         </a>
       </li>
+      
+{{#if user.Role.isAdmin }}
+  
 
        <li class="nav-item set-active">
         <span
@@ -159,7 +177,7 @@
           </ul>
         </div>
       </li>
-
+{{/if}}
       {{!-- <li class="nav-item set-active">
         <a href="/settings" class="nav-link">
           <span class="sidebar-icon">

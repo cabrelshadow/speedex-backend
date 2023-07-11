@@ -30,17 +30,7 @@
                             placeholder="">
                         <small id="emailHelpId" class="form-text text-muted"></small>
                     </div>
-                        <div class="mb-3">
-                            <label for="role_id" class="form-label">Role</label>
-                             <select class="form-select" name="role_id" id="role_id">
-                                <option selected value="">Selectionner un rôle</option>
-                                  {{#each ../roles}}
-                                    <option {{#if_equal ../role_id id}}
-                                                    selected
-                                           {{/if_equal}} value="{{id}}">{{name}}</option>
-                                                        {{/each}}
-                                                    </select>
-                                                </div>
+                       
                     <div class="mb-3 float-end">
                         <a href="#">Mot de passe oublié?</a>
                     </div>

@@ -17,7 +17,7 @@ function localAuth(passport) {
 					raw: true,
 				}).then((user) => {
 					if (!user) {
-						//console.log("No User Found");
+						console.log("No User Found");
 						return done(null, false, { message: "No User Found" });
 					}
 					// Match password
@@ -38,7 +38,6 @@ function localAuth(passport) {
 	);
 
 	passport.serializeUser(function (user, cb) {
-		//  console.log(user);
 		process.nextTick(function () {
 			return cb(null, {
 				id: user.id,

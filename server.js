@@ -28,6 +28,7 @@ app.use(
 /* expressHandlebars.create({
 	
 }); */
+
 app.engine(
 	".hbs",
 	expressHandlebars.engine({
@@ -76,14 +77,7 @@ app.engine(
 );
 app.set("view engine", ".hbs");
 app.set("views", "./views");
-app.use((err, req, res, next) => {
-	// Handle the error
-	res.status(500).json({ error: "Internal Server Error" });
-});
-app.use(function (req, res, next) {
-	res.locals.user = req.user || null;
-	next();
-});
+
 app.use(
 	session({
 		secret: "secret",
@@ -99,6 +93,15 @@ app.use(passport.initialize());
 app.use(passport.session());
 jwtAuth(passport);
 localAuth(passport);
+app.use((err, req, res, next) => {
+	// Handle the error
+	res.status(500).json({ error: "Internal Server Error" });
+});
+app.use(function (req, res, next) {
+	res.locals.user = req.user || null;
+	next();
+});
+
 const port = process.env.PORT || 8000;
 
 app.use("/", require("./routes/index"));

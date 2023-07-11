@@ -13,7 +13,7 @@ router.post("/login", async (req, res, next) => {
 	})(req, res, next);
 });
 router.get("/redirectLogin", (req, res, next) => {
-	if (req.user["Role.name"] === "Administrateur") return res.redirect("/");
+	if (req.user["Role.name"]) return res.redirect("/");
 });
 router.get("/logout", (req, res) => {
 	req.logout(() => {

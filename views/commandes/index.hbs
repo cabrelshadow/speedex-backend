@@ -29,10 +29,10 @@
                                 <th scope="col" width="10%">Canal de Vente</th>
                                 <th scope="col" width="20%">Agent</th>
                                 <th scope="col" width="20%">Numero de suivi</th>
-                                <th scope="col" width="20%">Article(s) commandé(s)</th>
+                                <th scope="col" width="20%">Contenu produit</th>
                                 <th scope="col" width="20%">Prix total</th>
                                 <th scope="col" width="20%">Telephone client</th>
-                                <th scope="col" width="20%">Adresse de livraison</th>
+                                <th scope="col" width="20%">Adresse client</th>
                                 <th scope="col" width="20%">Ville client</th>
                                 <th scope="col" width="20%">Status commande</th>
                                 <th scope="col" width="20%">Livraison</th>
@@ -40,7 +40,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{#each commandes}}
                             <tr>
                                 <th scope="row"><input class="form-check-input" type="checkbox"></th>
                                 <td>Valdez</td>
@@ -54,16 +53,15 @@
                                 <td><span class="badge bg-danger">En cours</span></td>
                                 <td><span class="badge bg-danger">Reporter</span></td>
                                 <td>
-                                    <button class="btn btn-sm btn-warning" data-bs-toggle="modal"><i
-                                            class="fas fa-edit"></i></button>
-
+                                    <button class="btn btn-sm btn-warning" data-bs-toggle="modal"><i class="fas fa-edit"></i></button>
+                            
                                     <button class="btn btn-sm btn-danger" data-bs-toggle="modal"><i class="fa fa-trash"
                                             aria-hidden="true"></i></button>
                                 </td>
 
                             </tr>
                             {{/each}}
-
+                           
                         </tbody>
                     </table>
 
@@ -195,33 +193,33 @@
         let prepData = {}
         const multInput = []
         let inputs = {}
-        let articles = []
+        const articles = []
         const name = document.querySelector("#name");
         const commande_info = [...document.querySelectorAll(".commande_info input"), ...document.querySelectorAll(".commande_info select")];
         const multiInputs = document.querySelector("[multi-input]").children;
-        multiInputs.forEach((multiInput) => {
-            [...multiInput.querySelectorAll("input"), ...multiInput.querySelectorAll("select")].forEach(mInput => {
-                prepData = { ...prepData, [mInput.name]: mInput.value }
-            })
-            multInput.push(prepData);
-        })
-        articles = multInput
-        commande_info.forEach((cmInfo) => {
-            inputs = { ...inputs, [cmInfo.name]: cmInfo.value }
-        })
-        const data = {
+       multiInputs.forEach((multiInput)=>{
+         [...multiInput.querySelectorAll("input"), ...multiInput.querySelectorAll("select")].forEach(mInput => {
+               prepData = { ...prepData, [mInput.name]: mInput.value }
+           })
+           multInput.push(prepData);
+         })
+         articles=multInput
+         commande_info.forEach((cmInfo)=>{
+            inputs = {...inputs,[cmInfo.name]:cmInfo.value}
+         })
+         const data = {
             ...inputs,
-            articles: articles
-        }
-        fetch("/commandes/add", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
+            articles:articles
+         }
+        fetch("/commandes/add",{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
             },
-            body: JSON.stringify(data),
-            redirect: "follow"
-        }).then((res) => res.status === 201 && window.location.reload())
-
+            body:JSON.stringify(data),
+            redirect:"follow"
+        }).then((res)=>res.status===201&&window.location.reload())
+        
     }
     document.addEventListener("DOMContentLoaded", function () {
         var currentStep = 0;
@@ -266,9 +264,9 @@
         }).then(async (res) => {
             if (res.status === 200) {
                 const data = await res.json()
-                data.map((articles) => {
-                    articleSelects.forEach((articleSelect) => {
-                        const option = document.createElement("option")
+                data.map((articles)=>{
+                    articleSelects.forEach((articleSelect)=>{
+                        const option= document.createElement("option")
                         option.value = articles.article_id
                         option.innerText = articles["Article.name"]
                         articleSelect.append(option)

@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
 				foreignKey: "role_id",
 				onDelete: "CASCADE",
 			});
-			this.hasMany(models.User, {
+			this.hasOne(models.Commande, {
 				foreignKey: "user_commande_id",
 			});
 			this.hasMany(models.Magasin, {

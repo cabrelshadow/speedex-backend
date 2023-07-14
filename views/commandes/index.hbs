@@ -40,26 +40,27 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row"><input class="form-check-input" type="checkbox"></th>
-                                <td>Valdez</td>
-                                <td>Call center</td>
-                                <td>0122</td>
-                                <td>VVVV</td>
-                                <td>5000F</td>
-                                <td>698233443</td>
-                                <td>Makepe</td>
-                                <td>Douala</td>
-                                <td><span class="badge bg-danger">En cours</span></td>
-                                <td><span class="badge bg-danger">Reporter</span></td>
-                                <td>
-                                    <button class="btn btn-sm btn-warning" data-bs-toggle="modal"><i class="fas fa-edit"></i></button>
-                            
-                                    <button class="btn btn-sm btn-danger" data-bs-toggle="modal"><i class="fa fa-trash"
-                                            aria-hidden="true"></i></button>
-                                </td>
-
-                            </tr>
+                            {{#each commandes}}
+                                <tr>
+                                    <th scope="row"><input class="form-check-input" type="checkbox"></th>
+                                    <td>Valdez</td>
+                                    <td>Call center</td>
+                                    <td>0122</td>
+                                    <td>VVVV</td>
+                                    <td>5000F</td>
+                                    <td>698233443</td>
+                                    <td>Makepe</td>
+                                    <td>Douala</td>
+                                    <td><span class="badge bg-danger">En cours</span></td>
+                                    <td><span class="badge bg-danger">Reporter</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-warning" data-bs-toggle="modal"><i class="fas fa-edit"></i></button>
+                                
+                                        <button class="btn btn-sm btn-danger" data-bs-toggle="modal"><i class="fa fa-trash"
+                                                aria-hidden="true"></i></button>
+                                    </td>
+                                
+                                </tr>
                             {{/each}}
                            
                         </tbody>

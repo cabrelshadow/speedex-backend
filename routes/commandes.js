@@ -38,26 +38,22 @@ router.get("/live", ensureAuthenticated, async (req, res) => {
 	return res.render("commandes/live", { commandes, articles });
 });
 router.post("/add", ensureAuthenticated, (req, res, next) => {
-	/* db.Article.create(req.body)
-		.then(() => {
-			return res.redirect(req.headers.referer);
-		})
-		.catch((err) => {
-			next(err);
-		}); */
 	const { name, numero_client, address_livraison, stock_id, articles } =
 		req.body;
-	db.Commande.create({ name, numero_client, address_livraison }).then(
-		async (commande) => {
-			articles.map(async (article) => {
-				await db.Article_commande.create({
-					article_id: article.article_id,
-					commande_id: commande.id,
-					quantite: article.quantite,
-				});
+	db.Commande.create({
+		name,
+		numero_client,
+		address_livraison,
+		user_commande_id: req.user.id,
+	}).then(async (commande) => {
+		articles.map(async (article) => {
+			await db.Article_commande.create({
+				article_id: article.article_id,
+				commande_id: commande.id,
+				quantite: article.quantite,
 			});
-		},
-	);
+		});
+	});
 	res.status(201).redirect(req.headers.referer);
 });
 

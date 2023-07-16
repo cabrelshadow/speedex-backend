@@ -1,5 +1,5 @@
 <h3>Articles</h3>
-{{#if user.Role.isAdmin}}
+{{#if_admin user}}
     
 
 <div class="mb-3">
@@ -7,7 +7,7 @@
         Ajouter
         un article</button>
 </div>
-{{/if}}
+{{/if_admin}}
 <div class="table-responsive">
     <table class="table table-striped-columns table-bordered
     align-middle">

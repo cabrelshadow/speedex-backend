@@ -37,6 +37,8 @@
     <ul class="nav flex-column pt-3 pt-md-0">
 
 
+  
+
          <li class="nav-item">
         <a href="/" class="nav-link d-flex align-items-center">
           <span class="sidebar-icon">
@@ -45,7 +47,7 @@
           <span class="mt-1 ms-1 sidebar-text">SPEEDEX</span>
         </a>
 
-       
+      
         <li class="nav-item  set-active ">
         <a href="/" class="nav-link">
           <span class="sidebar-icon">
@@ -54,6 +56,7 @@
           <span class="sidebar-text">Dashboard</span>
         </a>
       </li>
+      {{#if_admin user}}
         <li class="nav-item set-active">
           <a href="/livreur/" class="nav-link">
             <span class="sidebar-icon">
@@ -80,20 +83,16 @@
           <span class="sidebar-text">Articles</span>
         </a>
       </li>
-
-     {{#if user.Role.isAdmin}}
       <li class="nav-item set-active">
-        <a href="/admin/stocks/" class="nav-link">
+        <a href="/admin/magasin/" class="nav-link">
           <span class="sidebar-icon">
             <i class="fas fa-clipboard"></i>
           </span>
-          <span class="sidebar-text">Stocks</span>
+          <span class="sidebar-text">Articles</span>
         </a>
       </li>
-      {{else}}
-     
-     {{/if}}
-      {{#if_equal user.Role.name "Partenaire"}}
+      {{/if_admin}}
+      {{#if_role user "Partenaire"}}
       
       <li class="nav-item set-active">
         <a href="/admin/stocks/" class="nav-link">
@@ -103,15 +102,19 @@
           <span class="sidebar-text">Stocks</span>
         </a>
       </li>
-      {{/if_equal}}
-        <li class="nav-item set-active">
-        <a href="/callcenter" class="nav-link">
-          <span class="sidebar-icon">
-            <i class="fab fa-teamspeak"></i>
-          </span>
-          <span class="sidebar-text">Call center</span>
-        </a>
-      </li>
+      {{/if_role}}
+        {{#if_role user "CallCenter"}}
+          <li class="nav-item set-active">
+            <a href="/callcenter" class="nav-link">
+              <span class="sidebar-icon">
+                <i class="fab fa-teamspeak"></i>
+              </span>
+              <span class="sidebar-text">Call center</span>
+            </a>
+          </li>
+        {{/if_role}}
+    {{#if_role user "Superviseur"}}
+      
     
       <li class="nav-item set-active">
         <a href="/superviseur" class="nav-link">
@@ -137,8 +140,10 @@
           <span class="sidebar-text">Commandes live</span>
         </a>
       </li>
+      {{/if_role}}
       
-{{#if user.Role.isAdmin }}
+  
+{{#if_admin user}}
   
 
        <li class="nav-item set-active">
@@ -177,7 +182,7 @@
           </ul>
         </div>
       </li>
-{{/if}}
+{{/if_admin}}
       {{!-- <li class="nav-item set-active">
         <a href="/settings" class="nav-link">
           <span class="sidebar-icon">

@@ -9,7 +9,7 @@ const Handlebars = require("handlebars");
 var sqlite = require("better-sqlite3");
 var SqliteStore = require("better-sqlite3-session-store")(session);
 var sessionsDB = new sqlite("db/sessions.db");
-const { engine } = require("express-handlebars");
+const { if_admin, if_role } = require("./helpers/handlebars");
 const { jwtAuth, localAuth } = require("./config/passport");
 const expressHandlebars = require("express-handlebars");
 const {
@@ -72,6 +72,8 @@ app.engine(
 					return "background-color: #e74c3c; color: white; font-size: 20px; text-align: center";
 				}
 			},
+			if_admin,
+			if_role,
 		},
 	}),
 );

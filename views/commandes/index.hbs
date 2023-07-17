@@ -27,30 +27,26 @@
                             <tr class="bg-light">
                                 <th scope="col" width="5%"><input class="form-check-input" type="checkbox"></th>
                                 <th scope="col" width="10%">Canal de Vente</th>
-                                <th scope="col" width="20%">Agent</th>
                                 <th scope="col" width="20%">Numero de suivi</th>
                                 <th scope="col" width="20%">Contenu produit</th>
                                 <th scope="col" width="20%">Prix total</th>
                                 <th scope="col" width="20%">Telephone client</th>
-                                <th scope="col" width="20%">Adresse client</th>
-                                <th scope="col" width="20%">Ville client</th>
+                                <th scope="col" width="20%">Adresse de livraison</th>
                                 <th scope="col" width="20%">Status commande</th>
                                 <th scope="col" width="20%">Livraison</th>
                                 <th scope="col" width="20%">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {{#each commandes}}
+                            {{#each Commandes}}
                                 <tr>
                                     <th scope="row"><input class="form-check-input" type="checkbox"></th>
-                                    <td>Valdez</td>
-                                    <td>Call center</td>
+                                    <td>{{name}}</td>
                                     <td>0122</td>
-                                    <td>VVVV</td>
+                                    <td>{{articles_commandes.length}}</td>
                                     <td>5000F</td>
-                                    <td>698233443</td>
-                                    <td>Makepe</td>
-                                    <td>Douala</td>
+                                    <td>{{numero_client}}</td>
+                                    <td>{{address_livraison}}</td>
                                     <td><span class="badge bg-danger">En cours</span></td>
                                     <td><span class="badge bg-danger">Reporter</span></td>
                                     <td>
@@ -194,7 +190,7 @@
         let prepData = {}
         const multInput = []
         let inputs = {}
-        const articles = []
+        let articles = []
         const name = document.querySelector("#name");
         const commande_info = [...document.querySelectorAll(".commande_info input"), ...document.querySelectorAll(".commande_info select")];
         const multiInputs = document.querySelector("[multi-input]").children;

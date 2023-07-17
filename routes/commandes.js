@@ -12,19 +12,18 @@ router.get("/", ensureAuthenticated, async (req, res) => {
 		raw: true,
 		include: db.Article,
 	});
-	commandes.map(async (commande) => {
+	commandes.filter(async (commande) => {
 		const articles_commandes = await db.Article_commande.findAll({
 			where: { commande_id: commande.id },
 			raw: true,
 		});
-		Commandes = { ...Commandes, ...commande, articles_commandes };
+		Commandes[commande.id] = { ...commande, articles_commandes };
 	});
+	const magasins = await db.Magasin.findAll({ raw: true });
 	setTimeout(() => {
 		console.log(Commandes);
 	}, 5000);
-	const magasins = await db.Magasin.findAll({ raw: true });
-
-	return res.render("commandes/", { commandes, articles, magasins });
+	return res.render("commandes/", { Commandes, articles, magasins });
 });
 router.get("/live", ensureAuthenticated, async (req, res) => {
 	const commandes = await db.Commande.findAll({
@@ -39,6 +38,7 @@ router.get("/live", ensureAuthenticated, async (req, res) => {
 router.post("/add", ensureAuthenticated, (req, res, next) => {
 	const { name, numero_client, address_livraison, stock_id, articles } =
 		req.body;
+	console.log(req.body);
 	db.Commande.create({
 		name,
 		numero_client,

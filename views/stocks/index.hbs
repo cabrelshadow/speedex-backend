@@ -7,19 +7,23 @@
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">client</th>
-                <th scope="col">crticle</th>
-                <th scope="col">quantite</th>
-                <th scope="col">prix</th>
+                <th scope="col">Magasin</th>
+                <th scope="col">Article</th>
+                <th scope="col">Quantite</th>
+                <th scope="col">Prix</th>
             </tr>
         </thead>
         <tbody>
            {{#each stocks}}
             <tr class="">
-                <td scope="row">{{"User.fullname"}}</td>
+                <td scope="row">{{"Magasin.name"}}</td>
                 <td>{{"Article.name"}}</td>
                 <td>{{quantite}}</td>*
-                <td>{{"Article.price"}}</td>
+                <td>{{#if Article.promoted}}
+                    {{"Article.promote_price"}}
+                {{else}}
+                    {{"Article.price"}}
+                {{/if}}</td>
             </tr>
            {{/each}}
             
@@ -57,10 +61,10 @@
                     </div>
                     <div class="mb-3">
                         <label for="user" class="form-label">Partenaire</label>
-                        <select class="form-select" name="user_id" id="user">
-                            <option value="" selected>Selectionner un partenaire</option>
-                            {{#each users}}
-                            <option value="{{id}}">{{fullname}}</option>
+                        <select class="form-select" name="magasin_id" id="user">
+                            <option value="" selected>Selectionner un magasin</option>
+                            {{#each magasins}}
+                            <option value="{{id}}">{{name}}</option>
                             {{/each}}
                         </select>
                     </div>

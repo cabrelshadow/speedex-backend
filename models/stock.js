@@ -17,8 +17,8 @@ module.exports = (sequelize, DataTypes) => {
 				foreignKey: "user_id",
 				onDelete: "CASCADE",
 			});
-			this.hasOne(models.Magasin, {
-				foreignKey: "stock_id",
+			this.belongsTo(models.Magasin, {
+				foreignKey: "magasin_id",
 				onDelete: "CASCADE",
 			});
 		}
@@ -28,6 +28,7 @@ module.exports = (sequelize, DataTypes) => {
 			article_id: DataTypes.INTEGER,
 			quantite: DataTypes.INTEGER,
 			user_id: DataTypes.INTEGER,
+			magasin_id: DataTypes.INTEGER,
 		},
 		{
 			sequelize,

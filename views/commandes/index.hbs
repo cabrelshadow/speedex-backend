@@ -5,11 +5,11 @@
         <i class="fas fa-plus"></i>
         Créer une commande
     </button>
-    <button class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#addCmd">
+    <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#addCommande">
         <i class="fas fa-plus"></i>
         Ajouter une commande
     </button>
-    <button class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#addUser">
+    <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#addUser">
         <i class="fas fa-plus"></i>
         Assigner une commande
     </button>
@@ -38,17 +38,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{#each commandes}}
+                            {{#each Commandes}}
                                 <tr>
                                     <th scope="row"><input class="form-check-input" type="checkbox"></th>
-                                    <td>Valdez</td>
-                                    <td>Call center</td>
+                                    <td>{{name}}</td>
                                     <td>0122</td>
-                                    <td>VVVV</td>
+                                    <td>{{articles_commandes.length}}</td>
                                     <td>5000F</td>
-                                    <td>698233443</td>
-                                    <td>Makepe</td>
-                                    <td>Douala</td>
+                                    <td>{{numero_client}}</td>
+                                    <td>{{address_livraison}}</td>
                                     <td><span class="badge bg-danger">En cours</span></td>
                                     <td><span class="badge bg-danger">Reporter</span></td>
                                     <td>
@@ -60,7 +58,7 @@
                                 
                                 </tr>
                             {{/each}}
-
+                           
                         </tbody>
                     </table>
 
@@ -187,154 +185,6 @@
     </div>
 </div>
 
-<div class="modal fade" id="addCmd" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
-    aria-labelledby="modalTitleId" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalTitleId">Créer une commande</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body step">
-                <div class="row">
-                    <form method="post" action=" ">
-                        <div class="col">
-                            <h3>Information Paternaire</h3>
-                            <div class="commande_info">
-                                <div class="mb-3">
-                                    <label for="name" class="form-label">Nom</label>
-                                    <input type="text" class="form-control" name="name" id="name"
-                                        aria-describedby="helpId" placeholder="">
-                                    <small id="helpId" class="form-text text-muted"></small>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="numero_client" class="form-label">adresse Recuperation</label>
-                                    <input type="text" class="form-control" name="numero_client" id="numero_client"
-                                        aria-describedby="helpId" placeholder="">
-                                    <small id="helpId" class="form-text text-muted"></small>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="address_livraison" class="form-label">Quartier Recuperation</label>
-                                    <input type="text" class="form-control" name="address_livraison"
-                                        id="address_livraison" aria-describedby="helpId" placeholder="">
-                                    <small id="helpId" class="form-text text-muted"></small>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="stock" class="form-label">Magasin: </label>
-                                    <select class="form-select">
-                                        <option selected>Choisir une option</option>
-                                        <option value="1">Speedex</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <button class="btn btn-outline-info float-end next-button" type="button">Suivant</button>
-                        </div>
-                        <div class="col">
-                            <h3>Information Client</h3>
-                            <div class="commande_info">
-                                <div class="mb-3">
-                                    <label for="name" class="form-label">Nom</label>
-                                    <input type="text" class="form-control" name="name" id="name"
-                                        aria-describedby="helpId" placeholder="">
-                                    <small id="helpId" class="form-text text-muted"></small>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="numero_client" class="form-label">Numero Telephone</label>
-                                    <input type="text" class="form-control" name="numero_client" id="numero_client"
-                                        aria-describedby="helpId" placeholder="">
-                                    <small id="helpId" class="form-text text-muted"></small>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="address_livraison" class="form-label">Quartier</label>
-                                    <input type="text" class="form-control" name="address_livraison"
-                                        id="address_livraison" aria-describedby="helpId" placeholder="">
-                                    <small id="helpId" class="form-text text-muted"></small>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="address_livraison" class="form-label">Adresse livraison</label>
-                                    <input type="text" class="form-control" name="address_livraison"
-                                        id="address_livraison" aria-describedby="helpId" placeholder="">
-                                    <small id="helpId" class="form-text text-muted"></small>
-                                </div>
-                            </div>
-
-                            <button class="btn btn-outline-warning prev-button">Retour</button>
-                            <button class="btn btn-outline-info float-end next-button" type="button">Suivant</button>
-                        </div>
-
-                        <div class="col" style="display: none;">
-                            <h3>Choisir les articles</h3>
-
-                            <div multi-input>
-                                <div class="input-group mb-3">
-                                    {{!-- <label for="quartier" class="form-label">Quartier Recuperation</label> --}}
-                                    <select class="form-select" name="article_id" id="article"
-                                        aria-label="Default select example">
-                                        <option selected value="">l'article</option>
-                                        <!--{{#each articles}}
-                                     <option value="{{id}}">{{"Article.name"}}</option>
-                                    {{/each}}-->
-                                    </select>
-                                    <input type="number" class="form-control" placeholder="quantite" name="quantite"
-                                        min="1">
-                                    <input type="text" class="form-control" placeholder="prix" name="prix" min="1">
-                                    <button class="btn btn-primary" type="button"><i class="fas fa-plus"></i></button>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Frais livraison</label>
-                                <input type="text" class="form-control" name="name" id="name" aria-describedby="helpId"
-                                    placeholder="">
-                                <small id="helpId" class="form-text text-muted"></small>
-                            </div>
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Frais emballage</label>
-                                <input type="text" class="form-control" name="name" id="name" aria-describedby="helpId"
-                                    placeholder="">
-                                <small id="helpId" class="form-text text-muted"></small>
-                            </div>
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Frais expedition</label>
-                                <input type="text" class="form-control" name="name" id="name" aria-describedby="helpId"
-                                    placeholder="">
-                                <small id="helpId" class="form-text text-muted"></small>
-                            </div>
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Montant total</label>
-                                <input type="text" class="form-control" name="name" id="name" aria-describedby="helpId"
-                                    placeholder="">
-                                <small id="helpId" class="form-text text-muted"></small>
-                            </div>
-                            <div class="mb-3">
-                                <label for="date_livraison" class="form-label">Date de Livraison</label>
-                                <input type="date" class="form-control" name="date_livraison" id="date_livraison"
-                                    aria-describedby="helpId" placeholder="">
-                                <small id="helpId" class="form-text text-muted"></small>
-                            </div>
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Heure livraison</label>
-                                <input type="time" class="form-control" name="name" id="name" aria-describedby="helpId"
-                                    placeholder="">
-                                <small id="helpId" class="form-text text-muted"></small>
-                            </div>
-                            <div class="mb-3">
-                                <label for="floatingTextarea2">Commentaire</label>
-                                <textarea class="form-control" placeholder="Commentaire" id="floatingTextarea2"
-                                    style="height: 100px"></textarea>
-                            </div>
-
-                            <button class="btn btn-outline-warning prev-button">Retour</button>
-                            <button type="button" class="btn btn-outline-info float-end next-button"
-                                onclick="onSubmit()">Commander</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
 <script>
     function onSubmit() {
         let prepData = {}
@@ -344,29 +194,29 @@
         const name = document.querySelector("#name");
         const commande_info = [...document.querySelectorAll(".commande_info input"), ...document.querySelectorAll(".commande_info select")];
         const multiInputs = document.querySelector("[multi-input]").children;
-        multiInputs.forEach((multiInput) => {
-            [...multiInput.querySelectorAll("input"), ...multiInput.querySelectorAll("select")].forEach(mInput => {
-                prepData = { ...prepData, [mInput.name]: mInput.value }
-            })
-            multInput.push(prepData);
-        })
-        articles = multInput
-        commande_info.forEach((cmInfo) => {
-            inputs = { ...inputs, [cmInfo.name]: cmInfo.value }
-        })
-        const data = {
+       multiInputs.forEach((multiInput)=>{
+         [...multiInput.querySelectorAll("input"), ...multiInput.querySelectorAll("select")].forEach(mInput => {
+               prepData = { ...prepData, [mInput.name]: mInput.value }
+           })
+           multInput.push(prepData);
+         })
+         articles=multInput
+         commande_info.forEach((cmInfo)=>{
+            inputs = {...inputs,[cmInfo.name]:cmInfo.value}
+         })
+         const data = {
             ...inputs,
-            articles: articles
-        }
-        fetch("/commandes/add", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
+            articles:articles
+         }
+        fetch("/commandes/add",{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
             },
-            body: JSON.stringify(data),
-            redirect: "follow"
-        }).then((res) => res.status === 201 && window.location.reload())
-
+            body:JSON.stringify(data),
+            redirect:"follow"
+        }).then((res)=>res.status===201&&window.location.reload())
+        
     }
     document.addEventListener("DOMContentLoaded", function () {
         var currentStep = 0;
@@ -403,40 +253,6 @@
         });
     });
 
-    document.addEventListener("DOMContentLoaded", function () {
-        var currentStep = 0;
-        var steps = document.querySelectorAll(".step .row .col");
-
-        // Hide all steps except the first one
-        for (var i = 1; i < steps.length; i++) {
-            steps[i].style.display = "none";
-        }
-
-        var nextButtons = document.querySelectorAll(".next-button");
-        var prevButtons = document.querySelectorAll(".prev-button");
-
-        // Add event listeners to next buttons
-        nextButtons.forEach(function (button) {
-            button.addEventListener("click", function () {
-                if (currentStep < steps.length - 1) {
-                    steps[currentStep].style.display = "none";
-                    currentStep++;
-                    steps[currentStep].style.display = "block";
-                }
-            });
-        });
-
-        // Add event listeners to previous buttons
-        prevButtons.forEach(function (button) {
-            button.addEventListener("click", function () {
-                if (currentStep > 0) {
-                    steps[currentStep].style.display = "none";
-                    currentStep--;
-                    steps[currentStep].style.display = "block";
-                }
-            });
-        });
-    });
     document.querySelector("#stock").addEventListener("change", (e) => {
         const articleSelects = document.querySelectorAll("#article")
         const value = e.target.value
@@ -445,9 +261,9 @@
         }).then(async (res) => {
             if (res.status === 200) {
                 const data = await res.json()
-                data.map((articles) => {
-                    articleSelects.forEach((articleSelect) => {
-                        const option = document.createElement("option")
+                data.map((articles)=>{
+                    articleSelects.forEach((articleSelect)=>{
+                        const option= document.createElement("option")
                         option.value = articles.article_id
                         option.innerText = articles["Article.name"]
                         articleSelect.append(option)

@@ -36,12 +36,12 @@ router.post("/add", async (req, res, next) => {
 	}
 });
 
-router.post("/:user_id", ensureAuthenticated, async (req, res) => {
-	const { user_id } = req.params;
+router.post("/:magasin_id", ensureAuthenticated, async (req, res) => {
+	const { magasin_id } = req.params;
 	const articles = await db.Stock.findAll({
 		include: ["Article"],
 		raw: true,
-		where: { user_id },
+		where: { magasin_id },
 	});
 	return res.status(200).json(articles);
 });

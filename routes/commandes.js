@@ -22,10 +22,9 @@ router.get("/", ensureAuthenticated, async (req, res) => {
 	setTimeout(() => {
 		console.log(Commandes);
 	}, 5000);
-	const getUsers = await db.User.findAll({ include: ["Role"], raw: true });
-	const users = getUsers.filter((user) => !user["Role.isAdmin"]);
+	const magasins = await db.Magasin.findAll({ raw: true });
 
-	return res.render("commandes/", { commandes, articles, users });
+	return res.render("commandes/", { commandes, articles, magasins });
 });
 router.get("/live", ensureAuthenticated, async (req, res) => {
 	const commandes = await db.Commande.findAll({

@@ -110,11 +110,11 @@
                                     <small id="helpId" class="form-text text-muted"></small>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="stock" class="form-label">Magasin de: </label>
+                                    <label for="stock" class="form-label">Magasin: </label>
                                     <select class="form-select form-select-lg" name="stock_id" id="stock">
                                         <option selected>Selectionner le magasin</option>
-                                        {{#each users}}
-                                        <option value="{{id}}">{{fullname}}</option>
+                                        {{#each magasins}}
+                                        <option value="{{id}}">{{name}}</option>
                                         {{/each}}
                                     </select>
                                 </div>

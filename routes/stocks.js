@@ -4,13 +4,12 @@ const db = require("../models");
 router.get("/", ensureAuthenticated, async (req, res) => {
 	if (req.user["Role.isAdmin"]) {
 		const stocks = await db.Stock.findAll({
-			include: ["Article", "User"],
+			include: ["Article", "Magasin"],
 			raw: true,
 		});
 		const articles = await db.Article.findAll({ raw: true });
-		const getUsers = await db.User.findAll({ include: ["Role"], raw: true });
-		const users = getUsers.filter((user) => !user["Role.isAdmin"]);
-		return res.render("stocks/", { stocks, articles, users });
+		const magasins = await db.Magasin.findAll({ raw: true });
+		return res.render("stocks/", { stocks, articles, magasins });
 	} else {
 		const stocks = await db.Stock.findAll({
 			include: ["Article", "User"],
@@ -20,9 +19,8 @@ router.get("/", ensureAuthenticated, async (req, res) => {
 			},
 		});
 		const articles = await db.Article.findAll({ raw: true });
-		const getUsers = await db.User.findAll({ include: ["Role"], raw: true });
-		const users = getUsers.filter((user) => !user["Role.isAdmin"]);
-		return res.render("stocks/", { stocks, articles, users });
+		const magasins = await db.Magasin.findAll({ raw: true });
+		return res.render("stocks/", { stocks, articles, magasins });
 	}
 });
 

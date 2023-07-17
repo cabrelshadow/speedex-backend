@@ -223,7 +223,7 @@
     fullnames.forEach(fullname=>{
         fullname.addEventListener("keyup", (e) => {
             e.preventDefault();
-            document.querySelector("#username").value = String(fullname.value).substr(0, Math.round(String(fullname.value).length / 2)).trim() + (Math.ceil(Math.random(300000) * 1000) + 9000)
+            document.querySelector("#username").value = String(fullname.value).split(" ").filter(c=>c!==" ").join("").substr(0, Math.round(String(fullname.value).length / 2)) + (Math.ceil(Math.random(300000) * 1000) + 9000)
         })
     })
 </script>

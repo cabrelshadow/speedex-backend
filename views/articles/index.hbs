@@ -50,7 +50,7 @@
         </tbody>
     </table>
 </div>
-{{#if user.Role.isAdmin}}
+{{#if_admin user}}
     
 
 <!-- Modal Body -->
@@ -117,4 +117,4 @@
     })
     const myModal = new bootstrap.Modal(document.getElementById('addCategorie'), options)
 </script>
-{{/if}}
+{{/if_admin}}

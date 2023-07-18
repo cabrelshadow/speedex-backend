@@ -202,10 +202,11 @@
                             <h3>Information Paternaire</h3>
                             <div class="commande_info">
                                 <div class="mb-3">
-                                    <label for="name" class="form-label">Nom</label>
-                                    <input type="text" class="form-control" name="name" id="name"
-                                        aria-describedby="helpId" placeholder="">
-                                    <small id="helpId" class="form-text text-muted"></small>
+                                    <label for="stock" class="form-label">Paternaire </label>
+                                    <select class="form-select">
+                                        <option selected>Choisir une paternaire</option>
+                                        <option value="1">Speedex</option>
+                                    </select>
                                 </div>
                                 <div class="mb-3">
                                     <label for="numero_client" class="form-label">adresse Recuperation</label>
@@ -245,6 +246,12 @@
                                     <small id="helpId" class="form-text text-muted"></small>
                                 </div>
                                 <div class="mb-3">
+                                    <label for="address_livraison" class="form-label">Ville</label>
+                                    <input type="text" class="form-control" name="address_livraison"
+                                        id="address_livraison" aria-describedby="helpId" placeholder="">
+                                    <small id="helpId" class="form-text text-muted"></small>
+                                </div>
+                                <div class="mb-3">
                                     <label for="address_livraison" class="form-label">Quartier</label>
                                     <input type="text" class="form-control" name="address_livraison"
                                         id="address_livraison" aria-describedby="helpId" placeholder="">
@@ -280,6 +287,12 @@
                                     <input type="text" class="form-control" placeholder="prix" name="prix" min="1">
                                     <button class="btn btn-primary" type="button"><i class="fas fa-plus"></i></button>
                                 </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Numero commande</label>
+                                <input type="text" class="form-control" name="name" id="name" aria-describedby="helpId"
+                                    placeholder="">
+                                <small id="helpId" class="form-text text-muted"></small>
                             </div>
                             <div class="mb-3">
                                 <label for="name" class="form-label">Frais livraison</label>

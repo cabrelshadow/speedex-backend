@@ -193,154 +193,6 @@
 </div>
 
 
-<div class="modal fade" id="addCmd" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
-    aria-labelledby="modalTitleId" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalTitleId">Créer une commande</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body step">
-                <div class="row">
-                    <form method="post" action=" ">
-                        <div class="col">
-                            <h3>Information Paternaire</h3>
-                            <div class="commande_info">
-                                <div class="mb-3">
-                                    <label for="name" class="form-label">Nom</label>
-                                    <input type="text" class="form-control" name="name" id="name"
-                                        aria-describedby="helpId" placeholder="">
-                                    <small id="helpId" class="form-text text-muted"></small>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="numero_client" class="form-label">adresse Recuperation</label>
-                                    <input type="text" class="form-control" name="numero_client" id="numero_client"
-                                        aria-describedby="helpId" placeholder="">
-                                    <small id="helpId" class="form-text text-muted"></small>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="address_livraison" class="form-label">Quartier Recuperation</label>
-                                    <input type="text" class="form-control" name="address_livraison"
-                                        id="address_livraison" aria-describedby="helpId" placeholder="">
-                                    <small id="helpId" class="form-text text-muted"></small>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="stock" class="form-label">Magasin: </label>
-                                    <select class="form-select">
-                                        <option selected>Choisir une option</option>
-                                        <option value="1">Speedex</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <button class="btn btn-outline-info float-end next-button" type="button">Suivant</button>
-                        </div>
-                        <div class="col">
-                            <h3>Information Client</h3>
-                            <div class="commande_info">
-                                <div class="mb-3">
-                                    <label for="name" class="form-label">Nom</label>
-                                    <input type="text" class="form-control" name="name" id="name"
-                                        aria-describedby="helpId" placeholder="">
-                                    <small id="helpId" class="form-text text-muted"></small>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="numero_client" class="form-label">Numero Telephone</label>
-                                    <input type="text" class="form-control" name="numero_client" id="numero_client"
-                                        aria-describedby="helpId" placeholder="">
-                                    <small id="helpId" class="form-text text-muted"></small>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="address_livraison" class="form-label">Quartier</label>
-                                    <input type="text" class="form-control" name="address_livraison"
-                                        id="address_livraison" aria-describedby="helpId" placeholder="">
-                                    <small id="helpId" class="form-text text-muted"></small>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="address_livraison" class="form-label">Adresse livraison</label>
-                                    <input type="text" class="form-control" name="address_livraison"
-                                        id="address_livraison" aria-describedby="helpId" placeholder="">
-                                    <small id="helpId" class="form-text text-muted"></small>
-                                </div>
-                            </div>
-
-                            <button class="btn btn-outline-warning prev-button">Retour</button>
-                            <button class="btn btn-outline-info float-end next-button" type="button">Suivant</button>
-                        </div>
-
-                        <div class="col" style="display: none;">
-                            <h3>Choisir les articles</h3>
-
-                            <div multi-input>
-                                <div class="input-group mb-3">
-                                    {{!-- <label for="quartier" class="form-label">Quartier Recuperation</label> --}}
-                                    <select class="form-select" name="article_id" id="article"
-                                        aria-label="Default select example">
-                                        <option selected value="">l'article</option>
-                                        <!--{{#each articles}}
-                                     <option value="{{id}}">{{"Article.name"}}</option>
-                                    {{/each}}-->
-                                    </select>
-                                    <input type="number" class="form-control" placeholder="quantite" name="quantite"
-                                        min="1">
-                                    <input type="text" class="form-control" placeholder="prix" name="prix" min="1">
-                                    <button class="btn btn-primary" type="button"><i class="fas fa-plus"></i></button>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Frais livraison</label>
-                                <input type="text" class="form-control" name="name" id="name" aria-describedby="helpId"
-                                    placeholder="">
-                                <small id="helpId" class="form-text text-muted"></small>
-                            </div>
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Frais emballage</label>
-                                <input type="text" class="form-control" name="name" id="name" aria-describedby="helpId"
-                                    placeholder="">
-                                <small id="helpId" class="form-text text-muted"></small>
-                            </div>
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Frais expedition</label>
-                                <input type="text" class="form-control" name="name" id="name" aria-describedby="helpId"
-                                    placeholder="">
-                                <small id="helpId" class="form-text text-muted"></small>
-                            </div>
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Montant total</label>
-                                <input type="text" class="form-control" name="name" id="name" aria-describedby="helpId"
-                                    placeholder="">
-                                <small id="helpId" class="form-text text-muted"></small>
-                            </div>
-                            <div class="mb-3">
-                                <label for="date_livraison" class="form-label">Date de Livraison</label>
-                                <input type="date" class="form-control" name="date_livraison" id="date_livraison"
-                                    aria-describedby="helpId" placeholder="">
-                                <small id="helpId" class="form-text text-muted"></small>
-                            </div>
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Heure livraison</label>
-                                <input type="time" class="form-control" name="name" id="name" aria-describedby="helpId"
-                                    placeholder="">
-                                <small id="helpId" class="form-text text-muted"></small>
-                            </div>
-                            <div class="mb-3">
-                                <label for="floatingTextarea2">Commentaire</label>
-                                <textarea class="form-control" placeholder="Commentaire" id="floatingTextarea2"
-                                    style="height: 100px"></textarea>
-                            </div>
-
-                            <button class="btn btn-outline-warning prev-button">Retour</button>
-                            <button type="button" class="btn btn-outline-info float-end next-button"
-                                onclick="onSubmit()">Commander</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
 <script>
     function onSubmit() {
         let prepData = {}
@@ -427,7 +279,8 @@
         }).then(async (res) => {
             if (res.status === 200) {
                 const data = await res.json()
-                data && data.map((articles)=>{
+                if(data.length>0){
+                data.map((articles)=>{
                     articleSelects.forEach((articleSelect)=>{
                         const option= document.createElement("option")
                         option.value = articles.article_id
@@ -436,6 +289,12 @@
                         articleSelect.append(option)
                     })
                 })
+                }else{
+                    articleSelects.forEach((articleSelect) => {
+                        const option = articleSelect.querySelectorAll("[article-price]")
+                        option.forEach(o=>o.remove())
+                    })
+                }
             }
         })
     })

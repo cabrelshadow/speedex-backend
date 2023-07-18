@@ -27,6 +27,7 @@ module.exports = (sequelize, DataTypes) => {
 	}
 	Commande.init(
 		{
+			numero_commande: DataTypes.STRING,
 			address_livraison: DataTypes.STRING,
 			numero_client: DataTypes.STRING,
 			total: DataTypes.INTEGER,

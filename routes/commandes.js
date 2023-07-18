@@ -6,6 +6,7 @@ const router = require("express").Router();
 router.get("/", ensureAuthenticated, async (req, res) => {
 	let Commandes = {};
 	const commandes = await db.Commande.findAll({
+		include: ["User"],
 		raw: true,
 	});
 	const articles = await db.Stock.findAll({
@@ -13,17 +14,32 @@ router.get("/", ensureAuthenticated, async (req, res) => {
 		include: db.Article,
 	});
 	commandes.filter(async (commande) => {
-		const articles_commandes = await db.Article_commande.findAll({
+		const get_articles_commandes = await db.Article_commande.findAll({
 			where: { commande_id: commande.id },
 			raw: true,
 		});
-		Commandes[commande.id] = { ...commande, articles_commandes };
+		const articles_commandes = [];
+		get_articles_commandes.map(async (article) => {
+			await db.Article.findOne({
+				where: { id: article.article_id },
+				raw: true,
+			}).then((getArticle) => {
+				articles_commandes.push(getArticle);
+			});
+		});
+		const call_center = await db.User.findOne({
+			where: { id: commande.user_call_center },
+			raw: true,
+		});
+		Commandes[commande.id] = { ...commande, articles_commandes, call_center };
 	});
 	const magasins = await db.Magasin.findAll({ raw: true });
-	setTimeout(() => {
-		console.log(Commandes);
-	}, 5000);
-	return res.render("commandes/", { Commandes, articles, magasins });
+	const getUsers = await db.User.findAll({ include: ["Role"], raw: true });
+	const users = getUsers.filter(
+		(user) => String(user["Role.name"]).toLocaleLowerCase() === "callcenter",
+	);
+	console.log(Commandes);
+	return res.render("commandes/", { Commandes, articles, magasins, users });
 });
 router.get("/live", ensureAuthenticated, async (req, res) => {
 	const commandes = await db.Commande.findAll({
@@ -36,13 +52,15 @@ router.get("/live", ensureAuthenticated, async (req, res) => {
 	return res.render("commandes/live", { commandes, articles });
 });
 router.post("/add", ensureAuthenticated, (req, res, next) => {
-	const { name, numero_client, address_livraison, stock_id, articles } =
+	const { name, numero_client, address_livraison, total, stock_id, articles } =
 		req.body;
 	console.log(req.body);
 	db.Commande.create({
 		name,
 		numero_client,
+		total,
 		address_livraison,
+		numero_commande: "SPD-" + (Math.ceil(Math.random(300000) * 1000) + 9000),
 		user_commande_id: req.user.id,
 	}).then(async (commande) => {
 		articles.map(async (article) => {
@@ -53,7 +71,18 @@ router.post("/add", ensureAuthenticated, (req, res, next) => {
 			});
 		});
 	});
-	res.status(201).redirect(req.headers.referer);
+	res.status(201).send("ok");
+});
+router.post("/assign/:cmd_id", async (req, res) => {
+	const { user_call_center } = req.body;
+	if (user_call_center) {
+		await db.Commande.update(
+			{ user_call_center },
+			{ where: { id: req.params.cmd_id } },
+		);
+
+		return res.redirect(req.headers.referer);
+	}
 });
 
 module.exports = router;

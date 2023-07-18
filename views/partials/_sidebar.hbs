@@ -46,8 +46,6 @@
           </span>
           <span class="mt-1 ms-1 sidebar-text">SPEEDEX</span>
         </a>
-
-      
         <li class="nav-item  set-active ">
         <a href="/" class="nav-link">
           <span class="sidebar-icon">
@@ -56,16 +54,22 @@
           <span class="sidebar-text">Dashboard</span>
         </a>
       </li>
-      {{#if_admin user}}
+      
+      {{#if_role user "Livreur"}}
         <li class="nav-item set-active">
           <a href="/livreur/" class="nav-link">
             <span class="sidebar-icon">
               <i class="fas fa-users"></i>
             </span>
-            <span class="sidebar-text">Livreurs</span>
+            <span class="sidebar-text">coursier</span>
           </a>
         </li>
-          
+  {{/if_role}}
+      {{#if_admin user}}
+
+
+   
+
         <li class="nav-item set-active">
           <a href="/livraison/" class="nav-link">
             <span class="sidebar-icon">
@@ -102,6 +106,19 @@
           <span class="sidebar-text">Stocks</span>
         </a>
       </li>
+      
+      {{/if_role}}
+     {{#if_role user "Partenaire"}}
+      
+        <li class="nav-item set-active">
+        <a href="/commandes" class="nav-link">
+          <span class="sidebar-icon">
+            <i class="fas fa-shopping-bag"></i>
+          </span>
+          <span class="sidebar-text">Commandes</span>
+        </a>
+      </li>
+      
       {{/if_role}}
         {{#if_role user "CallCenter"}}
           <li class="nav-item set-active">
@@ -115,7 +132,6 @@
         {{/if_role}}
     {{#if_role user "Superviseur"}}
       
-    
       <li class="nav-item set-active">
         <a href="/superviseur" class="nav-link">
           <span class="sidebar-icon">
@@ -124,6 +140,7 @@
           <span class="sidebar-text">superviseur</span>
         </a>
       </li>
+      
         <li class="nav-item set-active">
         <a href="/commandes" class="nav-link">
           <span class="sidebar-icon">

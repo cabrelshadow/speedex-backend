@@ -107,7 +107,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="stock" class="form-label">Magasin: </label>
-                                    <select class="form-select form-select-lg" name="stock_id" id="stock">
+                                    <select class="form-select" name="stock_id" id="stock">
                                         <option selected>Selectionner le magasin</option>
                                         {{#each magasins}}
                                         <option value="{{id}}">{{name}}</option>
@@ -143,7 +143,7 @@
                                 </div>
                             </div>
 
-                            <button class="btn btn-secondary prev-button">Retour</button>
+                            <button type="button" class="btn btn-secondary prev-button">Retour</button>
                             <button type="button" class="btn btn-primary float-end next-button"
                                 onclick="onSubmit()">Commander</button>
                         </div>

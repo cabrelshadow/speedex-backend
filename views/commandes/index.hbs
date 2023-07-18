@@ -5,14 +5,11 @@
         <i class="fas fa-plus"></i>
         Créer une commande
     </button>
-    <button class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#addCmd">
+    <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#addCommande">
         <i class="fas fa-plus"></i>
         Ajouter une commande
     </button>
-    <button class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#addUser">
-        <i class="fas fa-plus"></i>
-        Assigner une commande
-    </button>
+ 
 
 
     <div class=" mt-5 px-2">
@@ -38,29 +35,29 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{#each commandes}}
+                     
                                 <tr>
                                     <th scope="row"><input class="form-check-input" type="checkbox"></th>
-                                    <td>Valdez</td>
-                                    <td>Call center</td>
+                                    <td>yyu</td>
                                     <td>0122</td>
-                                    <td>VVVV</td>
+                                    <td>66</td>
                                     <td>5000F</td>
-                                    <td>698233443</td>
-                                    <td>Makepe</td>
-                                    <td>Douala</td>
+                                    <td>5878989</td>
+                                    <td>doua</td>
                                     <td><span class="badge bg-danger">En cours</span></td>
                                     <td><span class="badge bg-danger">Reporter</span></td>
                                     <td>
-                                        <button class="btn btn-sm btn-warning" data-bs-toggle="modal"><i class="fas fa-edit"></i></button>
+                                          <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#addUser">
+        <i class="fas fa-plus"></i>
+        Assigner
+    </button>
                                 
-                                        <button class="btn btn-sm btn-danger" data-bs-toggle="modal"><i class="fa fa-trash"
-                                                aria-hidden="true"></i></button>
+                                    
                                     </td>
                                 
                                 </tr>
-                            {{/each}}
-
+              
+                           
                         </tbody>
                     </table>
 
@@ -173,9 +170,12 @@
                 <form action="/admin/User/add" method="post">
                     <div class="mb-3">
                         <label for="name" class="form-label">Nom</label>
-                        <input type="text" class="form-control" name="name" id="name" aria-describedby="helpId"
-                            placeholder="">
-                        <small id="helpId" class="form-text text-muted"></small>
+                        <select class="form-select" name="role_id" id="role_id">
+                                <option selected value="">Selectionner call center</option>
+                                {{#each roles}}
+                                    <option value="{{id}}">{{name}}</option>
+                                {{/each}}
+                            </select>
                     </div>
             </div>
             <div class="modal-footer">
@@ -202,11 +202,10 @@
                             <h3>Information Paternaire</h3>
                             <div class="commande_info">
                                 <div class="mb-3">
-                                    <label for="stock" class="form-label">Paternaire </label>
-                                    <select class="form-select">
-                                        <option selected>Choisir une paternaire</option>
-                                        <option value="1">Speedex</option>
-                                    </select>
+                                    <label for="name" class="form-label">Nom</label>
+                                    <input type="text" class="form-control" name="name" id="name"
+                                        aria-describedby="helpId" placeholder="">
+                                    <small id="helpId" class="form-text text-muted"></small>
                                 </div>
                                 <div class="mb-3">
                                     <label for="numero_client" class="form-label">adresse Recuperation</label>
@@ -246,12 +245,6 @@
                                     <small id="helpId" class="form-text text-muted"></small>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="address_livraison" class="form-label">Ville</label>
-                                    <input type="text" class="form-control" name="address_livraison"
-                                        id="address_livraison" aria-describedby="helpId" placeholder="">
-                                    <small id="helpId" class="form-text text-muted"></small>
-                                </div>
-                                <div class="mb-3">
                                     <label for="address_livraison" class="form-label">Quartier</label>
                                     <input type="text" class="form-control" name="address_livraison"
                                         id="address_livraison" aria-describedby="helpId" placeholder="">
@@ -287,12 +280,6 @@
                                     <input type="text" class="form-control" placeholder="prix" name="prix" min="1">
                                     <button class="btn btn-primary" type="button"><i class="fas fa-plus"></i></button>
                                 </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Numero commande</label>
-                                <input type="text" class="form-control" name="name" id="name" aria-describedby="helpId"
-                                    placeholder="">
-                                <small id="helpId" class="form-text text-muted"></small>
                             </div>
                             <div class="mb-3">
                                 <label for="name" class="form-label">Frais livraison</label>
@@ -357,29 +344,29 @@
         const name = document.querySelector("#name");
         const commande_info = [...document.querySelectorAll(".commande_info input"), ...document.querySelectorAll(".commande_info select")];
         const multiInputs = document.querySelector("[multi-input]").children;
-        multiInputs.forEach((multiInput) => {
-            [...multiInput.querySelectorAll("input"), ...multiInput.querySelectorAll("select")].forEach(mInput => {
-                prepData = { ...prepData, [mInput.name]: mInput.value }
-            })
-            multInput.push(prepData);
-        })
-        articles = multInput
-        commande_info.forEach((cmInfo) => {
-            inputs = { ...inputs, [cmInfo.name]: cmInfo.value }
-        })
-        const data = {
+       multiInputs.forEach((multiInput)=>{
+         [...multiInput.querySelectorAll("input"), ...multiInput.querySelectorAll("select")].forEach(mInput => {
+               prepData = { ...prepData, [mInput.name]: mInput.value }
+           })
+           multInput.push(prepData);
+         })
+         articles=multInput
+         commande_info.forEach((cmInfo)=>{
+            inputs = {...inputs,[cmInfo.name]:cmInfo.value}
+         })
+         const data = {
             ...inputs,
-            articles: articles
-        }
-        fetch("/commandes/add", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
+            articles:articles
+         }
+        fetch("/commandes/add",{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
             },
-            body: JSON.stringify(data),
-            redirect: "follow"
-        }).then((res) => res.status === 201 && window.location.reload())
-
+            body:JSON.stringify(data),
+            redirect:"follow"
+        }).then((res)=>res.status===201&&window.location.reload())
+        
     }
     document.addEventListener("DOMContentLoaded", function () {
         var currentStep = 0;
@@ -416,40 +403,6 @@
         });
     });
 
-    document.addEventListener("DOMContentLoaded", function () {
-        var currentStep = 0;
-        var steps = document.querySelectorAll(".step .row .col");
-
-        // Hide all steps except the first one
-        for (var i = 1; i < steps.length; i++) {
-            steps[i].style.display = "none";
-        }
-
-        var nextButtons = document.querySelectorAll(".next-button");
-        var prevButtons = document.querySelectorAll(".prev-button");
-
-        // Add event listeners to next buttons
-        nextButtons.forEach(function (button) {
-            button.addEventListener("click", function () {
-                if (currentStep < steps.length - 1) {
-                    steps[currentStep].style.display = "none";
-                    currentStep++;
-                    steps[currentStep].style.display = "block";
-                }
-            });
-        });
-
-        // Add event listeners to previous buttons
-        prevButtons.forEach(function (button) {
-            button.addEventListener("click", function () {
-                if (currentStep > 0) {
-                    steps[currentStep].style.display = "none";
-                    currentStep--;
-                    steps[currentStep].style.display = "block";
-                }
-            });
-        });
-    });
     document.querySelector("#stock").addEventListener("change", (e) => {
         const articleSelects = document.querySelectorAll("#article")
         const value = e.target.value
@@ -458,9 +411,9 @@
         }).then(async (res) => {
             if (res.status === 200) {
                 const data = await res.json()
-                data.map((articles) => {
-                    articleSelects.forEach((articleSelect) => {
-                        const option = document.createElement("option")
+                data.map((articles)=>{
+                    articleSelects.forEach((articleSelect)=>{
+                        const option= document.createElement("option")
                         option.value = articles.article_id
                         option.innerText = articles["Article.name"]
                         articleSelect.append(option)

@@ -85,4 +85,30 @@ router.post("/assign/:cmd_id", async (req, res) => {
 	}
 });
 
+
+//afficher les commande assignés
+const Commandes = {};
+
+const commandes = db.Commande.findAll();
+
+for (const commande of commandes) {
+  const user = db.User.findOne({ id: commande.user_id, type: "call_center" });
+
+  if (user) {
+    const articles_commandes = [];
+    const articleCommandes = db.Article_commande.findAll({ commande_id: commande.id });
+
+    for (const articleCommande of articleCommandes) {
+      const article = db.Article.findOne({ id: articleCommande.article_id });
+      articles_commandes.push(article);
+    }
+
+    Commandes[commande.id] = {
+      details: commande,
+      articles_commandes,
+      call_center: user
+    };
+  }
+}
+
 module.exports = router;

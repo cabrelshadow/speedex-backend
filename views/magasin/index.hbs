@@ -3,47 +3,47 @@
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addMagasin">
         <i class="fas fa-plus"></i> créer un magasin
     </button>
-    
-    
-    
-    <div class="table-responsive">
-    <div class="card">
-     <div class="card-body">
-       <table class="table table-striped-columns table-bordered align-middle ">
 
-            <thead>
-                <tr>
-                    <th scope="col">Nom du magasin</th>
-                    <th scope="col">Partenaire</th>
-                    <th scope="col">Status</th>
-    
-                </tr>
-            </thead>
-            <tbody>
-                {{#each magasins}}
-                <tr class="">
-                    <td scope="row">{{name}}</td>
-                    <td>{{"User.fullname"}}</td>
-                    <td>
-                        {{#if active}}
-                            <span class="badge rounded-pill bg-success">Actif</span>
-                            {{else}}
-                            <span class="badge rounded-pill bg-danger">Inactif</span>
-                        {{/if}}
-                    </td>
-                </tr>
-                {{/each}}
-    
-            </tbody>
-        </table>
+
+
+    <div class="table-responsive mt-3">
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-striped-columns table-bordered align-middle ">
+
+                    <thead>
+                        <tr>
+                            <th scope="col">Nom du magasin</th>
+                            <th scope="col">Partenaire</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Adresse</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each magasins}}
+                        <tr class="">
+                            <td scope="row">{{name}}</td>
+                            <td>{{"User.fullname"}}</td>
+                            <td>
+                                {{#if active}}
+                                <span class="badge rounded-pill bg-success">Actif</span>
+                                {{else}}
+                                <span class="badge rounded-pill bg-danger">Inactif</span>
+                                {{/if}}
+                            </td>
+                        </tr>
+                        {{/each}}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-       </div>
-          </div>
-    
+
     <!-- Modal Body -->
     <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
-    <div class="modal fade" id="addMagasin" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
-        aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal fade" id="addMagasin" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+        role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -58,13 +58,19 @@
                                 placeholder="">
                             <small id="helpId" class="form-text text-muted"></small>
                         </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Adresse</label>
+                            <input type="text" class="form-control" name="name" id="name" aria-describedby="helpId"
+                                placeholder="">
+                            <small id="helpId" class="form-text text-muted"></small>
+                        </div>
                         <select class="form-select" name="user_id" id="user">
                             <option value="" selected>Selectionner un partenaire</option>
                             {{#each users}}
                             <option value="{{id}}">{{fullname}}</option>
                             {{/each}}
                         </select>
-                    
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>

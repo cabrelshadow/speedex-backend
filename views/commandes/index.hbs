@@ -5,11 +5,11 @@
         <i class="fas fa-plus"></i>
         Créer une commande
     </button>
-    <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#addCommande">
+    {{!-- <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#addCommande">
         <i class="fas fa-plus"></i>
         Ajouter une commande
-    </button>
- 
+    </button> --}}
+
 
 
     <div class=" mt-5 px-2">
@@ -35,64 +35,72 @@
                             </tr>
                         </thead>
                         <tbody>
-                     
-                                {{#each Commandes}}
-                                    <tr>
-                                        <th scope="row"><input class="form-check-input" type="checkbox"></th>
-                                        <td>{{"User.fullname"}}</td>
-                                        <td>{{numero_commande}}</td>
-                                        <td>{{articles_commandes.length}}</td>
-                                        <td>{{total}}</td>
-                                        <td>{{numero_client}}</td>
-                                        <td>{{address_livraison}}</td>
-                                        <td><span class="badge bg-danger">En cours</span></td>
-                                        <td><span class="badge bg-danger">Reporter</span></td>
-                                        <td>
-                                            {{#if user_call_center}}
-                                                Assigné à <span class="badge rounded-pill bg-warning">{{call_center.fullname}}</span>
-                                                {{else}}
-                                                <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#assignUser{{id}}">
-                                                    <i class="fas fa-share"></i>
-                                                    Assigner
-                                                </button>
-                                            {{/if}}
-                                    
-                                    
-                                        </td>
-                                    <!-- Modal Body -->
-                                    <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
-                                    <div class="modal fade" id="assignUser{{id}}" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
-                                        role="dialog" aria-labelledby="addRoleTitle" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="addRoleTitle">Assigner une commande à un utilisateur</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form action="/commandes/assign/{{id}}" method="post">
-                                                        <div class="mb-3">
-                                                            <label for="call_center" class="form-label">Nom</label>
-                                                            <select class="form-select" name="user_call_center" id="call_center">
-                                                                <option selected value="">Selectionner call center</option>
-                                                                {{#each ../users}}
-                                                                <option value="{{id}}">{{fullname}}</option>
-                                                                {{/each}}
-                                                            </select>
-                                                        </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                                                    <button type="submit" class="btn btn-primary">Enregistrer</button>
-                                                    </form>
-                                                </div>
+
+                            {{#each Commandes}}
+                            <tr>
+                                <th scope="row"><input class="form-check-input" type="checkbox"></th>
+                                <td>{{"User.fullname"}}</td>
+                                <td>{{numero_commande}}</td>
+                                <td>{{articles_commandes.length}}</td>
+                                <td>{{total}}</td>
+                                <td>{{numero_client}}</td>
+                                <td>{{address_livraison}}</td>
+                                <td><span class="badge bg-danger">En cours</span></td>
+                                <td><span class="badge bg-danger">Reporter</span></td>
+                                <td>
+                                    {{#if user_call_center}}
+                                    Assigné à <span
+                                        class="badge rounded-pill bg-warning">{{call_center.fullname}}</span>
+                                    {{else}}
+                                    <button class="btn btn-outline-success" data-bs-toggle="modal"
+                                        data-bs-target="#assignUser{{id}}">
+                                        <i class="fas fa-share"></i>
+                                        Assigner
+                                    </button>
+                                    {{/if}}
+
+
+                                </td>
+                                <!-- Modal Body -->
+                                <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+                                <div class="modal fade" id="assignUser{{id}}" tabindex="-1" data-bs-backdrop="static"
+                                    data-bs-keyboard="false" role="dialog" aria-labelledby="addRoleTitle"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered"
+                                        role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="addRoleTitle">Assigner une commande à un
+                                                    utilisateur</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="/commandes/assign/{{id}}" method="post">
+                                                    <div class="mb-3">
+                                                        <label for="call_center" class="form-label">Nom</label>
+                                                        <select class="form-select" name="user_call_center"
+                                                            id="call_center">
+                                                            <option selected value="">Selectionner call center</option>
+                                                            {{#each ../users}}
+                                                            <option value="{{id}}">{{fullname}}</option>
+                                                            {{/each}}
+                                                        </select>
+                                                    </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Fermer</button>
+                                                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
-                                    </tr>
-                                {{/each}}
-              
-                           
+                                </div>
+                            </tr>
+                            {{/each}}
+
+
                         </tbody>
                     </table>
 
@@ -119,7 +127,52 @@
                 <div class="row">
                     <form method="post" action="/commandes/add">
                         <div class="col">
-                            <h3>Information de la commande</h3>
+                            <h3>Information de la paternaire</h3>
+                            <div class="commande_info">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Nom</label>
+                                    <select class="form-select">
+                                        <option selected>Choisir une paternaire</option>
+                                            <option value="3">Valdez</option>
+                                        <option value="2">Christian</option>
+                                        <option value="1">Shadow</option>
+                                        <option value="3">Nono</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="stock" class="form-label">Magasin: </label>
+                                    <select class="form-select" name="stock_id" id="stock">
+                                        <option selected>Selectionner le magasin</option>
+                                        {{#each magasins}}
+                                        <option value="{{id}}">{{name}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="numero_client" class="form-label">Adresse Recuperation</label>
+                                    <input type="text" class="form-control" name="numero_client" id="numero_client"
+                                        aria-describedby="helpId" placeholder="Par defaut en fonction de l'adresse du magasin choisi">
+                                    <small id="helpId" class="form-text text-muted"></small>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="address_livraison" class="form-label">Quartier de Recuperation</label>
+                                    <input type="text" class="form-control" name="address_livraison"
+                                        id="address_livraison" aria-describedby="helpId" placeholder="">
+                                    <small id="helpId" class="form-text text-muted"></small>
+                                </div>
+                                
+                                <!-- <div class="mb-3">
+                                <label for="numero_client" class="form-label">Numero du client</label>
+                                <input type="text" class="form-control" name="numero_client" id="numero_client"
+                                    aria-describedby="helpId" placeholder="">
+                                <small id="helpId" class="form-text text-muted"></small>
+                            </div>-->
+
+                            </div>
+                            <button class="btn btn-primary float-end next-button" type="button">suivant</button>
+                        </div>
+                        <div class="col">
+                            <h3>Information de la client</h3>
                             <div class="commande_info">
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Nom du client</label>
@@ -134,19 +187,22 @@
                                     <small id="helpId" class="form-text text-muted"></small>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="address_livraison" class="form-label">Adresse de livraison</label>
+                                    <label for="address_livraison" class="form-label">Ville</label>
                                     <input type="text" class="form-control" name="address_livraison"
                                         id="address_livraison" aria-describedby="helpId" placeholder="">
                                     <small id="helpId" class="form-text text-muted"></small>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="stock" class="form-label">Magasin: </label>
-                                    <select class="form-select" name="stock_id" id="stock">
-                                        <option selected>Selectionner le magasin</option>
-                                        {{#each magasins}}
-                                        <option value="{{id}}">{{name}}</option>
-                                        {{/each}}
-                                    </select>
+                                    <label for="address_livraison" class="form-label">Quartier</label>
+                                    <input type="text" class="form-control" name="address_livraison"
+                                        id="address_livraison" aria-describedby="helpId" placeholder="">
+                                    <small id="helpId" class="form-text text-muted"></small>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="address_livraison" class="form-label">Adresse de livraison</label>
+                                    <input type="text" class="form-control" name="address_livraison"
+                                        id="address_livraison" aria-describedby="helpId" placeholder="">
+                                    <small id="helpId" class="form-text text-muted"></small>
                                 </div>
                                 <!-- <div class="mb-3">
                                 <label for="numero_client" class="form-label">Numero du client</label>
@@ -156,7 +212,8 @@
                             </div>-->
 
                             </div>
-                            <button class="btn btn-primary float-end next-button" type="button">Commencer</button>
+                            <button type="button" class="btn btn-secondary prev-button">Retour</button>
+                            <button class="btn btn-primary float-end next-button" type="button">suivant</button>
                         </div>
                         <div class="col" style="display: none;">
                             <h3>Choisir les articles</h3>
@@ -203,38 +260,38 @@
         const name = document.querySelector("#name");
         const commande_info = [...document.querySelectorAll(".commande_info input"), ...document.querySelectorAll(".commande_info select")];
         const multiInputs = document.querySelector("[multi-input]").children;
-       multiInputs.forEach((multiInput)=>{
-         [...multiInput.querySelectorAll("input"), ...multiInput.querySelectorAll("select")].forEach(mInput => {
-               prepData = { ...prepData, [mInput.name]: mInput.value }
-               
-           })
-           multiInput.querySelectorAll("select").forEach((select,i)=>{
-            
-             total += parseInt(select.options[select.selectedIndex].getAttribute("article-price")) *parseInt(multiInput.querySelectorAll("input")[i].value)
-           })
-           console.log(total)
-           multInput.push(prepData);
-         })
-         
-         articles=multInput
-         commande_info.forEach((cmInfo)=>{
-            inputs = {...inputs,[cmInfo.name]:cmInfo.value}
-         })
-         const data = {
+        multiInputs.forEach((multiInput) => {
+            [...multiInput.querySelectorAll("input"), ...multiInput.querySelectorAll("select")].forEach(mInput => {
+                prepData = { ...prepData, [mInput.name]: mInput.value }
+
+            })
+            multiInput.querySelectorAll("select").forEach((select, i) => {
+
+                total += parseInt(select.options[select.selectedIndex].getAttribute("article-price")) * parseInt(multiInput.querySelectorAll("input")[i].value)
+            })
+            console.log(total)
+            multInput.push(prepData);
+        })
+
+        articles = multInput
+        commande_info.forEach((cmInfo) => {
+            inputs = { ...inputs, [cmInfo.name]: cmInfo.value }
+        })
+        const data = {
             ...inputs,
             total,
-            articles:articles
-         }
+            articles: articles
+        }
 
-        fetch("/commandes/add",{
-            method:"POST",
-            headers:{
-                "Content-Type":"application/json"
+        fetch("/commandes/add", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
             },
-            body:JSON.stringify(data),
-            redirect:"follow"
-        }).then((res)=>res.status===201&&window.location.reload())
-        
+            body: JSON.stringify(data),
+            redirect: "follow"
+        }).then((res) => res.status === 201 && window.location.reload())
+
     }
     document.addEventListener("DOMContentLoaded", function () {
         var currentStep = 0;
@@ -279,20 +336,20 @@
         }).then(async (res) => {
             if (res.status === 200) {
                 const data = await res.json()
-                if(data.length>0){
-                data.map((articles)=>{
-                    articleSelects.forEach((articleSelect)=>{
-                        const option= document.createElement("option")
-                        option.value = articles.article_id
-                        option.innerText = articles["Article.name"]
-                        option.setAttribute("article-price",articles['Article.price'])
-                        articleSelect.append(option)
+                if (data.length > 0) {
+                    data.map((articles) => {
+                        articleSelects.forEach((articleSelect) => {
+                            const option = document.createElement("option")
+                            option.value = articles.article_id
+                            option.innerText = articles["Article.name"]
+                            option.setAttribute("article-price", articles['Article.price'])
+                            articleSelect.append(option)
+                        })
                     })
-                })
-                }else{
+                } else {
                     articleSelects.forEach((articleSelect) => {
                         const option = articleSelect.querySelectorAll("[article-price]")
-                        option.forEach(o=>o.remove())
+                        option.forEach(o => o.remove())
                     })
                 }
             }

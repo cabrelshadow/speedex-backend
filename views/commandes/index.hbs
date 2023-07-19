@@ -36,26 +36,61 @@
                         </thead>
                         <tbody>
                      
-                                <tr>
-                                    <th scope="row"><input class="form-check-input" type="checkbox"></th>
-                                    <td>yyu</td>
-                                    <td>0122</td>
-                                    <td>66</td>
-                                    <td>5000F</td>
-                                    <td>5878989</td>
-                                    <td>doua</td>
-                                    <td><span class="badge bg-danger">En cours</span></td>
-                                    <td><span class="badge bg-danger">Reporter</span></td>
-                                    <td>
-                                          <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#addUser">
-        <i class="fas fa-plus"></i>
-        Assigner
-    </button>
-                                
+                                {{#each Commandes}}
+                                    <tr>
+                                        <th scope="row"><input class="form-check-input" type="checkbox"></th>
+                                        <td>{{"User.fullname"}}</td>
+                                        <td>{{numero_commande}}</td>
+                                        <td>{{articles_commandes.length}}</td>
+                                        <td>{{total}}</td>
+                                        <td>{{numero_client}}</td>
+                                        <td>{{address_livraison}}</td>
+                                        <td><span class="badge bg-danger">En cours</span></td>
+                                        <td><span class="badge bg-danger">Reporter</span></td>
+                                        <td>
+                                            {{#if user_call_center}}
+                                                Assigné à <span class="badge rounded-pill bg-warning">{{call_center.fullname}}</span>
+                                                {{else}}
+                                                <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#assignUser{{id}}">
+                                                    <i class="fas fa-share"></i>
+                                                    Assigner
+                                                </button>
+                                            {{/if}}
                                     
-                                    </td>
-                                
-                                </tr>
+                                    
+                                        </td>
+                                    <!-- Modal Body -->
+                                    <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+                                    <div class="modal fade" id="assignUser{{id}}" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+                                        role="dialog" aria-labelledby="addRoleTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="addRoleTitle">Assigner une commande à un utilisateur</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="/commandes/assign/{{id}}" method="post">
+                                                        <div class="mb-3">
+                                                            <label for="call_center" class="form-label">Nom</label>
+                                                            <select class="form-select" name="user_call_center" id="call_center">
+                                                                <option selected value="">Selectionner call center</option>
+                                                                {{#each ../users}}
+                                                                <option value="{{id}}">{{fullname}}</option>
+                                                                {{/each}}
+                                                            </select>
+                                                        </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </tr>
+                                {{/each}}
               
                            
                         </tbody>
@@ -106,7 +141,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="stock" class="form-label">Magasin: </label>
-                                    <select class="form-select form-select-lg" name="stock_id" id="stock">
+                                    <select class="form-select" name="stock_id" id="stock">
                                         <option selected>Selectionner le magasin</option>
                                         {{#each magasins}}
                                         <option value="{{id}}">{{name}}</option>
@@ -142,7 +177,7 @@
                                 </div>
                             </div>
 
-                            <button class="btn btn-secondary prev-button">Retour</button>
+                            <button type="button" class="btn btn-secondary prev-button">Retour</button>
                             <button type="button" class="btn btn-primary float-end next-button"
                                 onclick="onSubmit()">Commander</button>
                         </div>
@@ -156,36 +191,7 @@
         </div>
     </div>
 </div>
-<!-- Modal Body -->
-<!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
-<div class="modal fade" id="addUser" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
-    aria-labelledby="addRoleTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addRoleTitle">Assigner une commande à un utilisateur</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="/admin/User/add" method="post">
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Nom</label>
-                        <select class="form-select" name="role_id" id="role_id">
-                                <option selected value="">Selectionner call center</option>
-                                {{#each roles}}
-                                    <option value="{{id}}">{{name}}</option>
-                                {{/each}}
-                            </select>
-                    </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Enregistrer</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 <script>
     function onSubmit() {
@@ -193,23 +199,33 @@
         const multInput = []
         let inputs = {}
         let articles = []
+        let total = 0;
         const name = document.querySelector("#name");
         const commande_info = [...document.querySelectorAll(".commande_info input"), ...document.querySelectorAll(".commande_info select")];
         const multiInputs = document.querySelector("[multi-input]").children;
        multiInputs.forEach((multiInput)=>{
          [...multiInput.querySelectorAll("input"), ...multiInput.querySelectorAll("select")].forEach(mInput => {
                prepData = { ...prepData, [mInput.name]: mInput.value }
+               
            })
+           multiInput.querySelectorAll("select").forEach((select,i)=>{
+            
+             total += parseInt(select.options[select.selectedIndex].getAttribute("article-price")) *parseInt(multiInput.querySelectorAll("input")[i].value)
+           })
+           console.log(total)
            multInput.push(prepData);
          })
+         
          articles=multInput
          commande_info.forEach((cmInfo)=>{
             inputs = {...inputs,[cmInfo.name]:cmInfo.value}
          })
          const data = {
             ...inputs,
+            total,
             articles:articles
          }
+
         fetch("/commandes/add",{
             method:"POST",
             headers:{
@@ -263,14 +279,22 @@
         }).then(async (res) => {
             if (res.status === 200) {
                 const data = await res.json()
+                if(data.length>0){
                 data.map((articles)=>{
                     articleSelects.forEach((articleSelect)=>{
                         const option= document.createElement("option")
                         option.value = articles.article_id
                         option.innerText = articles["Article.name"]
+                        option.setAttribute("article-price",articles['Article.price'])
                         articleSelect.append(option)
                     })
                 })
+                }else{
+                    articleSelects.forEach((articleSelect) => {
+                        const option = articleSelect.querySelectorAll("[article-price]")
+                        option.forEach(o=>o.remove())
+                    })
+                }
             }
         })
     })

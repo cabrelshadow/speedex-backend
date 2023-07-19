@@ -126,6 +126,7 @@ const httpServer = http.createServer(app);
 const io = new Server(httpServer, { cors: { origin: "*" } });
 
 io.on("connection", async (socket) => {
+	console.log("a user connect");
 	// const active = await getActive();
 	// io.emit("user connect", commandes);
 

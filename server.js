@@ -114,6 +114,7 @@ app.use("/admin/categories", require("./routes/categorie"));
 app.use("/admin/articles", require("./routes/article"));
 app.use("/commandes", require("./routes/commandes"));
 app.use("/commande_live", require("./routes/commande_live"));
+app.use("/map", require("./routes/map"));
 app.use("/admin/stocks", require("./routes/stocks"));
 app.use("/livreur", require("./routes/livreur"));
 app.use("/livraison", require("./routes/livraison"));

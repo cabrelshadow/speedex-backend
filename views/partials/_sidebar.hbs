@@ -132,12 +132,21 @@
         {{/if_role}}
     {{#if_role user "Superviseur"}}
       
+
       <li class="nav-item set-active">
         <a href="/superviseur" class="nav-link">
           <span class="sidebar-icon">
             <i class="fas fa-users"></i>
           </span>
           <span class="sidebar-text">superviseur</span>
+        </a>
+      </li>
+        <li class="nav-item set-active">
+        <a href="/map" class="nav-link">
+          <span class="sidebar-icon">
+            <i class="fas fa-map"></i>
+          </span>
+          <span class="sidebar-text">map</span>
         </a>
       </li>
       
@@ -155,6 +164,13 @@
             <i class="fas fa-shopping-basket"></i>
           </span>
           <span class="sidebar-text">Commandes live</span>
+          <style>
+  .lien-desactive {
+    color: gray;
+    cursor: not-allowed;
+    text-decoration: none;
+  }
+</style>
         </a>
       </li>
       {{/if_role}}

@@ -25,8 +25,19 @@ function if_role(user, value, opts) {
 		return opts.fn(this);
 	} else return opts.inverse(this);
 }
+function list_article(articles = [], opts) {
+	const articleName = [];
+	for (const key in articles) {
+		if (Object.hasOwnProperty.call(articles, key)) {
+			const article = articles[key];
+			articleName.push(article.name);
+		}
+	}
+	return articleName.join("+");
+}
 
 module.exports = {
 	if_admin,
 	if_role,
+	list_article,
 };

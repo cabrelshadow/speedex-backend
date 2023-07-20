@@ -6,7 +6,7 @@ const router = require("express").Router();
 router.get("/", ensureAuthenticated, async (req, res) => {
 	let Commandes = {};
 	const commandes = await db.Commande.findAll({
-		include: ["User"],
+		include: ["User", "Magasin"],
 		raw: true,
 	});
 	const articles = await db.Stock.findAll({
@@ -97,7 +97,6 @@ router.post("/assign/:cmd_id", async (req, res) => {
 		return res.redirect(req.headers.referer);
 	}
 });
-
 
 //afficher les commande assignés
 /*const Commandes = {};

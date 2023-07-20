@@ -17,6 +17,10 @@ module.exports = (sequelize, DataTypes) => {
 				foreignKey: "user_id",
 				onDelete: "CASCADE",
 			});
+			this.hasMany(models.Commande, {
+				foreignKey: "magasin_id",
+				onDelete: "CASCADE",
+			});
 		}
 	}
 	Magasin.init(

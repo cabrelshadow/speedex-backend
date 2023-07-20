@@ -23,6 +23,10 @@ module.exports = (sequelize, DataTypes) => {
 			this.belongsTo(models.User, {
 				foreignKey: "user_commande_id",
 			});
+			this.belongsTo(models.Magasin, {
+				foreignKey: "magasin_id",
+				onDelete: "CASCADE",
+			});
 		}
 	}
 	Commande.init(

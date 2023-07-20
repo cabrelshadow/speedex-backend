@@ -12,8 +12,8 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/add", async (req, res) => {
-	const { name, user_id } = req.body;
-	await db.Magasin.create({ name, user_id, active: true });
+	const { name, user_id, address } = req.body;
+	await db.Magasin.create({ name, user_id, active: true, address });
 	return res.redirect(req.headers.referer);
 });
 router.post("/:id", async (req, res) => {

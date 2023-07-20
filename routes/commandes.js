@@ -38,8 +38,11 @@ router.get("/", ensureAuthenticated, async (req, res) => {
 	const users = getUsers.filter(
 		(user) => String(user["Role.name"]).toLocaleLowerCase() === "callcenter",
 	);
+	const parternaires = getUsers.filter(
+		(user) => String(user["Role.name"]).toLocaleLowerCase() === "partenaire",
+	);
 	console.log(Commandes);
-	return res.render("commandes/", { Commandes, articles, magasins, users });
+	return res.render("commandes/", { Commandes, articles, magasins, users,parternaires });
 });
 router.get("/live", ensureAuthenticated, async (req, res) => {
 	const commandes = await db.Commande.findAll({

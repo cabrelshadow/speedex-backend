@@ -19,7 +19,7 @@ router.post("/add", async (req, res) => {
 router.post("/:id", async (req, res) => {
 	const { id } = req.params;
 	const magasins = await db.Magasin.findAll({
-		where: { id },
+		where: { user_id: id },
 	});
 	return res.status(200).json(magasins);
 });

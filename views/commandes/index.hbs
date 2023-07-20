@@ -136,9 +136,9 @@
                             <div class="commande_info">
                                 <div class="mb-3">
                                     <label for="partenaire_id" class="form-label">Nom</label>
-                             <select class="form-select" name="user_id" id="user">
+                             <select class="form-select" name="partenaire_id" id="partenaire_id">
                             <option value="" selected>Selectionner un partenaire</option>
-                            {{#each ./users}}
+                            {{#each ./parternaires}}
                             <option value="{{id}}">{{fullname}}</option>
                             {{/each}}
                         </select>
@@ -147,9 +147,9 @@
                                     <label for="magasin_id" class="form-label">Magasin: </label>
                                     <select class="form-select" name="magasin_id" id="magasin_id">
                                         <option selected>Selectionner le magasin</option>
-                                         {{#each magasins}}
+                                        {{!--  {{#each magasins}}
                                         <option value="{{id}}">{{name}}</option>
-                                        {{/each}}
+                                        {{/each}} --}}
                                     </select>
                                 </div>
                                 <div class="mb-3">

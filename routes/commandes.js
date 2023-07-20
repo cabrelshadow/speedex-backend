@@ -52,13 +52,26 @@ router.get("/live", ensureAuthenticated, async (req, res) => {
 	return res.render("commandes/live", { commandes, articles });
 });
 router.post("/add", ensureAuthenticated, (req, res, next) => {
-	const { name, numero_client, address_livraison, total, stock_id, articles } =
-		req.body;
+	const {
+		name,
+		numero_client,
+		address_livraison,
+		total,
+		partenaire_id,
+		magasin_id,
+		articles,
+		address_recup,
+		quartier_recup,
+	} = req.body;
 	console.log(req.body);
 	db.Commande.create({
 		name,
 		numero_client,
+		partenaire_id,
 		total,
+		address_recup,
+		quartier_recup,
+		magasin_id,
 		address_livraison,
 		numero_commande: "SPD-" + (Math.ceil(Math.random(300000) * 1000) + 9000),
 		user_commande_id: req.user.id,

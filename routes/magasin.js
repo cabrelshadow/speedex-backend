@@ -13,7 +13,14 @@ router.get("/", async (req, res) => {
 
 router.post("/add", async (req, res) => {
 	const { name, user_id } = req.body;
-	db.Magasin.create({ name, user_id, active: true });
+	await db.Magasin.create({ name, user_id, active: true });
 	return res.redirect(req.headers.referer);
+});
+router.post("/:id", async (req, res) => {
+	const { id } = req.params;
+	const magasins = await db.Magasin.findAll({
+		where: { id },
+	});
+	return res.status(200).json(magasins);
 });
 module.exports = router;

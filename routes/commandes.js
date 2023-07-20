@@ -100,7 +100,7 @@ router.post("/assign/:cmd_id", async (req, res) => {
 
 
 //afficher les commande assignés
-const Commandes = {};
+/*const Commandes = {};
 
 const commandes = db.Commande.findAll();
 
@@ -122,6 +122,6 @@ for (const commande of commandes) {
       call_center: user
     };
   }
-}
+}*/
 
 module.exports = router;

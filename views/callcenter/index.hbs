@@ -5,21 +5,21 @@
             <div class="col-sm-6 mb-3">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title text-info">Numero de commande: {{numero_commande}}</h5>
-                        <p class="card-text">Canal vente: {{"Magasin.name"}}</p>
-                        <p class="card-text">Nom Client: {{name}}</p>
-                        <p class="card-text ">Num Client: {{numero_client}}
+                        <h5 class="card-title text-info">Numero de commande: <span style="font-weight: bold;">{{numero_commande}}</span></h5>
+                        <p class="card-text">Canal vente: <span style="font-weight: bold; color:black">{{"Magasin.name"}}</span> </p>
+                        <p class="card-text">Nom Client: <span style="font-weight: bold; color:black">{{name}}</span> </p>
+                        <p class="card-text ">Numero Client:<span style="font-weight: bold; color:black">{{numero_client}}</span> 
                             <i class='fas fa-phone-alt ms-4'></i>
                             <i class='fas fa-comment-alt ms-2'></i>
                             <i class='fas fa-comment ms-2'></i>
                         </p>
-                        <p class="card-text"> <a href="#" data-bs-toggle="modal" data-bs-target="#articleShow" class="btn btn-sm btn-secondary">Liste des produits commandés</a></p>
-                        <p class="card-text">Prix Total: {{total}} </p>
+                        <p class="card-text"> <a href="#" data-bs-toggle="modal" data-bs-target="#articleShow" class="btn btn-sm btn-info">Liste des produits commandés</a></p>
+                        <p class="card-text">Prix Total:<span style="font-weight: bold; color:black"> {{total}} fcfa</span> </p>
                         {{!-- <p class="card-text">Ville livraison: Douala</p>
                         <p class="card-text">Quartier livraison: BM</p> --}}
-                        <p class="card-text">Adresse livraison: {{address_livraison}} </p>
-                        <p class="card-text">Status: En cours</p>
-                        <p class="card-text">Date et heure livraison: 03 mars 2023 12h</p>
+                        <p class="card-text">Adresse livraison:<span style="font-weight: bold; color:black">{{address_livraison}} </span> </p>
+                        <p class="card-text">Status:  <span class="badge rounded-pill bg-danger">En cours</span></p>
+                        <p class="card-text">Date et heure livraison:  <span style="font-weight: bold; color:black">03 mars 2023 12h</span></p>
                         <div>
                             <button class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#action">
                                 Editer

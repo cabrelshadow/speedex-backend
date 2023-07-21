@@ -1,114 +1,69 @@
 <div class="card mt-2">
     <div class="row p-2 mb-2">
         <h4 class="fs-6 ms-2">Listes des commandes à traiter</h4>
-        <div class="col-sm-6 mb-3">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title text-info">Numero de suivi: P0321</h5>
-                    <p class="card-text">Canal vente: Magasin Douala</p>
-                    <p class="card-text">Nom Client: Valdez</p>
-                    <p class="card-text ">Num Client: 698792449
-                        <i class='fas fa-phone-alt ms-4'></i>
-                        <i class='fas fa-comment-alt ms-2'></i>
-                        <i class='fas fa-comment ms-2'></i>
-                    </p>
-                    <p class="card-text">Produit: Ovules</p>
-                      <p class="card-text">Quantite: 10 </p>
-                    <p class="card-text">Prix Total: 8000f </p>
-                     <p class="card-text">Ville livraison: Douala</p>
-                      <p class="card-text">Quartier livraison: BM</p>
-                    <p class="card-text">Adresse livraison: Makepe </p>
-                    <p class="card-text">Status: En cours</p>
-                     <p class="card-text">Date et heure livraison: 03 mars 2023 12h</p>
-                    <div>
-                        <button class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#action">
-                            Editer
-                        </button>
+        {{#each Commandes}}
+            <div class="col-sm-6 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title text-info">Numero de commande: {{numero_commande}}</h5>
+                        <p class="card-text">Canal vente: {{"Magasin.name"}}</p>
+                        <p class="card-text">Nom Client: {{name}}</p>
+                        <p class="card-text ">Num Client: {{numero_client}}
+                            <i class='fas fa-phone-alt ms-4'></i>
+                            <i class='fas fa-comment-alt ms-2'></i>
+                            <i class='fas fa-comment ms-2'></i>
+                        </p>
+                        <p class="card-text"> <a href="#" data-bs-toggle="modal" data-bs-target="#articleShow" class="btn btn-sm btn-secondary">Liste des produits commandés</a></p>
+                        <p class="card-text">Prix Total: {{total}} </p>
+                        {{!-- <p class="card-text">Ville livraison: Douala</p>
+                        <p class="card-text">Quartier livraison: BM</p> --}}
+                        <p class="card-text">Adresse livraison: {{address_livraison}} </p>
+                        <p class="card-text">Status: En cours</p>
+                        <p class="card-text">Date et heure livraison: 03 mars 2023 12h</p>
+                        <div>
+                            <button class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#action">
+                                Editer
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-         <div class="col-sm-6 mb-3">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title text-info">Numero de suivi: P0321</h5>
-                    <p class="card-text">Canal vente: Magasin Douala</p>
-                    <p class="card-text">Nom Client: Valdez</p>
-                    <p class="card-text ">Num Client: 698792449
-                        <i class='fas fa-phone-alt ms-4'></i>
-                        <i class='fas fa-comment-alt ms-2'></i>
-                        <i class='fas fa-comment ms-2'></i>
-                    </p>
-                    <p class="card-text">Produit: Ovules</p>
-                      <p class="card-text">Quantite: 10 </p>
-                    <p class="card-text">Prix Total: 8000f </p>
-                     <p class="card-text">Ville livraison: Douala</p>
-                      <p class="card-text">Quartier livraison: BM</p>
-                    <p class="card-text">Adresse livraison: Makepe </p>
-                    <p class="card-text">Status: En cours</p>
-                     <p class="card-text">Date et heure livraison: 03 mars 2023 12h</p>
-                    <div>
-                        <button class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#action">
-                            Editer
-                        </button>
+            <!-- Modal Body -->
+            <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+            <div class="modal fade" id="articleShow" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                       {{!--  <div class="modal-header">
+                            <h5 class="modal-title" id="modalTitleId">Modal title</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div> --}}
+                        <div class="modal-body">
+                            <div class="row">
+                                {{#each articles_commandes}}
+                                  <div class="col-sm-12 col-lg-6">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h4 class="card-title">{{name}}</h4>
+                                            <p class="card-text">{{price}}</p>
+                                        </div>
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item">Quantité: {{quantite}}</li>
+                                        </ul>
+                                    </div>
+                                  </div>
+                                {{/each}}
+                            </div>
+                        </div>
+                        {{!-- <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save</button>
+                        </div> --}}
                     </div>
                 </div>
             </div>
-        </div>
-         <div class="col-sm-6 mb-3">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title text-info">Numero de suivi: P0321</h5>
-                    <p class="card-text">Canal vente: Magasin Douala</p>
-                    <p class="card-text">Nom Client: Valdez</p>
-                    <p class="card-text ">Num Client: 698792449
-                        <i class='fas fa-phone-alt ms-4'></i>
-                        <i class='fas fa-comment-alt ms-2'></i>
-                        <i class='fas fa-comment ms-2'></i>
-                    </p>
-                    <p class="card-text">Produit: Ovules</p>
-                      <p class="card-text">Quantite: 10 </p>
-                    <p class="card-text">Prix Total: 8000f </p>
-                     <p class="card-text">Ville livraison: Douala</p>
-                      <p class="card-text">Quartier livraison: BM</p>
-                    <p class="card-text">Adresse livraison: Makepe </p>
-                    <p class="card-text">Status: En cours</p>
-                     <p class="card-text">Date et heure livraison: 03 mars 2023 12h</p>
-                    <div>
-                        <button class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#action">
-                            Editer
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 mb-3">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title text-info">Numero de suivi: P0321</h5>
-                    <p class="card-text">Canal vente: Magasin Douala</p>
-                    <p class="card-text">Nom Client: Valdez</p>
-                    <p class="card-text ">Num Client: 698792449
-                        <i class='fas fa-phone-alt ms-4'></i>
-                        <i class='fas fa-comment-alt ms-2'></i>
-                        <i class='fas fa-comment ms-2'></i>
-                    </p>
-                    <p class="card-text">Produit: Ovules</p>
-                      <p class="card-text">Quantite: 10 </p>
-                    <p class="card-text">Prix Total: 8000f </p>
-                     <p class="card-text">Ville livraison: Douala</p>
-                      <p class="card-text">Quartier livraison: BM</p>
-                    <p class="card-text">Adresse livraison: Makepe </p>
-                    <p class="card-text">Status: En cours</p>
-                     <p class="card-text">Date et heure livraison: 03 mars 2023 12h</p>
-                    <div>
-                        <button class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#action">
-                            Editer
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+        {{/each}}
+
     </div>
 </div>
 

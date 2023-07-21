@@ -42,7 +42,13 @@ router.get("/", ensureAuthenticated, async (req, res) => {
 		(user) => String(user["Role.name"]).toLocaleLowerCase() === "partenaire",
 	);
 	console.log(Commandes);
-	return res.render("commandes/", { Commandes, articles, magasins, users,parternaires });
+	return res.render("commandes/", {
+		Commandes,
+		articles,
+		magasins,
+		users,
+		parternaires,
+	});
 });
 router.get("/live", ensureAuthenticated, async (req, res) => {
 	const commandes = await db.Commande.findAll({
@@ -93,7 +99,7 @@ router.post("/assign/:cmd_id", async (req, res) => {
 	const { user_call_center } = req.body;
 	if (user_call_center) {
 		await db.Commande.update(
-			{ user_call_center },
+			{ user_call_center, date_assignation: new Date() },
 			{ where: { id: req.params.cmd_id } },
 		);
 

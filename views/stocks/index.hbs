@@ -14,6 +14,7 @@
                 <th scope="col">Article</th>
                 <th scope="col">Quantite</th>
                 <th scope="col">Prix</th>
+                     <th scope="col">action</th>
             </tr>
         </thead>
         <tbody>
@@ -21,13 +22,62 @@
             <tr class="">
                 <td scope="row">{{"Magasin.name"}}</td>
                 <td>{{"Article.name"}}</td>
-                <td>{{quantite}}</td>*
+                <td>{{quantite}}</td>
                 <td>{{#if Article.promoted}}
                     {{"Article.promote_price"}}
                 {{else}}
                     {{"Article.price"}}
                 {{/if}}</td>
+                <td>
+            <button data-bs-target="#edit{{id}}" data-bs-toggle="modal" class="btn btn-warning btn-sm">éditer</button>
+                <a href="/admin/stocks/delete-stock/{{id}}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                </td>
             </tr>
+
+              <div class="modal fade" id="edit{{id}}" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleStocks" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitleStocks">Editer le stock</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/admin/stocks/edit-stock/{{id}}" method="post">
+                    <div class="mb-3">
+                        <label for="article" class="form-label">Article</label>
+                        <select class="form-select" name="article_id" id="article">
+                            <option value="" selected>Selectionner un article</option>
+                            {{#each ../articles}}
+                                <option value="{{id}}">{{name}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                      <label for="quantite" class="form-label">quantite</label>
+                      <input type="number"
+                        class="form-control" name="quantite" id="quantite" aria-describedby="helpId" placeholder="" value="{{quantite}}">
+                      <small id="helpId" class="form-text text-muted"></small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="user" class="form-label">Partenaire</label>
+                        <select class="form-select" name="magasin_id" id="user">
+                            <option value="" selected>Selectionner un magasin</option>
+                            {{#each ../magasins}}
+                            <option value="{{id}}">{{name}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary">editer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
            {{/each}}
             
         </tbody>

@@ -136,7 +136,7 @@
                             <h3>Information de la paternaire</h3>
                             <div class="commande_info">
                                 <div class="mb-3">
-                                    <label for="partenaire_id" class="form-label">Nom</label>
+                                    <label for="partenaire_id" class="form-label">Nom du patenaire</label>
                              <select class="form-select" name="partenaire_id" id="partenaire_id">
                             <option value="" selected>Selectionner un partenaire</option>
                             {{#each ./parternaires}}
@@ -155,9 +155,12 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="address_recup" class="form-label">Adresse Recuperation</label>
-                                    <input type="text" class="form-control" name="address_recup" id="address_recup"
-                                        aria-describedby="helpId" placeholder="Par defaut en fonction de l'adresse du magasin choisi">
-                                    <small id="helpId" class="form-text text-muted"></small>
+                                <select class="form-select" name="address" id="address_id">
+                                        <option selected>Selectionner le magasin</option>
+                                        {{!--  {{#each magasins}}
+                                        <option value="{{id}}">{{"Magasin.address"}}</option>
+                                        {{/each}} --}}
+                                    </select>
                                 </div>
                                 <div class="mb-3">
                                     <label for="quartier_recup" class="form-label">Quartier de Recuperation</label>

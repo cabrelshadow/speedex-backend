@@ -1,6 +1,9 @@
 <h3>Articles</h3>
 {{#if_admin user}}
-    
+      <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css"
+    />
 
 <div class="mb-3">
     <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#addCategorie"><i class="fas fa-plus"></i>
@@ -11,9 +14,8 @@
 <div class="table-responsive">
  <div class="card">
      <div class="card-body">
-        <table class="table table-striped-columns align-middle ">
-
-        <thead class="">
+     <table id="dtBasicExample" class="table table-striped" style="width:100%">
+       <thead class="">
            
             <tr>
                 <th>Article</th>
@@ -40,16 +42,10 @@
                     <span class="badge rounded-pill bg-danger">Pas en promotion</span>
                 {{/if}}</td>
                 <td>
-                    {{#if promote_price}}
-                        {{promote_price}}
-                        {{else}}
-                        *********
-                    {{/if}}
-                </td>
-                         <td>
-            <button data-bs-target="#edit{{id}}" data-bs-toggle="modal" class="btn btn-warning btn-sm"><i class="fas fa-pen"></i></button>
+                   <button data-bs-target="#edit{{id}}" data-bs-toggle="modal" class="btn btn-warning btn-sm"><i class="fas fa-pen"></i></button>
                 <a href="/admin/articles/delete-article/{{id}}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
                 </td>
+              
             </tr>
 
             <div class="modal fade" id="edit{{id}}" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
@@ -101,7 +97,7 @@
     </div>
 </div>
 
-            {{/each}}
+ {{/each}}
 
         </tbody>
     </table>
@@ -161,9 +157,18 @@
         </div>
     </div>
 </div>
-
+   <script>
+  $(document).ready(function () {
+$('#dtBasicExample').DataTable();
+$('.dataTables_length').addClass('bs-select');
+});
+    </script>
 
 <!-- Optional: Place to the bottom of scripts -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.datatables.net/v/bs5/dt-1.13.5/datatables.min.js"></script>
+
 <script>
     
     document.querySelector("#promoted").addEventListener("click",(e)=>{

@@ -1,3 +1,6 @@
+const moment = require("moment");
+
+moment.locale("fr");
 /**
  *
  * @param {*} user
@@ -35,9 +38,17 @@ function list_article(articles = [], opts) {
 	}
 	return articleName.join("+");
 }
-
+/**
+ *  Tenir compte du format de moment
+ * @param {string} date
+ * @param {string} format
+ */
+function dateFormat(date, date_format = "LL") {
+	return moment(date).format(date_format.toString());
+}
 module.exports = {
 	if_admin,
 	if_role,
 	list_article,
+	dateFormat,
 };

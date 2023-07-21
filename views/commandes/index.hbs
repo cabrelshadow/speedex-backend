@@ -33,6 +33,7 @@
                                 <th scope="col" width="20%">Adresse de livraison</th>
                                 <th scope="col" width="20%">Status commande</th>
                                 <th scope="col" width="20%">Livraison</th>
+                                <th scope="col">Date de création</th>
                                 <th scope="col" width="20%">Action</th>
                             </tr>
                         </thead>
@@ -52,19 +53,19 @@
                                 <td>{{address_livraison}}</td>
                                 <td><span class="badge bg-danger">En cours</span></td>
                                 <td><span class="badge bg-info">En cours</span></td>
+                                <td>{{#dateFormat createdAt "LLL"}}
+                                {{/dateFormat}}</td>
                                 <td>
                                     {{#if user_call_center}}
-                                    Assigné à <span
-                                        class="badge rounded-pill bg-warning">{{call_center.fullname}}</span>
+                                    Assigné à <span class="badge rounded-pill bg-warning">{{call_center.fullname}}</span>
                                     {{else}}
-                                    <button class="btn btn-outline-success" data-bs-toggle="modal"
-                                        data-bs-target="#assignUser{{id}}">
+                                    <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#assignUser{{id}}">
                                         <i class="fas fa-share"></i>
                                         Assigner
                                     </button>
                                     {{/if}}
-
-
+                                
+                                
                                 </td>
                                 <!-- Modal Body -->
                                 <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->

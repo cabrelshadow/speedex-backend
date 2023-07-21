@@ -37,7 +37,7 @@ router.post(
 	"/edit-article/:articleId",
 	ensureAuthenticated,
 	(req, res, next) => {
-		const articleId = req.params.roleId; // Récupère l'ID du rôle à éditer
+		const {articleId } = req.params;// Récupère l'ID du rôle à éditer
 		const updatedData = req.body; // Récupère les nouvelles données du rôle depuis le corps de la requête
 
 		if (req.user["Role.isAdmin"]) {
@@ -59,7 +59,7 @@ router.get(
 	"/delete-article/:articleId",
 	ensureAuthenticated,
 	(req, res, next) => {
-		const articleId = req.params.roleId; // Récupère l'ID du rôle à supprimer
+		const {articleId } = req.params;  // Récupère l'ID du rôle à supprimer
 
 		if (req.user["Role.isAdmin"]) {
 			db.Article.destroy({
@@ -74,4 +74,6 @@ router.get(
 		}
 	},
 );
+
+
 module.exports = router;

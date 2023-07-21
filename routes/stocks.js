@@ -11,12 +11,18 @@ router.get("/", ensureAuthenticated, async (req, res) => {
 		const magasins = await db.Magasin.findAll({ raw: true });
 		return res.render("stocks/", { stocks, articles, magasins });
 	} else {
-		const stocks = await db.Stock.findAll({
-			include: ["Article", "User"],
+		const user_magasins = await db.Magasin.findAll({
+			where: { user_id: req.user.id },
 			raw: true,
-			where: {
-				user_id: req.user.id,
-			},
+		});
+		const stocks = [];
+		user_magasins.map(async (magasin) => {
+			const getstocks = await db.Stock.findAll({
+				include: ["Article", "Magasin"],
+				where: { magasin_id: magasin.id },
+				raw: true,
+			});
+			return stocks.push(...getstocks);
 		});
 		const articles = await db.Article.findAll({ raw: true });
 		const magasins = await db.Magasin.findAll({ raw: true });

@@ -83,14 +83,7 @@
           <span class="sidebar-text">Articles</span>
         </a>
       </li>
-      <li class="nav-item set-active">
-        <a href="/admin/magasin/" class="nav-link">
-          <span class="sidebar-icon">
-            <i class="fas fa-store"></i>
-          </span>
-          <span class="sidebar-text">Magasin</span>
-        </a>
-      </li>
+      
       {{/if_admin}}
       {{#if_role user "Partenaire"}}
       
@@ -100,6 +93,14 @@
             <i class="fas fa-clipboard"></i>
           </span>
           <span class="sidebar-text">Stocks</span>
+        </a>
+      </li>
+      <li class="nav-item set-active">
+        <a href="/admin/magasin/" class="nav-link">
+          <span class="sidebar-icon">
+            <i class="fas fa-store"></i>
+          </span>
+          <span class="sidebar-text">Magasin</span>
         </a>
       </li>
       {{/if_role}}

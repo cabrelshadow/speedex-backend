@@ -48,7 +48,9 @@
                         <select class="form-select" name="article_id" id="article">
                             <option value="" selected>Selectionner un article</option>
                             {{#each ../articles}}
-                                <option value="{{id}}">{{name}}</option>
+                                <option value="{{id}}" {{#if_equal ../article_id id}}
+                                    selected
+                                {{/if_equal}}>{{name}}</option>
                             {{/each}}
                         </select>
                     </div>
@@ -63,7 +65,10 @@
                         <select class="form-select" name="magasin_id" id="user">
                             <option value="" selected>Selectionner un magasin</option>
                             {{#each ../magasins}}
-                            <option value="{{id}}">{{name}}</option>
+                            
+                            <option value="{{id}}" {{#if_equal ../magasin_id id}}
+                                selected
+                            {{/if_equal}}>{{name}}</option>
                             {{/each}}
                         </select>
                     </div>

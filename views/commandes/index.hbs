@@ -156,15 +156,22 @@
                                         {{/each}} --}}
                                     </select>
                                 </div>
-                                <div class="mb-3">
+                                {{!-- <div class="mb-3">
                                     <label for="address_recup" class="form-label">Adresse Recuperation</label>
                                 <select class="form-select" name="address" id="address_id">
-                                        <option selected>Selectionner le magasin</option>
+                                        <option selected>Selectionner le magasin</option> --}}
                                         {{!--  {{#each magasins}}
                                         <option value="{{id}}">{{"Magasin.address"}}</option>
                                         {{/each}} --}}
-                                    </select>
+                                    {{!-- </select>
+                                </div> --}}
+                                <div class="mb-3">
+                                    <label for="adresse_recup" class="form-label">Adresse Recuperation</label>
+                                    <input type="text" class="form-control" name="adresse_recup"
+                                        id="" aria-describedby="helpId" placeholder="adresse par defaut du magasin choisi">
+                                    <small id="helpId" class="form-text text-muted"></small>
                                 </div>
+
                                 <div class="mb-3">
                                     <label for="quartier_recup" class="form-label">Quartier de Recuperation</label>
                                     <input type="text" class="form-control" name="quartier_recup"

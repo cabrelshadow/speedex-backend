@@ -10,18 +10,13 @@
         Ajouter une commande
     </button> --}}
 
-   <link
-      rel="stylesheet"
-      href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css"
-    />
-
     <div class=" mt-5 px-2">
         <div class="card">
             <div class="card-body">
                 <div class="mb-2 d-flex justify-content-between align-items-center">
                 </div>
                 <div class="table-responsive">
-                    <table id="dtBasicExample" class="table table-striped" style="width:100%">
+                    <table sorted responsive class="table table-striped" style="width:100%">
 
                         <thead>
                             <tr class="bg-light">
@@ -243,6 +238,7 @@
                             <button class="btn btn-primary float-end next-button" type="button">suivant</button>
                         </div>
                         <div class="col" style="display: none;">
+                            <h4 id="total-show">Total: </h4>
                             <h3>Choisir les articles</h3>
 
                             <div multi-input>
@@ -256,7 +252,7 @@
                                     {{/each}}-->
                                     </select>
                                     <input type="number" class="form-control" placeholder="quantite" name="quantite"
-                                        min="1">
+                                        min="1" value="1">
                                     <button class="btn btn-primary" type="button"><i class="fas fa-plus"></i></button>
                                 </div>
                             </div>
@@ -291,12 +287,7 @@
         </div>
     </div>
 </div>
-   <script>
-  $(document).ready(function () {
-$('#dtBasicExample').DataTable();
-$('.dataTables_length').addClass('bs-select');
-});
-    </script>
+
 
 <script>
     function onSubmit() {
@@ -390,7 +381,7 @@ $('.dataTables_length').addClass('bs-select');
                             const option = document.createElement("option")
                             option.value = articles.article_id
                             option.innerText = articles["Article.name"]
-                            option.setAttribute("article-price", articles['Article.price'])
+                            option.setAttribute("article-price", articles.price)
                             articleSelect.append(option)
                         })
                     })
@@ -403,6 +394,8 @@ $('.dataTables_length').addClass('bs-select');
             }
         })
     })
+
+    
 
     document.querySelector("#partenaire_id")&&    document.querySelector("#partenaire_id").addEventListener("change", (e) => {
                 const magasinSelect = document.querySelector("#magasin_id")
@@ -432,5 +425,19 @@ $('.dataTables_length').addClass('bs-select');
                 })
             })
 
-
+    
+    document.addEventListener("mouseup",()=>{
+        const getmultiInputs = document.querySelector("[multi-input]");
+        let total = 0;
+        [...getmultiInputs.querySelectorAll("select"), ...getmultiInputs.querySelectorAll("input")].forEach((input) => {
+            input.addEventListener("change", (e) => {
+                e.preventDefault()
+                getmultiInputs.querySelectorAll("select").forEach((select, i) => {
+                   
+                    total += parseInt(select.options[select.selectedIndex].getAttribute("article-price")) * parseInt(getmultiInputs.querySelectorAll("input")[i].value||1)
+                })
+                document.querySelector("#total-show").innerHTML = `Total: ${total}`
+            })
+        })
+    })
 </script>

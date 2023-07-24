@@ -13,10 +13,10 @@ module.exports = (sequelize, DataTypes) => {
 				foreignKey: "article_id",
 				onDelete: "CASCADE",
 			});
-			this.belongsTo(models.User, {
+			/* this.belongsTo(models.User, {
 				foreignKey: "user_id",
 				onDelete: "CASCADE",
-			});
+			}); */
 			this.belongsTo(models.Magasin, {
 				foreignKey: "magasin_id",
 				onDelete: "CASCADE",
@@ -27,8 +27,10 @@ module.exports = (sequelize, DataTypes) => {
 		{
 			article_id: DataTypes.INTEGER,
 			quantite: DataTypes.INTEGER,
-			user_id: DataTypes.INTEGER,
 			magasin_id: DataTypes.INTEGER,
+			price: DataTypes.INTEGER,
+			promoted: DataTypes.BOOLEAN,
+			promote_price: DataTypes.INTEGER,
 		},
 		{
 			sequelize,

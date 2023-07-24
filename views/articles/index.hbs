@@ -1,9 +1,5 @@
 <h3>Articles</h3>
 {{#if_admin user}}
-      <link
-      rel="stylesheet"
-      href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css"
-    />
 
 <div class="mb-3">
     <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#addCategorie"><i class="fas fa-plus"></i>
@@ -14,33 +10,30 @@
 <div class="table-responsive">
  <div class="card">
      <div class="card-body">
-     <table id="dtBasicExample" class="table table-striped" style="width:100%">
+     <table sorted responsive class="table table-striped" style="width:100%">
        <thead class="">
            
             <tr>
                 <th>Article</th>
-                <th>prix</th>
                 <th>Categorie</th>
-                <th>En promotion</th>
-                <th>Prix de la promotion</th>
-                
+                <th></th>
             </tr>
         </thead>
         <tbody>
             {{#each articles}}
             <tr>
                 <td scope="row">{{name}}</td>
-                <td>{{#if promoted}}
+                {{!-- <td>{{#if promoted}}
                     <del>{{price}}</del>
                     {{else}}
                     {{price}} <span style="font-weight: bold;">XAF</span>
-                {{/if}}</td>
+                {{/if}}</td> --}}
                 <td>{{"Categorie.name"}}</td>
-                <td>{{#if promoted}}
+              {{!--   <td>{{#if promoted}}
                     <span class="badge rounded-pill bg-success">En promotion</span>
                     {{else}}
                     <span class="badge rounded-pill bg-danger">Pas en promotion</span>
-                {{/if}}</td>
+                {{/if}}</td> --}}
                 <td>
                    <button data-bs-target="#edit{{id}}" data-bs-toggle="modal" class="btn btn-warning btn-sm"><i class="fas fa-pen"></i></button>
                 <a href="/admin/articles/delete-article/{{id}}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
@@ -64,11 +57,11 @@
                             placeholder="">
                         <small id="helpId" class="form-text text-muted"></small>
                     </div>
-                    <div class="mb-3">
+                    {{!-- <div class="mb-3">
                         <label for="price" class="form-label">Prix</label>
                         <input type="text" class="form-control" name="price" id="price" aria-describedby="helpId" value="{{price}}" placeholder="">
                         <small id="helpId" class="form-text text-muted"></small>
-                    </div>
+                    </div> --}}
                     <div class="mb-3">
                         <label for="categorie" class="form-label">Catégorie</label>
                         <select class="form-select" name="categorie_id" id="categorie">
@@ -78,7 +71,7 @@
                             {{/each}}
                         </select>
                     </div>
-                    <div class="form-check form-switch">
+                  {{!--   <div class="form-check form-switch">
                         <input class="form-check-input" type="checkbox" id="promoted" name="promoted" value="true">
                         <label class="form-check-label" for="promoted">Promotionner?</label>
                       </div>
@@ -86,7 +79,7 @@
                         <label for="promoted_price" class="form-label">Prix de la promotion</label>
                         <input type="text" class="form-control" name="promote_price" id="promoted_price" aria-describedby="helpId" placeholder="">
                         <small id="helpId" class="form-text text-muted"></small>
-                    </div>
+                    </div> --}}
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
@@ -125,11 +118,11 @@
                             placeholder="">
                         <small id="helpId" class="form-text text-muted"></small>
                     </div>
-                    <div class="mb-3">
+{{!--                     <div class="mb-3">
                         <label for="price" class="form-label">Prix</label>
                         <input type="text" class="form-control" name="price" id="price" aria-describedby="helpId" placeholder="">
                         <small id="helpId" class="form-text text-muted"></small>
-                    </div>
+                    </div> --}}
                     <div class="mb-3">
                         <label for="categorie" class="form-label">Catégorie</label>
                         <select class="form-select" name="categorie_id" id="categorie">
@@ -139,7 +132,7 @@
                             {{/each}}
                         </select>
                     </div>
-                    <div class="form-check form-switch">
+                    {{!-- <div class="form-check form-switch">
                         <input class="form-check-input" type="checkbox" id="promoted" name="promoted" value="true">
                         <label class="form-check-label" for="promoted">Promotionner?</label>
                       </div>
@@ -147,7 +140,7 @@
                         <label for="promoted_price" class="form-label">Prix de la promotion</label>
                         <input type="text" class="form-control" name="promote_price" id="promoted_price" aria-describedby="helpId" placeholder="">
                         <small id="helpId" class="form-text text-muted"></small>
-                    </div>
+                    </div> --}}
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
@@ -157,17 +150,6 @@
         </div>
     </div>
 </div>
-   <script>
-  $(document).ready(function () {
-$('#dtBasicExample').DataTable();
-$('.dataTables_length').addClass('bs-select');
-});
-    </script>
-
-<!-- Optional: Place to the bottom of scripts -->
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.datatables.net/v/bs5/dt-1.13.5/datatables.min.js"></script>
 
 <script>
     

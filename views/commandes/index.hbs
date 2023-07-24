@@ -29,10 +29,10 @@
                                 <th scope="col" width="10%">Canal de Vente</th>
                                 <th scope="col" width="20%">Numero de suivi</th>
                                 <th scope="col" width="20%">Contenu produit</th>
-                                      <th scope="col" width="20%">nom article</th>
+                                <th scope="col" width="20%">nom article</th>
                                 <th scope="col" width="20%">Prix total</th>
                                 <th scope="col" width="20%">Telephone client</th>
-                                            <th scope="col" width="20%">nom client</th>
+                                <th scope="col" width="20%">nom client</th>
                                 <th scope="col" width="20%">Adresse de livraison</th>
                                 <th scope="col" width="20%">Status commande</th>
                                 <th scope="col" width="20%">Livraison</th>
@@ -52,7 +52,7 @@
                                 {{/list_article}}</td>
                                 <td>{{total}}  <b>XAF</b> </td>
                                 <td>{{numero_client}}</td>
-                               <td>{{name}}</td>
+                                <td>{{name}}</td>
                                 <td>{{address_livraison}}</td>
                                 <td><span class="badge bg-danger">En cours</span></td>
                                 <td><span class="badge bg-info">En cours</span></td>
@@ -156,6 +156,14 @@
                                         {{/each}} --}}
                                     </select>
                                 </div>
+
+                                 <div class="mb-3">
+                                    <label for="ville" class="form-label">ville</label>
+                                    <input type="text" class="form-control" name="ville"
+                                        id="" aria-describedby="helpId" placeholder="">
+                                    <small id="helpId" class="form-text text-muted"></small>
+                                </div>
+
                                 {{!-- <div class="mb-3">
                                     <label for="address_recup" class="form-label">Adresse Recuperation</label>
                                 <select class="form-select" name="address" id="address_id">
@@ -171,6 +179,7 @@
                                         id="" aria-describedby="helpId" placeholder="adresse par defaut du magasin choisi">
                                     <small id="helpId" class="form-text text-muted"></small>
                                 </div>
+
 
                                 <div class="mb-3">
                                     <label for="quartier_recup" class="form-label">Quartier de Recuperation</label>
@@ -251,6 +260,22 @@
                                     <button class="btn btn-primary" type="button"><i class="fas fa-plus"></i></button>
                                 </div>
                             </div>
+
+                              <div class="mb-3">
+                                    <label for="Frais_Emballage" class="form-label">Frais Emballage</label>
+                                    <input type="text" class="form-control" name="Frais_Emballage"
+                                        id="" aria-describedby="helpId" placeholder="">
+                                    <small id="helpId" class="form-text text-muted"></small>
+                                </div>
+
+                            <div class="mb-3">
+                                    <label for="Frais_livraison" class="form-label">Frais livraison</label>
+                                    <input type="text" class="form-control" name="Frais_livraison"
+                                        id="" aria-describedby="helpId" placeholder="">
+                                    <small id="helpId" class="form-text text-muted"></small>
+                                </div>
+
+                        
 
                             <button type="button" class="btn btn-secondary prev-button">Retour</button>
                             <button type="button" class="btn btn-primary float-end next-button"

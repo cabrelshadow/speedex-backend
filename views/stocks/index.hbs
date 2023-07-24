@@ -6,7 +6,7 @@
 <div class="table-responsive">
     <div class="card">
      <div class="card-body">
-        <table class="table table-striped-columns align-middle ">
+        <table sorted responsive class="table table-striped-columns align-middle ">
 
         <thead class="">
             <tr>
@@ -23,10 +23,10 @@
                 <td scope="row">{{"Magasin.name"}}</td>
                 <td>{{"Article.name"}}</td>
                 <td>{{quantite}}</td>
-                <td>{{#if Article.promoted}}
-                    {{"Article.promote_price"}}
+                <td>{{#if promoted}}
+                    {{promote_price}} <span style="font-weight: bold;">XAF</span>
                 {{else}}
-                    {{"Article.price"}}  <span style="font-weight: bold;">XAF</span>
+                    {{price}}  <span style="font-weight: bold;">XAF</span>
                 {{/if}}</td>
                 <td>
             <button data-bs-target="#edit{{id}}" data-bs-toggle="modal" class="btn btn-warning btn-sm">éditer</button>
@@ -72,6 +72,16 @@
                             {{/each}}
                         </select>
                     </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="promoted" name="promoted" value="true">
+                        <label class="form-check-label" for="promoted">Promotionner?</label>
+                    </div>
+                    <div class="mb-3" hidden>
+                        <label for="promoted_price" class="form-label">Prix de la promotion</label>
+                        <input type="text" class="form-control" name="promote_price" id="promoted_price" aria-describedby="helpId"
+                            placeholder="">
+                        <small id="helpId" class="form-text text-muted"></small>
+                    </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
@@ -115,9 +125,10 @@
                     <div class="mb-3">
                       <label for="prix" class="form-label">Prix</label>
                       <input type="number"
-                        class="form-control" name="quantite" id="prix" aria-describedby="helpId" placeholder="">
+                        class="form-control" name="price" id="prix" aria-describedby="helpId" placeholder="">
                       <small id="helpId" class="form-text text-muted"></small>
                     </div>
+                   
 
                     <div class="mb-3">
                       <label for="quantite" class="form-label">Quantite</label>
@@ -134,6 +145,16 @@
                             {{/each}}
                         </select>
                     </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="promoted" name="promoted" value="true">
+                        <label class="form-check-label" for="promoted">Promotionner?</label>
+                    </div>
+                    <div class="mb-3" hidden>
+                        <label for="promoted_price" class="form-label">Prix de la promotion</label>
+                        <input type="text" class="form-control" name="promote_price" id="promoted_price" aria-describedby="helpId"
+                            placeholder="">
+                        <small id="helpId" class="form-text text-muted"></small>
+                    </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
@@ -144,8 +165,15 @@
     </div>
 </div>
 
-
-<!-- Optional: Place to the bottom of scripts -->
 <script>
-    const myModal = new bootstrap.Modal(document.getElementById('addStocks'), options)
+
+    document.querySelectorAll("#promoted").forEach((promotedCheck,i)=>{
+        promotedCheck.addEventListener("click", (e) => {
+            if (e.target.checked) {
+                document.querySelectorAll("#promoted_price")[i].parentElement.removeAttribute("hidden")
+            } else {
+                document.querySelectorAll("#promoted_price")[i].parentElement.setAttribute("hidden", true)
+            }
+        })
+    })
 </script>

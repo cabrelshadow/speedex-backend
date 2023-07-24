@@ -15,15 +15,7 @@ module.exports = {
 			description: {
 				type: Sequelize.TEXT,
 			},
-			price: {
-				type: Sequelize.INTEGER,
-			},
-			promoted: {
-				type: Sequelize.BOOLEAN,
-			},
-			promote_price: {
-				type: Sequelize.INTEGER,
-			},
+
 			categorie_id: {
 				type: Sequelize.INTEGER,
 			},

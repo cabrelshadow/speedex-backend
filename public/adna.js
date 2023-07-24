@@ -41,3 +41,18 @@ multiInputs.forEach((multiInput) => {
 			});
 		});
 });
+
+const dataTables = document.querySelectorAll("table[sorted]");
+
+dataTables.forEach((dataTable) => {
+	try {
+		new DataTable(dataTable, {
+			buttons: ["pdf", "colvis"],
+			responsive: !!dataTable.hasAttribute("responsive"),
+			order: !!dataTable.hasAttribute("order"),
+			autoFill: !!dataTable.hasAttribute("autoFill"),
+		});
+	} catch (error) {
+		console.log(error);
+	}
+});

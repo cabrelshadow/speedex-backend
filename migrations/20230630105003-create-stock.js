@@ -15,9 +15,18 @@ module.exports = {
 			quantite: {
 				type: Sequelize.INTEGER,
 			},
-			user_id: {
+			price: {
 				type: Sequelize.INTEGER,
 			},
+			promoted: {
+				type: Sequelize.BOOLEAN,
+			},
+			promote_price: {
+				type: Sequelize.INTEGER,
+			},
+			/* user_id: {
+				type: Sequelize.INTEGER,
+			}, */
 			createdAt: {
 				allowNull: false,
 				type: Sequelize.DATE,
@@ -38,7 +47,7 @@ module.exports = {
 			onDelete: "SET NULL",
 			onUpdate: "CASCADE",
 		});
-		await queryInterface.addConstraint("Stocks", {
+		/* await queryInterface.addConstraint("Stocks", {
 			fields: ["user_id"],
 			type: "foreign key",
 			name: "fk_user_stocks",
@@ -48,11 +57,11 @@ module.exports = {
 			},
 			onDelete: "SET NULL",
 			onUpdate: "CASCADE",
-		});
+		}); */
 	},
 	async down(queryInterface, Sequelize) {
 		await queryInterface.removeConstraint("Stocks", "fk_stock_articles");
-		await queryInterface.removeConstraint("Stocks", "fk_user_stocks");
+		//await queryInterface.removeConstraint("Stocks", "fk_user_stocks");
 		await queryInterface.dropTable("Stocks");
 	},
 };

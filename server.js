@@ -130,22 +130,13 @@ app.use("/superviseur", require("./routes/superviseur"));
 app.use("/admin/magasin", require("./routes/magasin"));
 const httpServer = http.createServer(app);
 
-const io = new Server(httpServer, { cors: { origin: "*" } });
+httpServer.listen(port, () => {
+	console.log("Run server on port " + port);
+});
+/* const io = new Server(httpServer, { cors: { origin: "*" } });
 
 io.on("connection", async (socket) => {
 	console.log("a user connect");
-	// const active = await getActive();
-	// io.emit("user connect", commandes);
-
-	/*   socket.on("new", (data) => {
-    console.log("data of commandes", data);
-    //return data;
-  });
-
-  socket.on("test", (data) => {
-    console.log("data of commandes", data);
-    //return data;
-  }); */
 
 	socket.on("disconnect", () => {
 		// clearInterval(interval);
@@ -153,10 +144,5 @@ io.on("connection", async (socket) => {
 	});
 });
 
-/* const socketIoObject = io;
-module.exports.ioObject = socketIoObject; */
-
 app.io = io;
-httpServer.listen(port, () => {
-	console.log("Run server on port " + port);
-});
+ */

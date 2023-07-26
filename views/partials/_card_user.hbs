@@ -170,30 +170,6 @@
 </div>
 
 
-<script>
-  const socket = io('/user');
-
-  socket.emit("user id", '{{user.id}}')
-  socket.on("status", (status) => {
-    setTimeout(() => {
-      const totalFields = document.querySelectorAll("#total");
-      const depses = document.querySelectorAll("#depense");
-      const restes = document.querySelectorAll("#reste");
-      for (let t in totalFields) {
-        totalFields[t].innerHTML = status.montant_total;
-      }
-      for (let r in restes) {
-        restes[r].innerHTML = status.reste;
-      }
-      for (let d in depses) {
-        depses[d].innerHTML = status.depenses;
-      }
-      console.log(status)
-    }, 1000)
-  })
-</script>
-
-
 
 </script>
 

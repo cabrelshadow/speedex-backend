@@ -2,9 +2,8 @@
 {{#if_admin user}}
 
 <div class="mb-3">
-    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCategorie"><i class="fas fa-plus"></i>
-        Ajouter
-        un article</button>
+    <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#addCategorie"><i class="fas fa-plus"></i>   
+       article</button>
 </div>
 {{/if_admin}}
 <div class="table-responsive">
@@ -35,7 +34,7 @@
                     <span class="badge rounded-pill bg-danger">Pas en promotion</span>
                 {{/if}}</td> --}}
                 <td>
-                   <button data-bs-target="#edit{{id}}" data-bs-toggle="modal" class="btn btn-warning btn-sm"><i class="fas fa-pen"></i></button>
+                   <button data-bs-target="#edit{{id}}" data-bs-toggle="modal" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></button>
                 <a href="/admin/articles/delete-article/{{id}}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
                 </td>
               

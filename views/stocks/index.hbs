@@ -1,7 +1,7 @@
 <h3 class="mb-3">Stocks</h3>
 <!-- Modal trigger button -->
-<button type="button" class="btn btn-outline-primary mb-2" data-bs-toggle="modal" data-bs-target="#addStocks">
-    <i class="fas fa-plus"></i> Ajouter un stock
+<button type="button" class="btn btn-info mb-2" data-bs-toggle="modal" data-bs-target="#addStocks">
+    <i class="fas fa-plus "></i> Stock
 </button> <br>
 <div class="table-responsive">
     <div class="card">
@@ -29,7 +29,7 @@
                     {{price}}  <span style="font-weight: bold;">XAF</span>
                 {{/if}}</td>
                 <td>
-            <button data-bs-target="#edit{{id}}" data-bs-toggle="modal" class="btn btn-warning btn-sm">éditer</button>
+            <button data-bs-target="#edit{{id}}" data-bs-toggle="modal" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></button>
                 <a href="/admin/stocks/delete-stock/{{id}}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
                 </td>
             </tr>
@@ -57,7 +57,7 @@
                     <div class="mb-3">
                       <label for="quantite" class="form-label">Quantite</label>
                       <input type="number"
-                        class="form-control" name="quantite" id="quantite" aria-describedby="helpId" placeholder="" value="{{quantite}}">
+                        class="form-control" name="quantite" id="quantite" aria-describedby="helpId" placeholder="" value="{{quantite}}" required>
                       <small id="helpId" class="form-text text-muted"></small>
                     </div>
                     <div class="mb-3">
@@ -85,7 +85,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">editer</button>
+                <button type="submit" class="btn btn-info">editer</button>
                 </form>
             </div>
         </div>

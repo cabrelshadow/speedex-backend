@@ -1,7 +1,7 @@
 <h3>Catégories</h3>
 
 <div class="mb-3">
-    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCategorie"><i class="fas fa-plus"></i> Ajouter
+    <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addCategorie"><i class="fas fa-plus"></i> Ajouter
         une categorie</button>
 </div>
 <div class="table-responsive">
@@ -11,14 +11,13 @@
             <caption>Catégories</caption>
             <tr>
                 <th>Catégorie</th>
-                <th></th>
+                
             </tr>
         </thead>
         <tbody>
             {{#each categories}}
             <tr>
                 <td scope="row">{{name}}</td>
-                <td></td>
             </tr>
             {{/each}}
 

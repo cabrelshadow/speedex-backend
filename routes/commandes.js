@@ -91,7 +91,9 @@ router.post("/add", ensureAuthenticated, (req, res, next) => {
 				commande_id: commande.id,
 				quantite: article.quantite,
 			});
+
 		});
+		req.session.messages.push({type:"success",msg:"commande  a été bien ajouter"})
 	});
 	res.status(201).send("ok");
 });

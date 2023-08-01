@@ -9,6 +9,13 @@
 
     <div class="table-responsive mt-3">
         <div class="card">
+              {{#each messages}}
+                <div class="alert alert-{{type}} alert-dismissible fade show flash" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    {{msg}}
+                </div>
+                
+            {{/each}}
             <div class="card-body">
                 <table class="table table-striped-columns table-bordered align-middle ">
 

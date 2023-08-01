@@ -60,5 +60,5 @@ dataTables.forEach((dataTable) => {
  document.querySelectorAll(".alert").forEach(alert=>{
         setTimeout(()=>{
             alert.style.display = "none"
-        },500)
+        },5000)
     })

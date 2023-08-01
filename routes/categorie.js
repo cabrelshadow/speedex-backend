@@ -14,6 +14,7 @@ router.post("/add", (req, res) => {
 	) {
 		db.Categorie.create(req.body)
 			.then(() => {
+				req.session.messages.push({type:"success",msg:"categorie  a été bien ajouter"})
 				return res.redirect(req.headers.referer);
 			})
 			.catch((err) => {

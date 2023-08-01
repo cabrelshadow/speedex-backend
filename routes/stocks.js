@@ -62,6 +62,7 @@ router.post("/edit-stock/:stockId", ensureAuthenticated, (req, res, next) => {
 		where: { id: stockId },
 	})
 		.then(() => {
+			req.session.messages.push({type:"primary",msg:"Stock a été bien editer"})
 			return res.redirect(req.headers.referer);
 		})
 		.catch((err) => {
@@ -77,7 +78,7 @@ router.get("/delete-stock/:stockId", ensureAuthenticated, (req, res, next) => {
 		where: { id: stockId },
 	})
 		.then(() => {
-			req.session.messages.push({type:"success",msg:"Stock a été bien supprimer"})
+			req.session.messages.push({type:"info",msg:"Stock a été bien supprimer"})
 			return res.redirect(req.headers.referer);
 		})
 		.catch((err) => {

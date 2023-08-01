@@ -8,6 +8,15 @@
 {{/if_admin}}
 <div class="table-responsive">
  <div class="card">
+    
+            {{#each messages}}
+                <div class="alert alert-{{type}} alert-dismissible fade show flash" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    {{msg}}
+                </div>
+                
+            {{/each}}
+
      <div class="card-body">
      <table sorted responsive class="table table-striped" style="width:100%">
        <thead sorted responsive class="">

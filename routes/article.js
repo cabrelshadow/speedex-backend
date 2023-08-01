@@ -24,6 +24,7 @@ router.post("/add", ensureAuthenticated, (req, res, next) => {
 	if (req.user["Role.isAdmin"]) {
 		db.Article.create(req.body)
 			.then(() => {
+				req.session.messages.push({type:"success",msg:"l'article a été bien créer"})
 				return res.redirect(req.headers.referer);
 			})
 			.catch((err) => {
@@ -45,6 +46,7 @@ router.post(
 				where: { id: articleId },
 			})
 				.then(() => {
+					req.session.messages.push({type:"info",msg:"l'article a été bien editer"})
 					return res.redirect(req.headers.referer);
 				})
 				.catch((err) => {
@@ -66,6 +68,7 @@ router.get(
 				where: { id: articleId },
 			})
 				.then(() => {
+					req.session.messages.push({type:"info",msg:"l'article a été supprimer"})
 					return res.redirect(req.headers.referer);
 				})
 				.catch((err) => {

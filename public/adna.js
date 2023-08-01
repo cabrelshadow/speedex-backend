@@ -56,3 +56,9 @@ dataTables.forEach((dataTable) => {
 		console.log(error);
 	}
 });
+
+ document.querySelectorAll(".alert").forEach(alert=>{
+        setTimeout(()=>{
+            alert.style.display = "none"
+        },500)
+    })

@@ -34,6 +34,7 @@ router.post("/add", async (req, res, next) => {
 	if (Object.keys(req.body).length > 0) {
 		db.Stock.create(req.body)
 			.then(() => {
+				req.session.messages.push({type:"success",msg:"Stock a été bien créer"})
 				return res.redirect(req.headers.referer);
 			})
 			.catch((err) => {
@@ -76,6 +77,7 @@ router.get("/delete-stock/:stockId", ensureAuthenticated, (req, res, next) => {
 		where: { id: stockId },
 	})
 		.then(() => {
+			req.session.messages.push({type:"success",msg:"Stock a été bien supprimer"})
 			return res.redirect(req.headers.referer);
 		})
 		.catch((err) => {

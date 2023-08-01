@@ -16,8 +16,11 @@
                         <tr>
                             <th scope="col">Nom du magasin</th>
                             <th scope="col">Partenaire</th>
-                            <th scope="col">Status</th>
+                    
                             <th scope="col">Adresse</th>
+                              <th scope="col">ville</th>
+                              <th scope="col">quartier</th>
+                             <th scope="col">Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -25,6 +28,8 @@
                         <tr class="">
                             <td scope="row">{{name}}</td>
                             <td>{{"User.fullname"}}</td>
+                            
+                            <td>{{address}}</td>
                             <td>
                                 {{#if active}}
                                 <span class="badge rounded-pill bg-success">Actif</span>
@@ -32,7 +37,6 @@
                                 <span class="badge rounded-pill bg-danger">Inactif</span>
                                 {{/if}}
                             </td>
-                            <td>{{address}}</td>
                         </tr>
                         {{/each}}
 

@@ -81,6 +81,7 @@ router.post("/add", ensureAuthenticated, (req, res, next) => {
 		address_recup,
 		quartier_recup,
 		magasin_id,
+		status_commande: "Nouvelle",
 		address_livraison,
 		numero_commande: "SPD-" + (Math.ceil(Math.random(300000) * 1000) + 9000),
 		user_commande_id: req.user.id,
@@ -91,9 +92,23 @@ router.post("/add", ensureAuthenticated, (req, res, next) => {
 				commande_id: commande.id,
 				quantite: article.quantite,
 			});
-
+			const getarticle = db.Stock.findOne({
+				where: { article_id: article.article_id },
+			});
+			if (getarticle) {
+				await db.Stock.update(
+					{
+						quantite:
+							parseInt(getarticle.quantite) - parseInt(article.quantite),
+					},
+					{ where: { article_id: getarticle.article_id } },
+				);
+			}
 		});
-		req.session.messages.push({type:"success",msg:"commande  a été bien ajouter"})
+		req.session.messages.push({
+			type: "success",
+			msg: "commande  a été bien ajouter",
+		});
 	});
 	res.status(201).send("ok");
 });

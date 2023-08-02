@@ -1,0 +1,100 @@
+
+<h3>ville</h3>
+
+<div class="mb-3">
+    <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addRole"><i class="fas fa-plus"></i> Ajouter une ville</button>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table sorted responsive class="table align-middle">
+                <thead>
+                    <tr>
+                        <th>Role</th>
+                        <th>Permissions</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each role}}
+                        <tr>
+                            <td scope="row">{{name}}</td>
+                            <td>
+                                {{#if isAdmin}}
+                                    <span class="badge bg-success">Administrateur</span>
+                                {{else}}
+                                    <span class="badge bg-info">Standard</span>
+                                {{/if}}
+                            </td>
+                            <td>
+                                <button data-bs-target="#edit{{id}}" data-bs-toggle="modal" class="btn btn-warning btn-sm">éditer</button>
+                                <a href="/admin/role/delete/{{id}}" class="btn btn-danger btn-sm">supprimer</a>
+                            </td>
+                        </tr>
+
+                        <!-- Modal Body -->
+                        <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+                        <div class="modal fade" id="edit{{id}}" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
+                            aria-labelledby="modalTitleId" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalTitleId">Editer le rôle {{name}}</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="/admin/role/edit/{{id}}" method="post">
+                                            <div class="mb-3">
+                                                <label for="name" class="form-label">Nom</label>
+                                                <input type="text" class="form-control" name="name" id="name" aria-describedby="helpId"
+                                                    placeholder="" value="{{name}}">
+                                                <small id="helpId" class="form-text text-muted"></small>
+                                            </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Body -->
+<!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+<div class="modal fade" id="addRole" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="addRoleTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addRoleTitle">Ajouter un rôle</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/admin/role/add" method="post">
+                  <div class="mb-3">
+                    <label for="name" class="form-label">Nom</label>
+                    <input type="text"
+                      class="form-control" name="name" id="name" aria-describedby="helpId" placeholder="">
+                    <small id="helpId" class="form-text text-muted"></small>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="isAdmin" name="isAdmin" value="true">
+                    <label class="form-check-label" for="isAdmin">Administrateur ?</label>
+                    </div>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

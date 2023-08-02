@@ -154,7 +154,7 @@
                                  <div class="mb-3">
                                     <label for="ville" class="form-label">ville</label>
                                     <input type="text" class="form-control" name="ville"
-                                        id="" aria-describedby="helpId" placeholder="">
+                                        id="ville" aria-describedby="helpId" placeholder="">
                                     <small id="helpId" class="form-text text-muted"></small>
                                 </div>
 
@@ -170,7 +170,7 @@
                                 <div class="mb-3">
                                     <label for="adresse_recup" class="form-label">Adresse Recuperation</label>
                                     <input type="text" class="form-control" name="adresse_recup"
-                                        id="" aria-describedby="helpId" placeholder="adresse par defaut du magasin choisi">
+                                        id="address_recup" aria-describedby="helpId" placeholder="adresse par defaut du magasin choisi">
                                     <small id="helpId" class="form-text text-muted"></small>
                                 </div>
 
@@ -374,17 +374,21 @@
         }).then(async (res) => {
             if (res.status === 200) {
                 const data = await res.json()
+                
                 if (data.length > 0) {
                     data.map((articles) => {
                         articleSelects.forEach((articleSelect) => {
                             const option = document.createElement("option")
                             option.value = articles.article_id
                             option.innerText = articles["Article.name"]
-                            option.setAttribute("article-price", articles.price)
+                            const price = articles.promoted?articles.promote_price:articles.price
+                            option.setAttribute("article-price",price)
                             articleSelect.append(option)
                         })
+                        document.querySelector("#ville").value = articles["Magasin.address"]
                     })
                 } else {
+                    document.querySelector("#ville").value
                     articleSelects.forEach((articleSelect) => {
                         const option = articleSelect.querySelectorAll("[article-price]")
                         option.forEach(o => o.remove())
@@ -405,6 +409,8 @@
                     if (res.status === 200) {
                         const data = await res.json()
                         if (data.length > 0) {
+                            const option = magasinSelect.querySelectorAll("[Stock]")
+                            option.forEach(o => o.remove())
                             data.map((magasin) => {
                               
                                     const option = document.createElement("option")

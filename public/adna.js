@@ -47,7 +47,7 @@ const dataTables = document.querySelectorAll("table[sorted]");
 dataTables.forEach((dataTable) => {
 	try {
 		new DataTable(dataTable, {
-			buttons: ["pdf", "colvis"],
+			buttons: ["print", "colvis"],
 			responsive: !!dataTable.hasAttribute("responsive"),
 			order: !!dataTable.hasAttribute("order"),
 			autoFill: !!dataTable.hasAttribute("autoFill"),
@@ -57,8 +57,8 @@ dataTables.forEach((dataTable) => {
 	}
 });
 
- document.querySelectorAll(".alert").forEach(alert=>{
-        setTimeout(()=>{
-            alert.style.display = "none"
-        },5000)
-    })
+document.querySelectorAll(".alert").forEach((alert) => {
+	setTimeout(() => {
+		alert.style.display = "none";
+	}, 5000);
+});

@@ -15,12 +15,15 @@ import {
 	useToast,
 } from "@chakra-ui/react";
 import React from "react";
+import { BASE_URL } from "../api/common";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
 	const [userData, setUserData] = React.useState({
 		username: "",
 		password: "",
 	});
+	const navigate = useNavigate();
 	const toast = useToast({ position: "top-right" });
 	const { username, password } = userData;
 	function onInputChange(e) {
@@ -38,6 +41,37 @@ export default function Login() {
 				description: "Veuillez remplir les champs...",
 			});
 		}
+		fetch(`${BASE_URL}auth`, {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(userData),
+		})
+			.then(async (res) => {
+				if (res.ok) {
+					const token = await res.json();
+					sessionStorage.setItem("token", token);
+					toast({
+						status: "success",
+						title: "Bienvenue",
+						description: "Heureux de vous revoir",
+					});
+					return navigate("/");
+				}
+				toast({
+					status: "error",
+					title: "Alert!!",
+					description: "Une erreur s'est produite...",
+				});
+				return navigate("/login");
+			})
+			.catch((err) => {
+				toast({
+					status: "error",
+					title: "Alert!!",
+					description: "Une erreur s'est produite...",
+				});
+				return navigate("/login");
+			});
 	}
 	return (
 		<Flex

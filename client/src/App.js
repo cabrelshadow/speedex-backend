@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import Commandes from "./components/Commandes";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
+import PrivateRoute from "./components/PrivateRouter";
 function App() {
 	return (
 		<BrowserRouter>
@@ -11,8 +12,12 @@ function App() {
 				<Routes>
 					<Route
 						path='/'
-						element={<Commandes />}
-					/>
+						element={<PrivateRoute />}>
+						<Route
+							path='/'
+							element={<Commandes />}
+						/>
+					</Route>
 					<Route
 						path='/login'
 						element={<Login />}

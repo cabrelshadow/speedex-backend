@@ -22,7 +22,7 @@ module.exports = {
 				type: Sequelize.INTEGER,
 			},
 			status_commande: {
-				type: Sequelize.BOOLEAN,
+				type: Sequelize.STRING,
 			},
 			date_validation: {
 				type: Sequelize.DATE,

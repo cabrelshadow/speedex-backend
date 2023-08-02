@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
 			address_livraison: DataTypes.STRING,
 			numero_client: DataTypes.STRING,
 			total: DataTypes.INTEGER,
-			status_commande: DataTypes.BOOLEAN,
+			status_commande: DataTypes.STRING,
 			date_validation: DataTypes.DATE,
 			date_assignation: DataTypes.DATE,
 			validate: DataTypes.BOOLEAN,
@@ -47,6 +47,8 @@ module.exports = (sequelize, DataTypes) => {
 			user_commande_id: DataTypes.INTEGER,
 			partenaire_id: DataTypes.INTEGER,
 			magasin_id: DataTypes.INTEGER,
+			quartier: DataTypes.STRING,
+			comment: DataTypes.TEXT,
 		},
 		{
 			sequelize,

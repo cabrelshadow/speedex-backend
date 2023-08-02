@@ -10,7 +10,7 @@ var sqlite = require("better-sqlite3");
 var SqliteStore = require("better-sqlite3-session-store")(session);
 var sessionsDB = new sqlite("db/sessions.db");
 const cookieParser = require("cookie-parser");
-const flash = require("express-flash-messages")
+const flash = require("express-flash-messages");
 const {
 	if_admin,
 	if_role,
@@ -87,8 +87,8 @@ app.engine(
 	}),
 );
 app.set("view engine", ".hbs");
-app.set('views', __dirname + '/views');
-app.use(cookieParser())
+app.set("views", __dirname + "/views");
+app.use(cookieParser());
 app.use(
 	session({
 		secret: "secret",
@@ -102,19 +102,19 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(flash())
+app.use(flash());
 jwtAuth(passport);
 localAuth(passport);
 app.use((err, req, res, next) => {
 	// Handle the error
-	console.log(err)
+	console.log(err);
 	res.status(500).json({ error: "Internal Server Error" });
 });
 
 app.use(function (req, res, next) {
 	res.locals.user = req.user || null;
 	res.locals.messages = req.session.messages || [];
-	req.session.messages = []
+	req.session.messages = [];
 	next();
 });
 
@@ -137,6 +137,7 @@ app.use("/superviseur", require("./routes/superviseur"));
 app.use("/admin/magasin", require("./routes/magasin"));
 app.use("/ville", require("./routes/ville"));
 app.use("/pays", require("./routes/pays"));
+app.use("/api/livreur", require("./routes/api/livreur"));
 const httpServer = http.createServer(app);
 
 httpServer.listen(port, () => {

@@ -33,4 +33,22 @@ router.get("/", ensureAuthenticated, async (req, res) => {
 
 	return res.render("callcenter", { Commandes });
 });
+
+router.post("/edit/:cmd_id", async (req, res) => {
+	const { user_id, quartier, adresse_livraison, comment, status } = req.body;
+	if (user_id) {
+		await db.Commande.update(
+			{
+				user_id,
+				quartier,
+				adresse_livraison,
+				comment,
+				status_commande: status,
+			},
+			{ where: { id: req.params.cmd_id } },
+		);
+		return res.redirect(req.headers.referer);
+	}
+});
+
 module.exports = router;

@@ -19,7 +19,7 @@ import {
 import { FaChevronDown, FaMessage, FaPhone } from "react-icons/fa6";
 import React from "react";
 
-function CommandeItem() {
+function CommandeItem({ commande }) {
 	return (
 		<GridItem w={"full"}>
 			<Card>

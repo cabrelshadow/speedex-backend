@@ -15,13 +15,13 @@
                         </p>
                         <p class="card-text"> <a href="#" data-bs-toggle="modal" data-bs-target="#articleShow" class="btn btn-sm btn-info">Liste des produits commandés</a></p>
                         <p class="card-text">Prix Total:<span style="font-weight: bold; color:black"> {{total}} fcfa</span> </p>
-                        {{!-- <p class="card-text">Ville livraison: Douala</p>
-                        <p class="card-text">Quartier livraison: BM</p> --}}
+                        {{!-- <p class="card-text">Ville livraison: Douala</p>--}}
+                        <p class="card-text">Quartier livraison: {{quartier}}</p> 
                         <p class="card-text">Adresse livraison:<span style="font-weight: bold; color:black">{{address_livraison}} </span> </p>
                         <p class="card-text">Status:  <span class="badge rounded-pill bg-danger">En cours</span></p>
-                        <p class="card-text">Date et heure livraison:  <span style="font-weight: bold; color:black">03 mars 2023 12h</span></p>
+                        {{!-- <p class="card-text">Date et heure livraison:  <span style="font-weight: bold; color:black">03 mars 2023 12h</span></p> --}}
                         <div>
-                            <button class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#action">
+                            <button class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#action{{id}}">
                                 Editer
                             </button>
                         </div>
@@ -65,58 +65,71 @@
                 </div>
             </div>
 
+            <div class="modal" id="action{{id}}" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Modification</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                           <form action="/callcenter/edit/{{id}}" method="post">
+                            <div class="form-group">
+                                <label for="quartier_livraison" class="form-label">Quartier livraison</label>
+                                <input type="text" class="form-control" name="quartier" id="quartier_livraison" aria-describedby="helpId"
+                                    placeholder="">
+                                <small id="helpId" class="form-text text-muted"></small>
+                            </div>
+                            <div class="form-group">
+                                <label for="adresse_livraison" class="form-label">Adresse livraison</label>
+                                <input type="text" class="form-control" name="adresse_livraison" id="adresse_livraison" value="{{address_livraison}}"
+                                    aria-describedby="helpId" placeholder="{{address_livraison}}">
+                                <small id="helpId" class="form-text text-muted"></small>
+                            </div>
+                            {{!-- <div class="form-group">
+                                <label for="date_livraison" class="form-label">Date et heure livraison</label>
+                                <input type="text" class="form-control" name="date_livraison" id="date_livraison" aria-describedby="helpId"
+                                    placeholder="">
+                                <small id="helpId" class="form-text text-muted"></small>
+                            </div> --}}
+                            <div class="form-group">
+                                <label for="status" class="form-label">Status</label>
+                                <select class="form-select" id="status" name="status">
+                                    <option selected>Choisir une option</option>
+                                    <option value="Confirmer">Confirmer</option>
+                                    <option value="Occupée">Occupée</option>
+                                    <option value="Boite vocale">Boite vocale</option>
+                                    <option value="Reporteé">Reportée</option>
+                                    <option value="Annulée">Annulée</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="user_id" class="form-label">Assigner un livreur</label>
+                                <select class="form-select form-select-lg" name="user_id" id="user_id">
+                                    <option selected disabled>Selectionner un livreur </option>
+                                    {{#each livreurs}}
+                                    <option value="{{id}}">{{fullname}}</option>
+                                    {{/each}}
+                            
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="comment">Commentaire</label>
+                                <textarea class="form-control" placeholder="Commentaire" id="comment" name="comment"
+                                    style="height: 100px"></textarea>
+                            </div>
+                           </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-outline-info" data-bs-dismiss="modal">Valide</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         {{/each}}
 
     </div>
 </div>
 
 
-<div class="modal" id="action" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Modification</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <label for="quartier_livraison" class="form-label">Quartier livraison</label>
-                <input type="text" class="form-control" name="quartier_livraison" id="quartier_livraison"
-                    aria-describedby="helpId" placeholder="">
-                <small id="helpId" class="form-text text-muted"></small>
-            </div>
-            <div class="modal-body">
-                <label for="adresse_livraison" class="form-label">Adresse livraison</label>
-                <input type="text" class="form-control" name="adresse_livraison" id="adresse_livraison"
-                    aria-describedby="helpId" placeholder="">
-                <small id="helpId" class="form-text text-muted"></small>
-            </div>
-             <div class="modal-body">
-                <label for="date_livraison" class="form-label">Date et heure livraison</label>
-                <input type="text" class="form-control" name="date_livraison" id="date_livraison"
-                    aria-describedby="helpId" placeholder="">
-                <small id="helpId" class="form-text text-muted"></small>
-            </div>
-            <div class="modal-body">
-                <label for="status" class="form-label">Status</label>
-                <select class="form-select">
-                    <option selected>Choisir une option</option>
-                    <option value="1">Confirmer</option>
-                    <option value="2">Occupe</option>
-                    <option value="3">Boite vocale</option>
-                    <option value="3">Reporte</option>
-                    <option value="3">Annule</option>
-                </select>
-            </div>
-            <div class="modal-body">
-                <label for="floatingTextarea2">Commentaire</label>
-                <textarea class="form-control" placeholder="Commentaire" id="floatingTextarea2"
-                 style="height: 100px"></textarea>
-                 
-                
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-outline-info" data-bs-dismiss="modal">Valide</button>
-            </div>
-        </div>
-    </div>
-</div>

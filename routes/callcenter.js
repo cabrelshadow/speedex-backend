@@ -48,6 +48,8 @@ router.post("/edit/:cmd_id", async (req, res) => {
 				adresse_livraison,
 				comment,
 				status_commande: status,
+				date_validation: new Date(),
+				validate: true,
 			},
 			{ where: { id: req.params.cmd_id } },
 		);

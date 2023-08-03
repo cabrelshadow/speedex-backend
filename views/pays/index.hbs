@@ -1,8 +1,8 @@
 
-<h3>pays</h3>
+<h3>Quartier</h3>
 
 <div class="mb-3">
-    <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addRole"><i class="fas fa-plus"></i> Ajouter un pays</button>
+    <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addRole"><i class="fas fa-plus"></i> Ajouter un quatier</button>
 </div>
 <div class="card">
     <div class="card-body">
@@ -11,14 +11,14 @@
                 <thead>
                     <tr>
                 
-                        <th>ville</th>
+                        <th>Quartier</th>
                  
                     </tr>
                 </thead>
                 <tbody>
-                    {{#each ville}}
+                    {{#each quartier}}
                         <tr>
-                            <td scope="row">{{nomville}}</td>
+                            <td scope="row">{{nomquartier}}</td>
                         
                             <td>
                                 <button data-bs-target="#edit{{id}}" data-bs-toggle="modal" class="btn btn-warning btn-sm">éditer</button>
@@ -46,7 +46,7 @@
                                             </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
                                         <button type="submit" class="btn btn-primary">Enregistrer</button>
                                         </form>
                                     </div>
@@ -67,27 +67,21 @@
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addRoleTitle">ville</h5>
+                <h5 class="modal-title" id="addRoleTitle">quartier</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="/add-ville" method="post">
+                <form action="/add-quartier" method="post">
                   <div class="mb-3">
-                    <label for="name" class="form-label">Nom de la ville</label>
+                    <label for="name" class="form-label">Nom du quartier</label>
                     <input type="text"
                       class="form-control" name="name" id="name" aria-describedby="helpId" placeholder="">
-                    <small id="helpId" class="form-text text-muted"></small>
-                  </div>
-                 <div class="mb-3">
-                    <label for="name" class="form-label">code ville</label>
-                    <input type="text"
-                      class="form-control" name="codeville" id="name" aria-describedby="helpId" placeholder="">
                     <small id="helpId" class="form-text text-muted"></small>
                   </div>
                 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
                 <button type="submit" class="btn btn-primary">Enregistrer</button>
                 </form>
             </div>

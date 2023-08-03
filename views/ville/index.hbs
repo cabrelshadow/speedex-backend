@@ -67,13 +67,13 @@
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addRoleTitle">Ajouter un rôle</h5>
+                <h5 class="modal-title" id="addRoleTitle">Ajouter une ville</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form action="/add-ville" method="post">
                   <div class="mb-3">
-                    <label for="nomville" class="form-label">Nom villz</label>
+                    <label for="nomville" class="form-label">Nom ville</label>
                     <input type="text"
                       class="form-control" name="nomville" id="nomville" aria-describedby="helpId" placeholder="">
                     <small id="helpId" class="form-text text-muted"></small>
@@ -81,7 +81,7 @@
                  
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
                 <button type="submit" class="btn btn-primary">Enregistrer</button>
                 </form>
             </div>

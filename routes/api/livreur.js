@@ -2,13 +2,19 @@ const { compareSync, hashSync } = require("bcryptjs");
 const db = require("../../models");
 const { sign } = require("jsonwebtoken");
 const { protect } = require("../../config/auth");
+const { Op } = require("sequelize");
 
 const router = require("express").Router();
 
 router.get("/commandes", protect(), async (req, res) => {
 	try {
 		const commandes = await db.Commande.findAll({
-			where: { user_id: req.user.id },
+			where: {
+				[Op.and]: [
+					{ user_id: req.user.id },
+					{ delievred: { [Op.or]: [false, null] } },
+				],
+			},
 			include: ["User", "Magasin"],
 			raw: true,
 		});
@@ -39,7 +45,6 @@ router.get("/commandes", protect(), async (req, res) => {
 
 			Commandes.push({ ...commande, articles_commandes, call_center });
 		}
-		console.log(Commandes);
 		res.status(200).json(Commandes);
 	} catch (err) {
 		console.error("Error fetching commandes:", err);
@@ -71,5 +76,19 @@ router.post("/auth", async (req, res) => {
 });
 router.post("/check", protect(), (req, res) => {
 	res.status(200).json(req.user);
+});
+router.post("/action/:cmd_id", async (req, res) => {
+	const { user_id, status } = req.body;
+	if (user_id) {
+		await db.Commande.update(
+			{
+				status_commande: status,
+				date_livraison: new Date(),
+				delievred: status !== "Annulée",
+			},
+			{ where: { [Op.and]: [{ id: req.params.cmd_id }, { user_id }] } },
+		);
+		return res.redirect(req.headers.referer);
+	}
 });
 module.exports = router;

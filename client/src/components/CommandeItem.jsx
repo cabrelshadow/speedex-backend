@@ -22,9 +22,18 @@ import {
 import { FaChevronDown, FaMessage, FaPhone } from "react-icons/fa6";
 import React from "react";
 import Dialog from "./Dialog";
+import { BASE_URL } from "../api/common";
 
 function CommandeItem({ commande }) {
 	const { isOpen, onOpen, onClose } = useDisclosure();
+	const userData = JSON.parse(sessionStorage.getItem("userData"));
+	function doAction(state) {
+		fetch(`${BASE_URL}action/${commande.id}`, {
+			method: "POST",
+			headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` },
+			body: JSON.stringify({ status: state, user_id: userData.id }),
+		}).then((res) => res.ok && window.location.reload());
+	}
 	return (
 		<>
 			<GridItem w={"full"}>
@@ -76,8 +85,12 @@ function CommandeItem({ commande }) {
 									Status
 								</MenuButton>
 								<MenuList>
-									<MenuItem>Livrée</MenuItem>
-									<MenuItem color={"red.700"}>Annulée</MenuItem>
+									<MenuItem onClick={() => doAction("Livrée")}>Livrée</MenuItem>
+									<MenuItem
+										color={"red.700"}
+										onClick={() => doAction("Annulée")}>
+										Annulée
+									</MenuItem>
 								</MenuList>
 							</Menu>
 						</Flex>

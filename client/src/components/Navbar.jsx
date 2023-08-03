@@ -16,7 +16,7 @@ function Navbar() {
 			alignItems={"center"}>
 			<Heading size={{ base: "md", xl: "xl" }}>SPEEDEX</Heading>
 			<Spacer />
-			{token !== "" ? (
+			{!token ? (
 				<Button
 					onClick={() => {
 						navigate("/login");

@@ -10,7 +10,6 @@ import {
 	Stack,
 	Button,
 	Heading,
-	Text,
 	useColorModeValue,
 	useToast,
 } from "@chakra-ui/react";
@@ -125,14 +124,13 @@ export default function Login() {
 								align={"start"}
 								justify={"space-between"}>
 								<Checkbox>Remember me</Checkbox>
-								<Text color={"blue.400"}>Mot de passe oublié?</Text>
 							</Stack>
 							<Button
-								bg={"teal.400"}
+								bg={"black"}
 								color={"white"}
 								onClick={onSubmit}
 								_hover={{
-									bg: "teal.500",
+									bg: "#333333",
 								}}>
 								Connectez-vous
 							</Button>

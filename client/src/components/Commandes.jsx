@@ -5,17 +5,22 @@ import { BASE_URL } from "../api/common";
 
 function Commandes() {
 	const [Commandes, setCommandes] = React.useState([]);
+
 	const fetchCommandes = () => {
-		fetch(`${BASE_URL}commandes`, { method: "GET" }).then(async (res) => {
+		fetch(`${BASE_URL}commandes`, {
+			method: "GET",
+			headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` },
+		}).then(async (res) => {
 			if (res.ok) {
-				const getData = res.json() ?? [];
+				const getData = (await res.json()) ?? [];
 				setCommandes(getData);
 			}
 		});
 	};
 	React.useEffect(() => {
 		fetchCommandes();
-	}, [Commandes]);
+		console.log(Commandes);
+	}, []);
 	return (
 		<Container
 			maxW={{ base: "full", xl: "9xl" }}

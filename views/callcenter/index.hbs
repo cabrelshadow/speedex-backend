@@ -105,9 +105,9 @@
                             </div>
                             <div class="mb-3">
                                 <label for="user_id" class="form-label">Assigner un livreur</label>
-                                <select class="form-select form-select-lg" name="user_id" id="user_id">
+                                <select class="form-select" name="user_id" id="user_id">
                                     <option selected disabled>Selectionner un livreur </option>
-                                    {{#each livreurs}}
+                                    {{#each ../users}}
                                     <option value="{{id}}">{{fullname}}</option>
                                     {{/each}}
                             
@@ -118,10 +118,11 @@
                                 <textarea class="form-control" placeholder="Commentaire" id="comment" name="comment"
                                     style="height: 100px"></textarea>
                             </div>
-                           </form>
+                           
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-outline-info" data-bs-dismiss="modal">Valide</button>
+                            <button type="submit" class="btn btn-outline-info">Valide</button>
+                            </form>
                         </div>
                     </div>
                 </div>

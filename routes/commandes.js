@@ -92,10 +92,12 @@ router.post("/add", ensureAuthenticated, (req, res, next) => {
 				commande_id: commande.id,
 				quantite: article.quantite,
 			});
-			const getarticle = db.Stock.findOne({
+			const getarticle = await db.Stock.findOne({
 				where: { article_id: article.article_id },
+				raw: true,
 			});
-			if (getarticle) {
+			console.log(getarticle);
+			if (!!getarticle) {
 				await db.Stock.update(
 					{
 						quantite:
@@ -116,7 +118,11 @@ router.post("/assign/:cmd_id", async (req, res) => {
 	const { user_call_center } = req.body;
 	if (user_call_center) {
 		await db.Commande.update(
-			{ user_call_center, date_assignation: new Date() },
+			{
+				user_call_center,
+				date_assignation: new Date(),
+				status_commande: "En cours",
+			},
 			{ where: { id: req.params.cmd_id } },
 		);
 

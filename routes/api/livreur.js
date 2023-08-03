@@ -6,34 +6,45 @@ const { protect } = require("../../config/auth");
 const router = require("express").Router();
 
 router.get("/commandes", protect(), async (req, res) => {
-	let Commandes = [];
-	const commandes = await db.Commande.findAll({
-		where: { user_id: req.user.id },
-		include: ["User", "Magasin"],
-		raw: true,
-	});
-	commandes.filter(async (commande) => {
-		const get_articles_commandes = await db.Article_commande.findAll({
-			where: { commande_id: commande.id },
+	try {
+		const commandes = await db.Commande.findAll({
+			where: { user_id: req.user.id },
+			include: ["User", "Magasin"],
 			raw: true,
 		});
-		const articles_commandes = [];
-		get_articles_commandes.map(async (article) => {
-			await db.Article.findOne({
-				where: { id: article.article_id },
+
+		const Commandes = [];
+
+		for (const commande of commandes) {
+			const get_articles_commandes = await db.Article_commande.findAll({
+				where: { commande_id: commande.id },
 				raw: true,
-			}).then((getArticle) => {
-				getArticle.quantite = article.quantite;
-				articles_commandes.push(getArticle);
 			});
-		});
-		const call_center = await db.User.findOne({
-			where: { id: commande.user_call_center },
-			raw: true,
-		});
-		Commandes[commande.id] = { ...commande, articles_commandes, call_center };
-	});
-	res.status(200).json(Commandes);
+
+			const articles_commandes = await Promise.all(
+				get_articles_commandes.map(async (article) => {
+					const getArticle = await db.Article.findOne({
+						where: { id: article.article_id },
+						raw: true,
+					});
+					getArticle.quantite = article.quantite;
+					return getArticle;
+				}),
+			);
+
+			const call_center = await db.User.findOne({
+				where: { id: commande.user_call_center },
+				raw: true,
+			});
+
+			Commandes.push({ ...commande, articles_commandes, call_center });
+		}
+		console.log(Commandes);
+		res.status(200).json(Commandes);
+	} catch (err) {
+		console.error("Error fetching commandes:", err);
+		res.status(500).json({ error: "Internal Server Error" });
+	}
 });
 router.post("/auth", async (req, res) => {
 	const { username, password } = req.body;

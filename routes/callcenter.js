@@ -30,8 +30,12 @@ router.get("/", ensureAuthenticated, async (req, res) => {
 		});
 		Commandes[commande.id] = { ...commande, articles_commandes, call_center };
 	});
+	const getUsers = await db.User.findAll({ include: ["Role"], raw: true });
+	const users = getUsers.filter(
+		(user) => String(user["Role.name"]).toLocaleLowerCase() === "livreur",
+	);
 
-	return res.render("callcenter", { Commandes });
+	return res.render("callcenter", { Commandes, users });
 });
 
 router.post("/edit/:cmd_id", async (req, res) => {

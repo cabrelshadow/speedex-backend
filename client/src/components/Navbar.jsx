@@ -4,6 +4,11 @@ import { useNavigate } from "react-router-dom";
 
 function Navbar() {
 	const navigate = useNavigate();
+	const [token] = React.useState(sessionStorage.getItem("token"));
+	function logout() {
+		sessionStorage.removeItem("token");
+		sessionStorage.removeItem("userData");
+	}
 	return (
 		<Flex
 			p={3}
@@ -11,15 +16,23 @@ function Navbar() {
 			alignItems={"center"}>
 			<Heading size={{ base: "md", xl: "xl" }}>SPEEDEX</Heading>
 			<Spacer />
-			<Button
-				onClick={() => {
-					navigate("/login");
-				}}
-				variant={"teal"}
-				bg={"teal.400"}
-				_hover={{ bg: "teal.500" }}>
-				Connexion
-			</Button>
+			{token !== "" ? (
+				<Button
+					onClick={() => {
+						navigate("/login");
+					}}
+					variant={"teal"}
+					bg={"teal.400"}
+					_hover={{ bg: "teal.500" }}>
+					Connexion
+				</Button>
+			) : (
+				<Button
+					colorScheme='red'
+					onClick={logout}>
+					Déconnexion
+				</Button>
+			)}
 		</Flex>
 	);
 }

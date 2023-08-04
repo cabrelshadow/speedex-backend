@@ -1,101 +1,134 @@
-
 <h3>historique des commandes</h3>
 
-<div class="mb-3">
-    <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addRole"><i class="fas fa-plus"></i> Ajouter un quatier</button>
-</div>
-<div class="card">
-    <div class="card-body">
-        <div class="table-responsive">
-            <table sorted responsive class="table align-middle">
-                <thead>
-                    <tr>
-                
-                        <th>Quartier</th>
-                 
-                    </tr>
-                </thead>
-                <tbody>
-                    {{#each quartier}}
-                        <tr>
-                            <td scope="row">{{nomquartier}}</td>
-                        
-                            <td>
-                                <button data-bs-target="#edit{{id}}" data-bs-toggle="modal" class="btn btn-warning btn-sm">éditer</button>
-                                <a href="/admin/role/delete/{{id}}" class="btn btn-danger btn-sm">supprimer</a>
-                            </td>
-                        </tr>
+<div class=" mt-2 px-2">
+        <div class="card">
+            <h5 class="mx-auto mt-4">Les Commandes Terminées</h5>
+            <div class="card-body">
+                <div class="mb-2 d-flex justify-content-between align-items-center">
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped-columns table-bordered align-middle ">
 
-                        <!-- Modal Body -->
-                        <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
-                        <div class="modal fade" id="edit{{id}}" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
-                            aria-labelledby="modalTitleId" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="modalTitleId">Editer le rôle {{name}}</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form action="/admin/role/edit/{{id}}" method="post">
-                                            <div class="mb-3">
-                                                <label for="name" class="form-label">Nom</label>
-                                                <input type="text" class="form-control" name="name" id="name" aria-describedby="helpId"
-                                                    placeholder="" value="{{name}}">
-                                                <small id="helpId" class="form-text text-muted"></small>
-                                            </div>
-                                            
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
-                                        <button type="submit" class="btn btn-primary">Enregistrer</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    {{/each}}
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+                        <thead>
+                            <tr class="bg-light">
+                                <th scope="col" width="5%"><input class="form-check-input" type="checkbox"></th>
+                                <th scope="col" width="10%">Canal de Vente</th>
+                                <th scope="col" width="20%">Numero de suivi</th>
+                                <th scope="col" width="20%">Contenu produit</th>
+                                <th scope="col" width="20%">Prix total</th>
+                                <th scope="col" width="20%">Telephone client</th>
+                                <th scope="col" width="20%">Date creation</th>
+                                <th scope="col" width="20%">Date Livraison</th>
+                                <th scope="col" width="20%">Status commande</th>
+                                <th scope="col" width="20%">Livraison</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row"><input class="form-check-input" type="checkbox"></th>
+                                <td>Speedex</td>
+                                <td>SPD-9367</td>
+                                <td>1 cle</td>
+                                <td>1000f</td>
+                                <td>698233443</td>
+                                <td>08/04/2023</td>
+                                <td>18/04/2023</td>
+                                <td><span class="badge bg-success">Confirmer</span></td>
+                                <td><span class="badge bg-success">Terminées</span></td>
+                            </tr>
 
+                        </tbody>
+                    </table>
 
-<!-- Modal Body -->
-<!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
-<div class="modal fade" id="addRole" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="addRoleTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addRoleTitle">quartier</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="/add-pays" method="post">
-                       <div class="mb-3">
-                            <label for="role_id" class="form-label">Selectionner la ville</label>
-                            <select class="form-select" name="ville_id" id="ville_id">
-                                <option selected value="">Selectionner un ville</option>
-                                {{#each ...villes}}
-                                    <option value="{{id}}">{{nomville}}</option>
-                                {{/each}}
-                            </select>
-                        </div>
-                  <div class="mb-3">
-                    <label for="name" class="form-label">Nom du quartier</label>
-                    <input type="text"
-                      class="form-control" name="namepays" id="name" aria-describedby="helpId" placeholder="">
-                    <small id="helpId" class="form-text text-muted"></small>
-                  </div>
-             
-                
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Enregistrer</button>
-                </form>
+                </div>
+
             </div>
         </div>
+
+         <div class="card mt-2">
+            <h5 class="mx-auto mt-4">Les Commandes Reportées</h5>
+            <div class="card-body">
+                <div class="mb-2 d-flex justify-content-between align-items-center">
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped-columns table-bordered align-middle ">
+
+                        <thead>
+                            <tr class="bg-light">
+                                <th scope="col" width="5%"><input class="form-check-input" type="checkbox"></th>
+                                <th scope="col" width="10%">Canal de Vente</th>
+                                <th scope="col" width="20%">Numero de suivi</th>
+                                <th scope="col" width="20%">Contenu produit</th>
+                                <th scope="col" width="20%">Prix total</th>
+                                <th scope="col" width="20%">Telephone client</th>
+                                <th scope="col" width="20%">Date creation</th>
+                                <th scope="col" width="20%">Date Livraison</th>
+                                <th scope="col" width="20%">Status commande</th>
+                                <th scope="col" width="20%">Livraison</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row"><input class="form-check-input" type="checkbox"></th>
+                                <td>Speedex</td>
+                                <td>SPD-9367</td>
+                                <td>1 cle</td>
+                                <td>1000f</td>
+                                <td>698233443</td>
+                                <td>08/04/2023</td>
+                                <td>18/04/2023</td>
+                                <td><span class="badge bg-success">Confirmer</span></td>
+                                <td><span class="badge btn-warning">Reportée</span></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+ <div class="card mt-2">
+            <h5 class="mx-auto mt-4">Les Commandes Annulées</h5>
+            <div class="card-body">
+                <div class="mb-2 d-flex justify-content-between align-items-center">
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped-columns table-bordered align-middle ">
+
+                        <thead>
+                            <tr class="bg-light">
+                                <th scope="col" width="5%"><input class="form-check-input" type="checkbox"></th>
+                                <th scope="col" width="10%">Canal de Vente</th>
+                                <th scope="col" width="20%">Numero de suivi</th>
+                                <th scope="col" width="20%">Contenu produit</th>
+                                <th scope="col" width="20%">Prix total</th>
+                                <th scope="col" width="20%">Telephone client</th>
+                                <th scope="col" width="20%">Date creation</th>
+                                <th scope="col" width="20%">Date Livraison</th>
+                                <th scope="col" width="20%">Status commande</th>
+                                <th scope="col" width="20%">Livraison</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row"><input class="form-check-input" type="checkbox"></th>
+                                <td>Speedex</td>
+                                <td>SPD-9367</td>
+                                <td>1 cle</td>
+                                <td>1000f</td>
+                                <td>698233443</td>
+                                <td>08/04/2023</td>
+                                <td>18/04/2023</td>
+                                <td><span class="badge bg-success">Confirmer</span></td>
+                                <td><span class="badge bg-danger">Annulée</span></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
     </div>
-</div>

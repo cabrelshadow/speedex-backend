@@ -18,7 +18,7 @@
                 <thead>
                     <tr>
                         <th>nom ville</th>
-                        <th></th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,8 +27,8 @@
                             <td scope="row">{{nomville}}</td>
                          
                             <td>
-                                <button data-bs-target="#edit{{id}}" data-bs-toggle="modal" class="btn btn-warning btn-sm">éditer</button>
-                                <a href="/admin/ville/{{id}}" class="btn btn-danger btn-sm">supprimer</a>
+                                <button data-bs-target="#edit{{id}}" data-bs-toggle="modal" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></button>
+                                <a href="/admin/ville/{{id}}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
                             </td>
                         </tr>
 

@@ -12,6 +12,13 @@
     <div class=" mt-5 px-2">
         <div class="card">
             <div class="card-body">
+                {{#each messages}}
+                <div class="alert alert-{{type}} alert-dismissible fade show flash" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    {{msg}}
+                </div>
+                
+                {{/each}}
                 <div class="mb-2 d-flex justify-content-between align-items-center">
                 </div>
                 <div class="table-responsive">

@@ -6,6 +6,13 @@
 </div>
 <div class="card">
     <div class="card-body">
+        {{#each messages}}
+        <div class="alert alert-{{type}} alert-dismissible fade show flash" role="alert">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            {{msg}}
+        </div>
+        
+        {{/each}}
         <div class="table-responsive">
             <table sorted responsive class="table align-middle">
                 <thead>
@@ -32,15 +39,15 @@
                             <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="modalTitleId">Editer le rôle {{name}}</h5>
+                                        <h5 class="modal-title" id="modalTitleId">Editer le rôle {{nomville}}</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="/admin/role/edit/{{id}}" method="post">
+                                        <form action="/admin/ville/edit/{{id}}" method="post">
                                             <div class="mb-3">
                                                 <label for="name" class="form-label">Nom</label>
-                                                <input type="text" class="form-control" name="name" id="name" aria-describedby="helpId"
-                                                    placeholder="" value="{{name}}">
+                                                <input type="text" class="form-control" name="nomville" id="name" aria-describedby="helpId"
+                                                    placeholder="" value="{{nomville}}">
                                                 <small id="helpId" class="form-text text-muted"></small>
                                             </div>
                                     </div>

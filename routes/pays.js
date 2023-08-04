@@ -7,13 +7,28 @@ router.get("/", ensureAuthenticated, async (req, res) => {
 	return res.render("pays");
 });
 
-router.get("/", ensureAuthenticated, async (req, res) => {
-	const pays = await db.User.findAll({
-		include: [""],
-		raw: true,
-	});
-	const roles = await db.Role.findAll({ raw: true });
-	res.status(200).render("settings/user", { users, roles });
+router.post("/add-pays", async (req, res, next) => {
+	if (Object.keys(req.body).length > 0) {
+		const { nompays } = req.body;
+		const getPays = await db.Pays.findOne({ where: { nompays } });
+		if (getPays) {
+			req.session.messages.push({
+				type: "danger",
+				msg: "le pays a été déjà créer",
+			});
+			return res.redirect(req.headers.referer);
+		}
+		await db.Pays.create(req.body)
+			.then(() => {
+				req.session.messages.push({
+					type: "success",
+					msg: "pays a été bien créer",
+				});
+				return res.redirect(req.headers.referer);
+			})
+			.catch((err) => {
+				next(err);
+			});
+	}
 });
-
 module.exports = router;

@@ -138,6 +138,8 @@ app.use("/admin/magasin", require("./routes/magasin"));
 app.use("/admin/ville", require("./routes/ville"));
 app.use("/pays", require("./routes/pays"));
 app.use("/api/livreur", require("./routes/api/livreur"));
+app.use("/historiquecomande", require("./routes/historique"));
+
 const httpServer = http.createServer(app);
 
 httpServer.listen(port, () => {

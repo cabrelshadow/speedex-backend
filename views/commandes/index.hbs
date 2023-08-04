@@ -169,7 +169,7 @@
                                 </div> --}}
                                 <div class="mb-3">
                                     <label for="adresse_recup" class="form-label">Adresse Recuperation</label>
-                                    <input type="text" class="form-control" name="adresse_recup"
+                                    <input type="text" class="form-control" name="address_recup"
                                         id="address_recup" aria-describedby="helpId" placeholder="adresse par defaut du magasin choisi">
                                     <small id="helpId" class="form-text text-muted"></small>
                                 </div>
@@ -257,16 +257,16 @@
                             </div>
 
                               <div class="mb-3">
-                                    <label for="Frais_Emballage" class="form-label">Frais Emballage</label>
-                                    <input type="text" class="form-control" name="Frais_Emballage"
-                                        id="" aria-describedby="helpId" placeholder="">
+                                    <label for="frais_emballage" class="form-label">Frais Emballage</label>
+                                    <input type="text" class="form-control"  name="frais_emballage"
+                                        id="frais_emballage" aria-describedby="helpId" placeholder="">
                                     <small id="helpId" class="form-text text-muted"></small>
                                 </div>
 
                             <div class="mb-3">
-                                    <label for="Frais_livraison" class="form-label">Frais livraison</label>
-                                    <input type="text" class="form-control" name="Frais_livraison"
-                                        id="" aria-describedby="helpId" placeholder="">
+                                    <label for="frais_livraison" class="form-label">Frais livraison</label>
+                                    <input type="text" class="form-control" name="frais_livraison"
+                                        id="frais_livraison" aria-describedby="helpId" placeholder="">
                                     <small id="helpId" class="form-text text-muted"></small>
                                 </div>
 
@@ -320,6 +320,7 @@
             total,
             articles: articles
         }
+        console.log(data)
 
         fetch("/commandes/add", {
             method: "POST",

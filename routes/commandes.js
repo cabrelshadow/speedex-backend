@@ -71,6 +71,8 @@ router.post("/add", ensureAuthenticated, (req, res, next) => {
 		articles,
 		address_recup,
 		quartier_recup,
+		frais_livraison,
+		frais_emballage,
 	} = req.body;
 	console.log(req.body);
 	db.Commande.create({
@@ -80,6 +82,8 @@ router.post("/add", ensureAuthenticated, (req, res, next) => {
 		total,
 		address_recup,
 		quartier_recup,
+		frais_livraison,
+		frais_emballage,
 		magasin_id,
 		status_commande: "Nouvelle",
 		address_livraison,
@@ -96,7 +100,6 @@ router.post("/add", ensureAuthenticated, (req, res, next) => {
 				where: { article_id: article.article_id },
 				raw: true,
 			});
-			console.log(getarticle);
 			if (!!getarticle) {
 				await db.Stock.update(
 					{

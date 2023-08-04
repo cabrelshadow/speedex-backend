@@ -45,6 +45,8 @@ module.exports = (sequelize, DataTypes) => {
 			user_call_center: DataTypes.INTEGER,
 			user_id: DataTypes.INTEGER,
 			name: DataTypes.STRING,
+			address_recup: DataTypes.STRING,
+			quartier_recup: DataTypes.STRING,
 			user_commande_id: DataTypes.INTEGER,
 			partenaire_id: DataTypes.INTEGER,
 			magasin_id: DataTypes.INTEGER,

@@ -135,7 +135,7 @@ app.use("/livraison", require("./routes/livraison"));
 app.use("/callcenter", require("./routes/callcenter"));
 app.use("/superviseur", require("./routes/superviseur"));
 app.use("/admin/magasin", require("./routes/magasin"));
-app.use("/ville", require("./routes/ville"));
+app.use("/admin/ville", require("./routes/ville"));
 app.use("/pays", require("./routes/pays"));
 app.use("/api/livreur", require("./routes/api/livreur"));
 const httpServer = http.createServer(app);

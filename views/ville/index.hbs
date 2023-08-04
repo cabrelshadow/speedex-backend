@@ -11,8 +11,7 @@
                 <thead>
                     <tr>
                         <th>nom ville</th>
-                 
-                    
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -22,7 +21,7 @@
                          
                             <td>
                                 <button data-bs-target="#edit{{id}}" data-bs-toggle="modal" class="btn btn-warning btn-sm">éditer</button>
-                                <a href="/admin/role/delete/{{id}}" class="btn btn-danger btn-sm">supprimer</a>
+                                <a href="/admin/ville/{{id}}" class="btn btn-danger btn-sm">supprimer</a>
                             </td>
                         </tr>
 
@@ -71,7 +70,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="/add-ville" method="post">
+                <form action="/admin/ville/add-ville" method="post">
                   <div class="mb-3">
                     <label for="nomville" class="form-label">Nom villz</label>
                     <input type="text"

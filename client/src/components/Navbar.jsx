@@ -22,8 +22,9 @@ function Navbar() {
 						navigate("/login");
 					}}
 					variant={"teal"}
-					bg={"teal.400"}
-					_hover={{ bg: "teal.500" }}>
+					bg={"mediumseagreen"}
+					_hover={{ bg: "green" }}
+					color="white">
 					Connexion
 				</Button>
 			) : (

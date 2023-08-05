@@ -4,7 +4,8 @@ const db = require("../models");
 const router = require("express").Router();
 router.get("/", ensureAuthenticated, async (req, res) => {
 	const villes = await db.Ville.findAll({ raw: true });
-	return res.render("quartier", { villes });
+	const quartiers = await db.Quartier.findAll({ raw: true });
+	return res.render("quartier", { villes, quartiers });
 });
 
 router.post("/add-quartier", async (req, res, next) => {
@@ -18,7 +19,7 @@ router.post("/add-quartier", async (req, res, next) => {
 			});
 			return res.redirect(req.headers.referer);
 		}
-		await db.Pays.create(req.body)
+		await db.Quartier.create(req.body)
 			.then(() => {
 				req.session.messages.push({
 					type: "success",

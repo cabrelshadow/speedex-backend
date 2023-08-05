@@ -18,7 +18,7 @@ router.post("/add-quartier", async (req, res, next) => {
 			});
 			return res.redirect(req.headers.referer);
 		}
-		await db.Pays.create(req.body)
+		await db.Quartier.create(req.body)
 			.then(() => {
 				req.session.messages.push({
 					type: "success",

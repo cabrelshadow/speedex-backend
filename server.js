@@ -136,7 +136,7 @@ app.use("/callcenter", require("./routes/callcenter"));
 app.use("/superviseur", require("./routes/superviseur"));
 app.use("/admin/magasin", require("./routes/magasin"));
 app.use("/admin/ville", require("./routes/ville"));
-app.use("/pays", require("./routes/pays"));
+app.use("/quartier", require("./routes/quartier"));
 app.use("/api/livreur", require("./routes/api/livreur"));
 app.use("/historiquecomande", require("./routes/historique"));
 

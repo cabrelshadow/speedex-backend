@@ -7,11 +7,12 @@ router.get("/", ensureAuthenticated, async (req, res) => {
 	return res.render("quartier", { villes });
 });
 
+
 router.post("/add-quartier", async (req, res, next) => {
 	if (Object.keys(req.body).length > 0) {
-		const { nompays } = req.body;
-		const getPays = await db.Pays.findOne({ where: { nompays } });
-		if (getPays) {
+		const { nomquartier } = req.body;
+		const getquartier = await db.Pays.findOne({ where: {nomquartier	 } });
+		if (getquartier) {
 			req.session.messages.push({
 				type: "danger",
 				msg: "le quartier a été déjà créer",

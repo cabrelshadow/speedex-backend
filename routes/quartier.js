@@ -7,14 +7,14 @@ router.get("/", ensureAuthenticated, async (req, res) => {
 	return res.render("quartier", { villes });
 });
 
-router.post("/add-pays", async (req, res, next) => {
+router.post("/add-quartier", async (req, res, next) => {
 	if (Object.keys(req.body).length > 0) {
 		const { nompays } = req.body;
 		const getPays = await db.Pays.findOne({ where: { nompays } });
 		if (getPays) {
 			req.session.messages.push({
 				type: "danger",
-				msg: "le pays a été déjà créer",
+				msg: "le quartier a été déjà créer",
 			});
 			return res.redirect(req.headers.referer);
 		}
@@ -22,7 +22,7 @@ router.post("/add-pays", async (req, res, next) => {
 			.then(() => {
 				req.session.messages.push({
 					type: "success",
-					msg: "pays a été bien créer",
+					msg: "quartier a été bien créer",
 				});
 				return res.redirect(req.headers.referer);
 			})

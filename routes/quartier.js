@@ -3,8 +3,8 @@ const db = require("../models");
 
 const router = require("express").Router();
 router.get("/", ensureAuthenticated, async (req, res) => {
-	console.log(req.user);
-	return res.render("pays");
+	const villes = await db.Ville.findAll({ raw: true });
+	return res.render("quartier", { villes });
 });
 
 router.post("/add-pays", async (req, res, next) => {

@@ -74,18 +74,18 @@
             <div class="modal-body">
                 <form action="/add-quartier" method="post">
                        <div class="mb-3">
-                            <label for="role_id" class="form-label">Selectionner la ville</label>
-                            <select class="form-select" name="nomquartier" id="nomquartier">
-                                <option selected value="">Selectionner un ville</option>
+                            <label for="ville_id" class="form-label">Selectionner la ville</label>
+                            <select class="form-select" name="ville_id" id="ville_id">
+                                <option selected disabled>Selectionner un ville</option>
                                 {{#each villes}}
                                     <option value="{{id}}">{{nomville}}</option>
                                 {{/each}}
                             </select>
                         </div>
                   <div class="mb-3">
-                    <label for="name" class="form-label">Nom du quartier</label>
+                    <label for="nomquartier" class="form-label">Nom du quartier</label>
                     <input type="text"
-                      class="form-control" name="namepays" id="name" aria-describedby="helpId" placeholder="">
+                      class="form-control" name="nomquartier" id="nomquartier" aria-describedby="helpId" placeholder="">
                     <small id="helpId" class="form-text text-muted"></small>
                   </div>
             </div>

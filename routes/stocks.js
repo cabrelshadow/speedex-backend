@@ -32,6 +32,15 @@ router.get("/", ensureAuthenticated, async (req, res) => {
 
 router.post("/add", async (req, res, next) => {
 	if (Object.keys(req.body).length > 0) {
+		const { article_id } = req.body;
+		const getStock = await db.Stock.findOne({ where: { article_id } });
+		if (getStock) {
+			req.session.messages.push({
+				type: "danger",
+				msg: "Ce stock a été déjà créer",
+			});
+			return res.redirect(req.headers.referer);
+		}
 		db.Stock.create(req.body)
 			.then(() => {
 				req.session.messages.push({

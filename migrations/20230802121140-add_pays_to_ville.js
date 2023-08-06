@@ -31,6 +31,6 @@ module.exports = {
 		 * await queryInterface.dropTable('users');
 		 */
 		await queryInterface.removeConstraint("Villes", "fk_pays_to_ville_id");
-		await queryInterface.removeColumn("Magasins", "ville_id");
+		await queryInterface.removeColumn("Villes", "ville_id");
 	},
 };

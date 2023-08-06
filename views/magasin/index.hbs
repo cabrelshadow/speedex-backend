@@ -75,15 +75,18 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="town" class="form-label">Ville</label>
-                            <select class="form-select" name="ville" id="town" show-town>
+                            <label for="ville_id" class="form-label">Ville</label>
+                            <select class="form-select" name="ville_id" id="ville_id" >
                                 <option selected>Selectionner la ville</option>
+                                {{#each villes}}
+                                  <option value="{{id}}">{{nomville}}</option>  
+                                {{/each}}
                             </select>
                         </div>
                                  
                             <div class="mb-3">
-                            <label for="quater" class="form-label">Quartier</label>
-                            <select class="form-select" name="quater" id="town" show-quater>
+                            <label for="quartier" class="form-label">Quartier</label>
+                            <select class="form-select" name="quartier" id="quartier">
                                 <option selected>Selectionner la quartier</option>
                             </select>
                         </div>
@@ -112,3 +115,28 @@
         </div>
     </div>
 </div>
+
+<script>
+    const villdeId = document.querySelector("#ville_id")
+    const quartier = document.querySelector("#quartier")
+
+    villdeId.addEventListener("change",(e)=>{
+        e.preventDefault()
+        fetch("/api/quartier/"+villdeId.value,{
+            method:"GET"
+        }).then(async(res)=>{
+            if(res.ok){
+                const data = await res.json()??[]
+                data.map((q)=>{
+                    document.querySelectorAll("[new]").forEach((n) => n.remove())
+                    const option = document.createElement("option")
+                    option.value = q.id
+                    option.innerHTML = q.nomquartier
+                    option.setAttribute("new",true)
+                    quartier.append(option)
+                })
+                data.length===0&&document.querySelectorAll("[new]").forEach((n)=>n.remove())
+            }
+        })
+    })
+</script>

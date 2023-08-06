@@ -58,8 +58,8 @@ module.exports = {
 	},
 
 	async down(queryInterface, Sequelize) {
-		await queryInterface.dropTable("Magasins");
 		await queryInterface.removeConstraint("Magasins", "fk_user_magasin_id");
 		await queryInterface.removeConstraint("Magasins", "fk_magasin_stock_id");
+		await queryInterface.dropTable("Magasins");
 	},
 };

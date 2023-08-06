@@ -10,7 +10,6 @@ var sqlite = require("better-sqlite3");
 var SqliteStore = require("better-sqlite3-session-store")(session);
 var sessionsDB = new sqlite("db/sessions.db");
 const cookieParser = require("cookie-parser");
-const flash = require("express-flash-messages");
 const {
 	if_admin,
 	if_role,
@@ -102,7 +101,6 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(flash());
 jwtAuth(passport);
 localAuth(passport);
 app.use((err, req, res, next) => {
@@ -139,6 +137,7 @@ app.use("/admin/ville", require("./routes/ville"));
 app.use("/quartier", require("./routes/quartier"));
 app.use("/api/livreur", require("./routes/api/livreur"));
 app.use("/historiquecomande", require("./routes/historique"));
+app.use("/api/quartier", require("./routes/api/quartier"));
 
 const httpServer = http.createServer(app);
 

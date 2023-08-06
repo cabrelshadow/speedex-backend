@@ -10,7 +10,8 @@ router.get("/", async (req, res) => {
 		const users = getUsers.filter(
 			(user) => String(user["Role.name"]).toLocaleLowerCase() === "partenaire",
 		);
-		return res.render("magasin/", { magasins, users });
+		const villes = await db.Ville.findAll({});
+		return res.render("magasin/", { magasins, users, villes });
 	} else {
 		const magasins = await db.Magasin.findAll({
 			include: ["User"],
@@ -25,7 +26,8 @@ router.get("/", async (req, res) => {
 		const users = getUsers.filter(
 			(user) => String(user["Role.name"]).toLocaleLowerCase() === "partenaire",
 		);
-		return res.render("magasin/", { magasins, users });
+		const villes = await db.Ville.findAll({});
+		return res.render("magasin/", { magasins, users, villes });
 	}
 });
 

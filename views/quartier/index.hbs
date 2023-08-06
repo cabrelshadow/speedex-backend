@@ -12,14 +12,17 @@
                     <tr>
                 
                         <th>Quartier</th>
+                        <th>ville</th>
+                        <th>action</th>
                  
                     </tr>
                 </thead>
                 <tbody>
-                    {{#each quartier}}
+                    {{#each quartiers}}
                         <tr>
                             <td scope="row">{{nomquartier}}</td>
-                        
+                             <td scope="row">{{"Ville.nomville"}}</td>
+                             
                             <td>
                                 <button data-bs-target="#edit{{id}}" data-bs-toggle="modal" class="btn btn-warning btn-sm">éditer</button>
                                 <a href="/admin/role/delete/{{id}}" class="btn btn-danger btn-sm">supprimer</a>

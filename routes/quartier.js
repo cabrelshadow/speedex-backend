@@ -4,7 +4,8 @@ const db = require("../models");
 const router = require("express").Router();
 router.get("/", ensureAuthenticated, async (req, res) => {
 	const villes = await db.Ville.findAll({ raw: true });
-	return res.render("quartier", { villes });
+	const quartiers = await db.Quartier.findAll({ include:["Ville"], raw: true });
+	return res.render("quartier", { villes, quartiers});
 });
 
 router.post("/add-quartier", async (req, res, next) => {

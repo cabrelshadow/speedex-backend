@@ -1,11 +1,21 @@
 <h3 class="mb-3">Stocks</h3>
 <!-- Modal trigger button -->
-<button type="button" class="btn btn-info mb-2" data-bs-toggle="modal" data-bs-target="#addStocks">
+<button type="button" class="btn btn-outline-primary mb-2" data-bs-toggle="modal" data-bs-target="#addStocks">
     <i class="fas fa-plus "></i> Stock
 </button> <br>
 <div class="table-responsive">
     <div class="card">
      <div class="card-body">
+
+            {{#each messages}}
+                <div class="alert alert-{{type}} alert-dismissible fade show flash" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    {{msg}}
+                </div>
+                
+            {{/each}}
+
+        
         <table sorted responsive class="table table-striped-columns align-middle ">
 
         <thead class="">
@@ -24,7 +34,7 @@
                 <td>{{"Article.name"}}</td>
                 <td>{{quantite}}</td>
                 <td>{{#if promoted}}
-                    {{promote_price}} <span style="font-weight: bold;">XAF</span>
+                   <del>{{price}} <span style="font-weight: bold;">XAF</span></del> {{promote_price}} <span style="font-weight: bold;">XAF</span>
                 {{else}}
                     {{price}}  <span style="font-weight: bold;">XAF</span>
                 {{/if}}</td>
@@ -84,7 +94,7 @@
                     </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
                 <button type="submit" class="btn btn-info">editer</button>
                 </form>
             </div>
@@ -157,7 +167,7 @@
                     </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
                 <button type="submit" class="btn btn-primary">Ajouter</button>
                 </form>
             </div>
@@ -176,4 +186,7 @@
             }
         })
     })
+
+   
 </script>
+

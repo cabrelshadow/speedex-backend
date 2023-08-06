@@ -21,6 +21,9 @@ module.exports = (sequelize, DataTypes) => {
 				foreignKey: "magasin_id",
 				onDelete: "CASCADE",
 			});
+			this.belongsTo(models.Quartier, {
+				foreignKey: "quartier_id",
+			});
 		}
 	}
 	Magasin.init(
@@ -30,6 +33,8 @@ module.exports = (sequelize, DataTypes) => {
 			stock_id: DataTypes.INTEGER,
 			user_id: DataTypes.INTEGER,
 			address: DataTypes.STRING,
+			quartier_id: DataTypes.INTEGER,
+			quartier: DataTypes.STRING,
 		},
 		{
 			sequelize,

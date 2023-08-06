@@ -71,6 +71,8 @@ router.post("/add", ensureAuthenticated, (req, res, next) => {
 		articles,
 		address_recup,
 		quartier_recup,
+		frais_livraison,
+		frais_emballage,
 	} = req.body;
 	console.log(req.body);
 	db.Commande.create({
@@ -80,7 +82,10 @@ router.post("/add", ensureAuthenticated, (req, res, next) => {
 		total,
 		address_recup,
 		quartier_recup,
+		frais_livraison,
+		frais_emballage,
 		magasin_id,
+		status_commande: "Nouvelle",
 		address_livraison,
 		numero_commande: "SPD-" + (Math.ceil(Math.random(300000) * 1000) + 9000),
 		user_commande_id: req.user.id,
@@ -91,6 +96,23 @@ router.post("/add", ensureAuthenticated, (req, res, next) => {
 				commande_id: commande.id,
 				quantite: article.quantite,
 			});
+			const getarticle = await db.Stock.findOne({
+				where: { article_id: article.article_id },
+				raw: true,
+			});
+			if (!!getarticle) {
+				await db.Stock.update(
+					{
+						quantite:
+							parseInt(getarticle.quantite) - parseInt(article.quantite),
+					},
+					{ where: { article_id: getarticle.article_id } },
+				);
+			}
+		});
+		req.session.messages.push({
+			type: "success",
+			msg: "commande  a été bien ajouter",
 		});
 	});
 	res.status(201).send("ok");
@@ -99,7 +121,11 @@ router.post("/assign/:cmd_id", async (req, res) => {
 	const { user_call_center } = req.body;
 	if (user_call_center) {
 		await db.Commande.update(
-			{ user_call_center, date_assignation: new Date() },
+			{
+				user_call_center,
+				date_assignation: new Date(),
+				status_commande: "En cours",
+			},
 			{ where: { id: req.params.cmd_id } },
 		);
 

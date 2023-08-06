@@ -47,7 +47,7 @@ const dataTables = document.querySelectorAll("table[sorted]");
 dataTables.forEach((dataTable) => {
 	try {
 		new DataTable(dataTable, {
-			buttons: ["pdf", "colvis"],
+			buttons: ["print", "colvis"],
 			responsive: !!dataTable.hasAttribute("responsive"),
 			order: !!dataTable.hasAttribute("order"),
 			autoFill: !!dataTable.hasAttribute("autoFill"),
@@ -55,4 +55,37 @@ dataTables.forEach((dataTable) => {
 	} catch (error) {
 		console.log(error);
 	}
+});
+
+document.querySelectorAll(".alert").forEach((alert) => {
+	setTimeout(() => {
+		alert.style.display = "none";
+	}, 5000);
+});
+
+const showCountries = document.querySelectorAll("[show-countries]");
+const CountriesApiUrl = `https://restcountries.com/v3.1/all`;
+showCountries.forEach((showCountrie) => {
+	fetch(CountriesApiUrl, {
+		method: "GET",
+	}).then(async (res) => {
+		if (res.ok) {
+			const data = (await res.json()) ?? [];
+			data.map((country) => {
+				const createOption = document.createElement("option");
+				createOption.value = country.name.common;
+				createOption.innerHTML = country.name.common;
+				if (country.flags) {
+					const flagImg = document.createElement("img");
+					flagImg.src = country.flags.png;
+					flagImg.alt = `${country.name.common} flag`;
+					flagImg.style.width = "30px";
+					flagImg.style.marginRight = "5px";
+
+					createOption.prepend(flagImg);
+				}
+				showCountrie.appendChild(createOption);
+			});
+		}
+	});
 });

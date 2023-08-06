@@ -9,6 +9,15 @@
 <div class="container-fluid">
     <div class="card">
         <div class="card-body">
+            
+            {{#each messages}}
+                <div class="alert alert-{{type}} alert-dismissible fade show flash" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    {{msg}}
+                </div>
+                
+            {{/each}}
+
              <div class="table-responsive">
         <table class="table  
         align-middle">
@@ -118,7 +127,7 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
                                         <button type="submit" class="btn btn-primary">Enregister</button>
                                         </form>
                                     </div>

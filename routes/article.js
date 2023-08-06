@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const { ensureAuthenticated } = require("../config/auth");
 const db = require("../models");
 
@@ -20,10 +21,25 @@ router.get("/", ensureAuthenticated, async (req, res) => {
 	}
 });
 
-router.post("/add", ensureAuthenticated, (req, res, next) => {
+router.post("/add", ensureAuthenticated, async (req, res, next) => {
 	if (req.user["Role.isAdmin"]) {
-		db.Article.create(req.body)
+		const { name, categorie_id } = req.body;
+		const getArticle = await db.Article.findOne({
+			where: { [Op.and]: [{ name }, { categorie_id }] },
+		});
+		if (getArticle) {
+			req.session.messages.push({
+				type: "danger",
+				msg: "l'article a été déjà créer",
+			});
+			return res.redirect(req.headers.referer);
+		}
+		await db.Article.create(req.body)
 			.then(() => {
+				req.session.messages.push({
+					type: "success",
+					msg: "l'article a été bien créer",
+				});
 				return res.redirect(req.headers.referer);
 			})
 			.catch((err) => {
@@ -37,7 +53,7 @@ router.post(
 	"/edit-article/:articleId",
 	ensureAuthenticated,
 	(req, res, next) => {
-		const {articleId } = req.params;// Récupère l'ID du rôle à éditer
+		const { articleId } = req.params; // Récupère l'ID du rôle à éditer
 		const updatedData = req.body; // Récupère les nouvelles données du rôle depuis le corps de la requête
 
 		if (req.user["Role.isAdmin"]) {
@@ -45,6 +61,10 @@ router.post(
 				where: { id: articleId },
 			})
 				.then(() => {
+					req.session.messages.push({
+						type: "info",
+						msg: "l'article a été bien editer",
+					});
 					return res.redirect(req.headers.referer);
 				})
 				.catch((err) => {
@@ -59,13 +79,17 @@ router.get(
 	"/delete-article/:articleId",
 	ensureAuthenticated,
 	(req, res, next) => {
-		const {articleId } = req.params;  // Récupère l'ID du rôle à supprimer
+		const { articleId } = req.params; // Récupère l'ID du rôle à supprimer
 
 		if (req.user["Role.isAdmin"]) {
 			db.Article.destroy({
 				where: { id: articleId },
 			})
 				.then(() => {
+					req.session.messages.push({
+						type: "info",
+						msg: "l'article a été supprimer",
+					});
 					return res.redirect(req.headers.referer);
 				})
 				.catch((err) => {
@@ -74,6 +98,5 @@ router.get(
 		}
 	},
 );
-
 
 module.exports = router;

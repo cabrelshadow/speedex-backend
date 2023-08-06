@@ -1,0 +1,99 @@
+
+<h3>Quartier</h3>
+
+<div class="mb-3">
+    <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addRole"><i class="fas fa-plus"></i> Ajouter un quatier</button>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table sorted responsive class="table align-middle">
+                <thead>
+                    <tr>
+                
+                        <th>Quartier</th>
+                 
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each quartiers}}
+                        <tr>
+                            <td scope="row">{{nomquartier}}</td>
+                        
+                            <td>
+                                <button data-bs-target="#edit{{id}}" data-bs-toggle="modal" class="btn btn-warning btn-sm">éditer</button>
+                                <a href="/admin/role/delete/{{id}}" class="btn btn-danger btn-sm">supprimer</a>
+                            </td>
+                        </tr>
+
+                        <!-- Modal Body -->
+                        <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+                        <div class="modal fade" id="edit{{id}}" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
+                            aria-labelledby="modalTitleId" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalTitleId">Editer le rôle {{name}}</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="/admin/role/edit/{{id}}" method="post">
+                                            <div class="mb-3">
+                                                <label for="name" class="form-label">Nom</label>
+                                                <input type="text" class="form-control" name="name" id="name" aria-describedby="helpId"
+                                                    placeholder="" value="{{name}}">
+                                                <small id="helpId" class="form-text text-muted"></small>
+                                            </div>
+                                            
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
+                                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Body -->
+<!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+<div class="modal fade" id="addRole" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="addRoleTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addRoleTitle">quartier</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/quartier/add-quartier" method="post">
+                       <div class="mb-3">
+                            <label for="ville_id" class="form-label">Selectionner la ville</label>
+                            <select class="form-select" name="ville_id" id="ville_id">
+                                <option selected disabled>Selectionner un ville</option>
+                                {{#each villes}}
+                                    <option value="{{id}}">{{nomville}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                  <div class="mb-3">
+                    <label for="nomquartier" class="form-label">Nom du quartier</label>
+                    <input type="text"
+                      class="form-control" name="nomquartier" id="nomquartier" aria-describedby="helpId" placeholder="">
+                    <small id="helpId" class="form-text text-muted"></small>
+                  </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

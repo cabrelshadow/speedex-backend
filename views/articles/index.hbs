@@ -2,12 +2,21 @@
 {{#if_admin user}}
 
 <div class="mb-3">
-    <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#addCategorie"><i class="fas fa-plus"></i>   
-       article</button>
+    <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addCategorie"><i class="fas fa-plus"></i>   
+       Article</button>
 </div>
 {{/if_admin}}
 <div class="table-responsive">
  <div class="card">
+    
+            {{#each messages}}
+                <div class="alert alert-{{type}} alert-dismissible fade show flash" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    {{msg}}
+                </div>
+                
+            {{/each}}
+
      <div class="card-body">
      <table sorted responsive class="table table-striped" style="width:100%">
        <thead sorted responsive class="">
@@ -35,7 +44,7 @@
                 {{/if}}</td> --}}
                 <td>
                    <button data-bs-target="#edit{{id}}" data-bs-toggle="modal" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></button>
-                <a href="/admin/articles/delete-article/{{id}}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                                   <a href="/admin/articles/delete-article/{{id}}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
                 </td>
               
             </tr>
@@ -81,7 +90,7 @@
                     </div> --}}
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
                 <button type="submit" class="btn btn-primary">editer</button>
                 </form>
             </div>
@@ -142,7 +151,7 @@
                     </div> --}}
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
                 <button type="submit" class="btn btn-primary">Enregistrer</button>
                 </form>
             </div>

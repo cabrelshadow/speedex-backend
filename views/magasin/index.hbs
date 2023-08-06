@@ -1,7 +1,7 @@
 <h3 class="mb-3">Magasin</h3>
 <div class="mt-5">
     <!-- Modal trigger button -->
-    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#addMagasin">
+    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addMagasin">
         <i class="fas fa-plus"></i> Magasin
     </button>
 
@@ -9,15 +9,25 @@
 
     <div class="table-responsive mt-3">
         <div class="card">
+              {{#each messages}}
+                <div class="alert alert-{{type}} alert-dismissible fade show flash" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    {{msg}}
+                </div>
+                
+            {{/each}}
             <div class="card-body">
-                <table class="table table-striped-columns table-bordered align-middle ">
+                <table sorted responsive class="table table-striped-columns table-bordered align-middle ">
 
                     <thead>
                         <tr>
                             <th scope="col">Nom du magasin</th>
                             <th scope="col">Partenaire</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Adresse</th>
+                    
+                            <th scope="col">Ville</th>
+                              <th scope="col">Quartier</th>
+                              <th scope="col">Adresse</th>
+                             <th scope="col">Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -25,6 +35,8 @@
                         <tr class="">
                             <td scope="row">{{name}}</td>
                             <td>{{"User.fullname"}}</td>
+                            
+                            <td>{{address}}</td>
                             <td>
                                 {{#if active}}
                                 <span class="badge rounded-pill bg-success">Actif</span>
@@ -32,7 +44,8 @@
                                 <span class="badge rounded-pill bg-danger">Inactif</span>
                                 {{/if}}
                             </td>
-                            <td>{{address}}</td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         {{/each}}
 
@@ -60,20 +73,21 @@
                                 placeholder="" required>
                             <small id="helpId" class="form-text text-muted"></small>
                         </div>
+
+                        <div class="mb-3">
+                            <label for="town" class="form-label">Ville</label>
+                            <select class="form-select" name="ville" id="town" show-town>
+                                <option selected>Selectionner la ville</option>
+                            </select>
+                        </div>
                                  
                             <div class="mb-3">
-                            <label for="ville" class="form-label">Ville</label>
-                            <input type="text" class="form-control" name="ville" id="ville" aria-describedby="helpId"
-                                placeholder="" required>
-                            <small id="helpId" class="form-text text-muted"></small>
+                            <label for="quater" class="form-label">Quartier</label>
+                            <select class="form-select" name="quater" id="town" show-quater>
+                                <option selected>Selectionner la quartier</option>
+                            </select>
                         </div>
 
-                         <div class="mb-3">
-                            <label for="quartier" class="form-label">Quartier</label>
-                            <input type="text" class="form-control" name="quartier" id="quartier" aria-describedby="helpId"
-                                placeholder="" required>
-                            <small id="helpId" class="form-text text-muted"></small>
-                        </div>
 
                         <div class="mb-3">
                             <label for="address" class="form-label">Adresse</label>
@@ -90,7 +104,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
                     <button type="submit" class="btn btn-primary">Enregistrer</button>
                     </form>
                 </div>

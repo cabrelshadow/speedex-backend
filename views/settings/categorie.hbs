@@ -4,11 +4,21 @@
     <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addCategorie"><i class="fas fa-plus"></i> Ajouter
         une categorie</button>
 </div>
+  {{#each messages}}
+                <div class="alert alert-{{type}} alert-dismissible fade show flash" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    {{msg}}
+                </div>
+                
+            {{/each}}
+            <div class="card">
+  <div class="card-body">
+
+
 <div class="table-responsive">
-    <table sorted  class="table table-striped-columns table-bordered
-    align-middle">
+     <table sorted responsive class="table table-striped-columns align-middle ">
         <thead class="">
-            <caption>Catégories</caption>
+        
             <tr>
                 <th>Catégorie</th>
                 
@@ -23,6 +33,9 @@
 
         </tbody>
     </table>
+</div>
+  </div>
+
 </div>
 
 <!-- Modal Body -->
@@ -45,7 +58,7 @@
                     </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
                 <button type="submit" class="btn btn-primary">Enregistrer</button>
                 </form>
             </div>

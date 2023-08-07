@@ -65,3 +65,13 @@ function if_role(user, value, opts) {
     </li>
 {{/if_role}}
 ````
+
+
+# Calculate helper
+
+````hbs
+{{#calculate 1 1 "plus"}}
+    
+{{/calculate}}
+
+````

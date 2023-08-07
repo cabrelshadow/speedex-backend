@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
 				where: { id: magasin.quartier_id },
 				raw: true,
 			});
-			magasin.ville_name = ville["Ville.nomville"];
+			magasin.ville_name = (ville && ville["Ville.nomville"]) || null;
 		});
 		const getUsers = await db.User.findAll({ include: ["Role"], raw: true });
 		const users = getUsers.filter(

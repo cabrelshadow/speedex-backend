@@ -75,7 +75,7 @@ router.post("/add", ensureAuthenticated, (req, res, next) => {
 		frais_emballage,
 	} = req.body;
 	console.log(req.body);
-	db.Commande.create({
+	/* db.Commande.create({
 		name,
 		numero_client,
 		partenaire_id,
@@ -114,7 +114,7 @@ router.post("/add", ensureAuthenticated, (req, res, next) => {
 			type: "success",
 			msg: "commande  a été bien ajouter",
 		});
-	});
+	}); */
 	res.status(201).send("ok");
 });
 router.post("/assign/:cmd_id", async (req, res) => {

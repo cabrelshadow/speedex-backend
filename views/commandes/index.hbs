@@ -50,7 +50,6 @@
                                 <td>{{numero_commande}}</td>
                                 <td>{{articles_commandes.length}} {{#list_article articles_commandes}}
                                     {{/list_article}}</td>
-
                                 <td>{{total}} <b>XAF</b> </td>
                                 <td>{{numero_client}}</td>
                                 <td>{{name}}</td>
@@ -111,8 +110,6 @@
                                 </div>
                             </tr>
                             {{/each}}
-
-
                         </tbody>
                     </table>
 
@@ -154,30 +151,14 @@
                                     <label for="magasin_id" class="form-label">Magasin: </label>
                                     <select class="form-select" name="magasin_id" id="magasin_id">
                                         <option selected>Selectionner le magasin</option>
-                                        {{!-- {{#each magasins}}
-                                        <option value="{{id}}">{{name}}</option>
-                                        {{/each}} --}}
                                     </select>
                                 </div>
-
                                 <div class="mb-3">
                                     <label for="ville" class="form-label">ville</label>
                                     <input type="text" class="form-control" name="ville" id="ville"
                                         aria-describedby="helpId" placeholder="ville par defaut du magasin choisi">
                                     <small id="helpId" class="form-text text-muted"></small>
                                 </div>
-
-                                {{!-- <div class="mb-3">
-                                    <label for="address_recup" class="form-label">Adresse Recuperation</label>
-                                    <select class="form-select" name="address" id="address_id">
-                                        <option selected>Selectionner le magasin</option> --}}
-                                        {{!-- {{#each magasins}}
-                                        <option value="{{id}}">{{"Magasin.address"}}</option>
-                                        {{/each}} --}}
-                                        {{!--
-                                    </select>
-                                </div> --}}
-
                                 <div class="mb-3">
                                     <label for="quartier_recup" class="form-label">Quartier de Recuperation</label>
                                     <input type="text" class="form-control" name="quartier_recup" id="quartier_recup"
@@ -190,14 +171,6 @@
                                         aria-describedby="helpId" placeholder="adresse par defaut du magasin choisi">
                                     <small id="helpId" class="form-text text-muted"></small>
                                 </div>
-
-                                <!-- <div class="mb-3">
-                                <label for="numero_client" class="form-label">Numero du client</label>
-                                <input type="text" class="form-control" name="numero_client" id="numero_client"
-                                    aria-describedby="helpId" placeholder="">
-                                <small id="helpId" class="form-text text-muted"></small>
-                            </div>-->
-
                             </div>
                             <button class="btn btn-primary float-end next-button" type="button">suivant</button>
                         </div>
@@ -240,12 +213,18 @@
                                         id="address_livraison" aria-describedby="helpId" placeholder="">
                                     <small id="helpId" class="form-text text-muted"></small>
                                 </div>
-                                <!-- <div class="mb-3">
-                                <label for="numero_client" class="form-label">Numero du client</label>
-                                <input type="text" class="form-control" name="numero_client" id="numero_client"
-                                    aria-describedby="helpId" placeholder="">
+                            <div class="mb-3">
+                                <label for="frais_emballage" class="form-label">Frais Emballage</label>
+                                <input type="text" class="form-control" name="frais_emballage" id="frais_emballage" aria-describedby="helpId"
+                                    placeholder="">
                                 <small id="helpId" class="form-text text-muted"></small>
-                            </div>-->
+                            </div>
+                            <div class="mb-3">
+                                <label for="frais_livraison" class="form-label">Frais livraison</label>
+                                <input type="text" class="form-control" name="frais_livraison" id="frais_livraison" aria-describedby="helpId"
+                                    placeholder="">
+                                <small id="helpId" class="form-text text-muted"></small>
+                            </div>
 
                             </div>
                             <button type="button" class="btn btn-danger prev-button">Retour</button>
@@ -254,7 +233,6 @@
                         <div class="col" style="display: none;">
                             <h4 id="total-show">Total: </h4>
                             <h3>Choisir les articles</h3>
-
                             <div multi-input>
                                 <div class="input-group mb-3">
                                     {{!-- <label for="quartier" class="form-label">Quartier Recuperation</label> --}}
@@ -270,23 +248,6 @@
                                     <button class="btn btn-primary" type="button"><i class="fas fa-plus"></i></button>
                                 </div>
                             </div>
-
-                            <div class="mb-3">
-                                <label for="frais_emballage" class="form-label">Frais Emballage</label>
-                                <input type="text" class="form-control" name="frais_emballage" id="frais_emballage"
-                                    aria-describedby="helpId" placeholder="">
-                                <small id="helpId" class="form-text text-muted"></small>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="frais_livraison" class="form-label">Frais livraison</label>
-                                <input type="text" class="form-control" name="frais_livraison" id="frais_livraison"
-                                    aria-describedby="helpId" placeholder="">
-                                <small id="helpId" class="form-text text-muted"></small>
-                            </div>
-
-
-
                             <button type="button" class="btn btn-danger prev-button">Retour</button>
                             <button type="button" class="btn btn-primary float-end next-button"
                                 onclick="onSubmit()">Commander</button>

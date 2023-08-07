@@ -30,12 +30,6 @@ function if_role(user, value, opts) {
 }
 function list_article(articles = [], opts) {
 	const articleName = articles.map((a) => a.name);
-	/* for (const key in articles) {
-		if (Object.hasOwnProperty.call(articles, key)) {
-			const article = articles[key];
-			articleName.push(article.name);
-		}
-	} */
 	return articleName.join("+");
 }
 /**
@@ -46,9 +40,33 @@ function list_article(articles = [], opts) {
 function dateFormat(date, date_format = "LL") {
 	return moment(date).format(date_format.toString());
 }
+/**
+ *
+ * @param {number} val1
+ * @param {number} val2
+ * @param {string} operator
+ * @returns
+ */
+function calculate(val1, val2, operator) {
+	switch (operator) {
+		case "multi":
+			return val1 * val2;
+		case "plus" || "add":
+			return val1 + val1;
+		case "minus" || "subs":
+			return val1 - val2;
+		case "div" || "division":
+			return val1 / val2;
+		case "modulo":
+			return val1 % val2;
+		default:
+			return val1 + val2;
+	}
+}
 module.exports = {
 	if_admin,
 	if_role,
 	list_article,
 	dateFormat,
+	calculate,
 };

@@ -283,7 +283,7 @@
             multiInput.querySelectorAll("select").forEach((select, i) => {
                 total += parseInt(select.options[select.selectedIndex].getAttribute("article-price")) * parseInt(multiInput.querySelectorAll("input")[i].value)
             })
-            total += (frais_emballage+frais_emballage)
+            
             multInput.push(prepData);
         })
 
@@ -311,15 +311,12 @@
     document.addEventListener("DOMContentLoaded", function () {
         var currentStep = 0;
         var steps = document.querySelectorAll(".stepper .row .col");
-
         // Hide all steps except the first one
         for (var i = 1; i < steps.length; i++) {
             steps[i].style.display = "none";
         }
-
         var nextButtons = document.querySelectorAll(".next-button");
         var prevButtons = document.querySelectorAll(".prev-button");
-
         // Add event listeners to next buttons
         nextButtons.forEach(function (button) {
             button.addEventListener("click", function () {
@@ -330,7 +327,6 @@
                 }
             });
         });
-
         // Add event listeners to previous buttons
         prevButtons.forEach(function (button) {
             button.addEventListener("click", function () {
@@ -342,7 +338,6 @@
             });
         });
     });
-
     document.querySelector("#magasin_id").addEventListener("change", (e) => {
         const articleSelects = document.querySelectorAll("#article")
         const value = e.target.value
@@ -358,7 +353,7 @@
                             const option = document.createElement("option")
                             option.value = articles.article_id
                             option.innerText = articles["Article.name"]
-                            const price = articles.promoted ? articles.promote_price : articles.price
+                            const price = articles.promoted && articles.promote_price ?? articles.price
                             option.setAttribute("article-price", price)
                             articleSelect.append(option)
                         })
@@ -389,25 +384,20 @@
                     const option = magasinSelect.querySelectorAll("[Stock]")
                     option.forEach(o => o.remove())
                     data.map((magasin) => {
-
                         const option = document.createElement("option")
                         option.value = magasin.id
                         option.innerText = magasin.name
                         option.setAttribute("Stock", magasin.stock_id)
                         magasinSelect.append(option)
-
                     })
                 } else {
 
                     const option = magasinSelect.querySelectorAll("[Stock]")
                     option.forEach(o => o.remove())
-
                 }
             }
         })
     })
-
-
     document.addEventListener("mouseup", () => {
         const getmultiInputs = document.querySelector("[multi-input]");
         let total = 0;
@@ -415,9 +405,9 @@
             input.addEventListener("change", (e) => {
                 e.preventDefault()
                 getmultiInputs.querySelectorAll("select").forEach((select, i) => {
-
                     total += parseInt(select.options[select.selectedIndex].getAttribute("article-price")) * parseInt(getmultiInputs.querySelectorAll("input")[i].value || 1)
                 })
+                total += (frais_emballage + frais_emballage)
                 document.querySelector("#total-show").innerHTML = `Total: ${total}`
             })
         })

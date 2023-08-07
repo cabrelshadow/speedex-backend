@@ -272,18 +272,18 @@
         let articles = []
         let total = 0;
         const name = document.querySelector("#name");
+        const frais_emballage = parseInt(document.querySelector("#frais_emballage").value)
+        const frais_livraison = parseInt(document.querySelector("#frais_livraison").value)
         const commande_info = [...document.querySelectorAll(".commande_info input"), ...document.querySelectorAll(".commande_info select")];
         const multiInputs = document.querySelector("[multi-input]").children;
         multiInputs.forEach((multiInput) => {
             [...multiInput.querySelectorAll("input"), ...multiInput.querySelectorAll("select")].forEach(mInput => {
                 prepData = { ...prepData, [mInput.name]: mInput.value }
-
             })
             multiInput.querySelectorAll("select").forEach((select, i) => {
-
                 total += parseInt(select.options[select.selectedIndex].getAttribute("article-price")) * parseInt(multiInput.querySelectorAll("input")[i].value)
             })
-            console.log(total)
+            total += (frais_emballage+frais_emballage)
             multInput.push(prepData);
         })
 

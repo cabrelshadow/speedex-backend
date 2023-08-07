@@ -15,6 +15,7 @@ const {
 	if_role,
 	list_article,
 	dateFormat,
+	calculate,
 } = require("./helpers/handlebars");
 const { jwtAuth, localAuth } = require("./config/passport");
 const expressHandlebars = require("express-handlebars");
@@ -82,6 +83,7 @@ app.engine(
 			if_role,
 			list_article,
 			dateFormat,
+			calculate,
 		},
 	}),
 );

@@ -17,7 +17,10 @@ router.post("/add-user", ensureAuthenticated, async (req, res, next) => {
 	req.body.password = hashSync(req.body.password, 10);
 	await db.User.create(req.body)
 		.then((result) => {
-			req.session.messages.push({type:"success",msg:"utilisateur a été bien ajouter"})
+			req.session.messages.push({
+				type: "success",
+				msg: "utilisateur a été bien ajouter",
+			});
 			return res.redirect(req.headers.referer);
 		})
 		.catch((err) => {
@@ -56,7 +59,10 @@ router.post("/edit-user/:userId", ensureAuthenticated, (req, res, next) => {
 		where: { id: userId },
 	})
 		.then(() => {
-			req.session.messages.push({type:"primary",msg:"user a été bien editer"})
+			req.session.messages.push({
+				type: "primary",
+				msg: "user a été bien editer",
+			});
 			return res.redirect(req.headers.referer);
 		})
 		.catch((err) => {
@@ -73,7 +79,10 @@ router.delete("/delete-user/:userId", ensureAuthenticated, (req, res, next) => {
 		where: { id: userId },
 	})
 		.then(() => {
-			req.session.messages.push({type:"info",msg:"Stock a été bien supprimer"})
+			req.session.messages.push({
+				type: "info",
+				msg: "Stock a été bien supprimer",
+			});
 			return res.redirect(req.headers.referer);
 		})
 		.catch((err) => {

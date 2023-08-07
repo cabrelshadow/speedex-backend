@@ -272,8 +272,8 @@
         let articles = []
         let total = 0;
         const name = document.querySelector("#name");
-        const frais_emballage = parseInt(document.querySelector("#frais_emballage").value)
-        const frais_livraison = parseInt(document.querySelector("#frais_livraison").value)
+        /*const frais_emballage = parseInt(document.querySelector("#frais_emballage").value)
+        const frais_livraison = parseInt(document.querySelector("#frais_livraison").value)*/
         const commande_info = [...document.querySelectorAll(".commande_info input"), ...document.querySelectorAll(".commande_info select")];
         const multiInputs = document.querySelector("[multi-input]").children;
         multiInputs.forEach((multiInput) => {
@@ -401,6 +401,8 @@
     document.addEventListener("mouseup", () => {
         const getmultiInputs = document.querySelector("[multi-input]");
         let total = 0;
+        const frais_emballage = parseInt(document.querySelector("#frais_emballage").value)
+        const frais_livraison = parseInt(document.querySelector("#frais_livraison").value)
         [...getmultiInputs.querySelectorAll("select"), ...getmultiInputs.querySelectorAll("input")].forEach((input) => {
             input.addEventListener("change", (e) => {
                 e.preventDefault()

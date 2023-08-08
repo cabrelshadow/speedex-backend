@@ -288,7 +288,6 @@
             multiInput.querySelectorAll("select").forEach((select, i) => {
                 total += parseInt(select.options[select.selectedIndex].getAttribute("article-price")) * parseInt(multiInput.querySelectorAll("input")[i].value)
             })
-            
             multInput.push(prepData);
         })
 
@@ -358,7 +357,7 @@
                             const option = document.createElement("option")
                             option.value = articles.article_id
                             option.innerText = articles["Article.name"]
-                            const price = articles.promoted && articles.promote_price ?? articles.price
+                            const price = articles.promoted ? articles.promote_price : articles.price
                             option.setAttribute("article-price", price)
                             articleSelect.append(option)
                         })
@@ -404,19 +403,21 @@
         })
     })
     document.addEventListener("mouseup", () => {
-        const getmultiInputs = document.querySelector("[multi-input]");
-        let total = 0;
-        const frais_emballage = parseInt(document.querySelector("#frais_emballage").value)
-        const frais_livraison = parseInt(document.querySelector("#frais_livraison").value)
-        [...getmultiInputs.querySelectorAll("select"), ...getmultiInputs.querySelectorAll("input")].forEach((input) => {
-            input.addEventListener("change", (e) => {
-                e.preventDefault()
-                getmultiInputs.querySelectorAll("select").forEach((select, i) => {
-                    total += parseInt(select.options[select.selectedIndex].getAttribute("article-price")) * parseInt(getmultiInputs.querySelectorAll("input")[i].value || 1)
+            const getmultiInputs = document.querySelector("[multi-input]");
+            let total = 0;
+             
+            [...getmultiInputs.querySelectorAll("select"), ...getmultiInputs.querySelectorAll("input")].forEach((input) => {
+                input.addEventListener("change", (e) => {
+                    e.preventDefault()
+                    getmultiInputs.querySelectorAll("select").forEach((select, i) => {
+                        total += parseInt(select.options[select.selectedIndex].getAttribute("article-price")) * parseInt(getmultiInputs.querySelectorAll("input")[i].value || 1)
+                    })
+                    const frais_emballage = parseInt(document.querySelector("#frais_emballage").value)
+                    const frais_livraison = parseInt(document.querySelector("#frais_livraison").value)
+                    total += (frais_emballage + frais_emballage)
+                    document.querySelector("#total-show").innerHTML = `Total: ${total}`
+                    document.querySelector("#total-show").innerHTML = `Total: ${total}`
                 })
-                total += (frais_emballage + frais_emballage)
-                document.querySelector("#total-show").innerHTML = `Total: ${total}`
             })
         })
-    })
 </script>

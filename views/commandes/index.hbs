@@ -364,8 +364,9 @@
                         articleSelects.forEach((articleSelect) => {
                             const option = document.createElement("option")
                             option.value = articles.article_id
-                            option.innerText = articles["Article.name"]
                             const price = articles.promoted ? articles.promote_price : articles.price
+                            option.innerText = `${articles["Article.name"]}----${price}`
+                            
                             option.setAttribute("article-price", price)
                             articleSelect.append(option)
                         })
@@ -421,10 +422,10 @@
                     getmultiInputs.querySelectorAll("select").forEach((select, i) => {
                         total += parseInt(select.options[select.selectedIndex].getAttribute("article-price")) * parseInt(getmultiInputs.querySelectorAll("input")[i].value || 1)
                     })
-                    const frais_emballage = parseInt(document.querySelector("#frais_emballage").value)
-                    const frais_livraison = parseInt(document.querySelector("#frais_livraison").value)
+                    const frais_emballage = parseInt(document.querySelector("#frais_emballage").value||0)
+                    const frais_livraison = parseInt(document.querySelector("#frais_livraison").value||0)
                     total += (frais_emballage + frais_emballage)
-                    document.querySelector("#total-show").innerHTML = `Total: ${total}`
+                    console.log(frais_emballage ,frais_emballage)
                     document.querySelector("#total-show").innerHTML = `Total: ${total}`
                 })
             })

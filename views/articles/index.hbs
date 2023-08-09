@@ -161,13 +161,12 @@
 
 <script>
     
-    document.querySelector("#promoted").addEventListener("click",(e)=>{
+    document.querySelector("#promoted")&& document.querySelector("#promoted").addEventListener("click",(e)=>{
         if(e.target.checked){
             document.querySelector("#promoted_price").parentElement.removeAttribute("hidden")
         }else{
              document.querySelector("#promoted_price").parentElement.setAttribute("hidden", true)
         }
     })
-    const myModal = new bootstrap.Modal(document.getElementById('addCategorie'), options)
 </script>
 {{/if_admin}}

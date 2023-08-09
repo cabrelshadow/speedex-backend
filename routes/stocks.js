@@ -62,7 +62,18 @@ router.post("/:magasin_id", ensureAuthenticated, async (req, res) => {
 		raw: true,
 		where: { magasin_id },
 	});
-	return res.status(200).json(articles);
+	const magasin = await db.Magasin.findOne({
+		where: { id: magasin_id },
+		include: ["Quartier"],
+		raw: true,
+	});
+	const ville = await db.Ville.findOne({
+		where: { id: magasin["Quartier.ville_id"] },
+		raw: true,
+	});
+	magasin.ville = ville.nomville;
+
+	return res.status(200).json({ magasin, articles });
 });
 
 /*  edite  stock*/

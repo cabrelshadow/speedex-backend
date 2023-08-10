@@ -51,8 +51,8 @@
                                 <td>{{articles_commandes.length}} {{#list_article articles_commandes}}
                                     {{/list_article}}</td>
                                 <td><b>XAF</b> {{total}} <br><b> frais de  livraison et embalage<b><br>
-                               
-                                {{#calculate frais_livraison frais_emballage "plus"}}
+                           
+                                {{#calculate frais_livraison 1 "plus"}}
     
                                     {{/calculate}}
                                 </b></td>

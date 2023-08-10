@@ -32,8 +32,8 @@ router.get("/", ensureAuthenticated, async (req, res) => {
 
 router.post("/add", async (req, res, next) => {
 	if (Object.keys(req.body).length > 0) {
-		const { article_id } = req.body;
-		const getStock = await db.Stock.findOne({ where: { article_id } });
+		const { magasin_id } = req.body;
+		const getStock = await db.Stock.findOne({ where: { magasin_id } });
 		if (getStock) {
 			req.session.messages.push({
 				type: "danger",

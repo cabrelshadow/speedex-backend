@@ -47,7 +47,7 @@ const dataTables = document.querySelectorAll("table[sorted]");
 dataTables.forEach((dataTable) => {
 	try {
 		new DataTable(dataTable, {
-			buttons: ["print", "colvis"],
+			buttons: ["pdf", "print"],
 			responsive: !!dataTable.hasAttribute("responsive"),
 			order: !!dataTable.hasAttribute("order"),
 			autoFill: !!dataTable.hasAttribute("autoFill"),

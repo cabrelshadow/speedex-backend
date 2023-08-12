@@ -19,7 +19,7 @@ function Commandes() {
 	};
 	React.useEffect(() => {
 		fetchCommandes();
-	}, []);
+	}, [Commandes]);
 	return (
 		<Container
 			maxW={{ base: "full", xl: "9xl" }}

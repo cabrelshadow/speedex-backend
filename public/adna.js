@@ -25,7 +25,11 @@ multiInputs.forEach((multiInput) => {
 			[
 				...cloneForm.querySelectorAll("input"),
 				...cloneForm.querySelectorAll("select"),
-			].forEach((input) => (input.value = ""));
+			].forEach((input) => {
+				if (input.name !== "quantite") {
+					input.value = "";
+				}
+			});
 			rmIcon.classList.add("fas");
 			rmIcon.classList.add("fa-minus");
 			rmBtn.classList.add("btn");
@@ -34,8 +38,18 @@ multiInputs.forEach((multiInput) => {
 			rmBtn.setAttribute("rmbtn", true);
 			cloneForm.append(rmBtn);
 			multiInput.append(cloneForm);
+			document.dispatchEvent(
+				new CustomEvent("multi-input-add", {
+					detail: cloneForm,
+				}),
+			);
 			multiInput.querySelectorAll("[rmbtn]").forEach((removeBtn) => {
 				removeBtn.addEventListener("click", (e) => {
+					document.dispatchEvent(
+						new CustomEvent("multi-input-remove", {
+							detail: removeBtn.parentElement,
+						}),
+					);
 					removeBtn.parentElement.remove();
 				});
 			});

@@ -4,10 +4,11 @@ import Commandes from "./components/Commandes";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
 import PrivateRoute from "./components/PrivateRouter";
+import theme from "./hooks/theme";
 function App() {
 	return (
 		<BrowserRouter>
-			<ChakraProvider>
+			<ChakraProvider theme={theme}>
 				<Navbar></Navbar>
 				<Routes>
 					<Route

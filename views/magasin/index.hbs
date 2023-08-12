@@ -67,14 +67,14 @@
                 <div class="modal-body">
                     <form action="/admin/magasin/add" method="post">
                         <div class="mb-3">
-                            <label for="name" class="form-label">Nom du magasin</label>
+                            <label for="name" class="form-label">Nom du magasin<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" name="name" id="name" aria-describedby="helpId"
                                 placeholder="" required>
                             <small id="helpId" class="form-text text-muted"></small>
                         </div>
 
                         <div class="mb-3">
-                            <label for="ville_id" class="form-label">Ville</label>
+                            <label for="ville_id" class="form-label">Ville<span class="text-danger">*</span></label>
                             <select class="form-select" name="ville_id" id="ville_id" >
                                 <option selected>Selectionner la ville</option>
                                 {{#each villes}}
@@ -84,7 +84,7 @@
                         </div>
                                  
                             <div class="mb-3">
-                            <label for="quartier" class="form-label">Quartier</label>
+                            <label for="quartier" class="form-label">Quartier<span class="text-danger">*</span></label>
                             <select class="form-select" name="quartier_id" id="quartier">
                                 <option selected>Selectionner la quartier</option>
                             </select>
@@ -92,7 +92,7 @@
 
 
                         <div class="mb-3">
-                            <label for="address" class="form-label">Adresse</label>
+                            <label for="address" class="form-label">Adresse<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" name="address" id="address" aria-describedby="helpId"
                                 placeholder="" required>
                             <small id="helpId" class="form-text text-muted"></small>
@@ -138,4 +138,6 @@
             }
         })
     })
+
+    
 </script>

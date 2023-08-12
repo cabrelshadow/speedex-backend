@@ -144,7 +144,7 @@
                             <h3>Information de la paternaire</h3>
                             <div class="commande_info">
                                 <div class="mb-3">
-                                    <label for="partenaire_id" class="form-label">Nom du patenaire</label>
+                                    <label for="partenaire_id" class="form-label">Nom du patenaire<span class="text-danger">*</span></label>
                                     <select class="form-select" name="partenaire_id" id="partenaire_id">
                                         <option value="" selected>Selectionner un partenaire</option>
                                         {{#each ./parternaires}}
@@ -153,25 +153,25 @@
                                     </select>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="magasin_id" class="form-label">Magasin: </label>
+                                    <label for="magasin_id" class="form-label">Magasin <span class="text-danger">*</span></label>
                                     <select class="form-select" name="magasin_id" id="magasin_id">
                                         <option selected>Selectionner le magasin</option>
                                     </select>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="ville" class="form-label">ville</label>
+                                    <label for="ville" class="form-label">ville<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" name="ville" id="ville"
                                         aria-describedby="helpId" placeholder="ville par defaut du magasin choisi">
                                     <small id="helpId" class="form-text text-muted"></small>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="quartier_recup" class="form-label">Quartier de Recuperation</label>
+                                    <label for="quartier_recup" class="form-label">Quartier de Recuperation<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" name="quartier_recup" id="quartier_recup"
                                         aria-describedby="helpId" placeholder="quartier par defaut du magasin choisi">
                                     <small id="helpId" class="form-text text-muted"></small>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="adresse_recup" class="form-label">Adresse Recuperation</label>
+                                    <label for="adresse_recup" class="form-label">Adresse Recuperation<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" name="address_recup" id="address_recup"
                                         aria-describedby="helpId" placeholder="adresse par defaut du magasin choisi">
                                     <small id="helpId" class="form-text text-muted"></small>
@@ -183,19 +183,19 @@
                             <h3>Information de la client</h3>
                             <div class="commande_info">
                                 <div class="mb-3">
-                                    <label for="name" class="form-label">Nom du client</label>
+                                    <label for="name" class="form-label">Nom du client<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" name="name" id="name"
-                                        aria-describedby="helpId" placeholder="">
+                                        aria-describedby="helpId" placeholder="" required>
                                     <small id="helpId" class="form-text text-muted"></small>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="numero_client" class="form-label">Telephone du client</label>
+                                    <label for="numero_client" class="form-label">Telephone du client<span class="text-danger">*</span></label>
                                     <input type="number" class="form-control" name="numero_client" id="numero_client"
-                                        aria-describedby="helpId" placeholder="">
+                                        aria-describedby="helpId" placeholder="" required>
                                     <small id="helpId" class="form-text text-muted"></small>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="address_livraison" class="form-label">Ville</label>
+                                    <label for="address_livraison" class="form-label">Ville<span class="text-danger">*</span></label>
                                     <select class="form-select form-select-sm" aria-label=".form-select-sm example">
                                         <option>Selectionner la ville</option>
                                         <option value="1">Douala</option>
@@ -204,7 +204,7 @@
                                     <small id="helpId" class="form-text text-muted"></small>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="address_livraison" class="form-label">Quartier</label>
+                                    <label for="address_livraison" class="form-label">Quartier<span class="text-danger">*</span></label>
                                     <select class="form-select form-select-sm" aria-label=".form-select-sm example">
                                         <option>Selectionner le Quartier</option>
                                         <option value="1">Sable</option>
@@ -213,21 +213,21 @@
                                     <small id="helpId" class="form-text text-muted"></small>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="address_livraison" class="form-label">Adresse de livraison</label>
+                                    <label for="address_livraison" class="form-label">Adresse de livraison<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" name="address_livraison"
-                                        id="address_livraison" aria-describedby="helpId" placeholder="">
+                                        id="address_livraison" aria-describedby="helpId" placeholder="" required>
                                     <small id="helpId" class="form-text text-muted"></small>
                                 </div>
                             <div class="mb-3">
-                                <label for="frais_emballage" class="form-label">Frais Emballage</label>
+                                <label for="frais_emballage" class="form-label">Frais Emballage<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" name="frais_emballage" id="frais_emballage" aria-describedby="helpId"
-                                    placeholder="">
+                                    placeholder="" required>
                                 <small id="helpId" class="form-text text-muted"></small>
                             </div>
                             <div class="mb-3">
-                                <label for="frais_livraison" class="form-label">Frais livraison</label>
+                                <label for="frais_livraison" class="form-label">Frais livraison<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" name="frais_livraison" id="frais_livraison" aria-describedby="helpId"
-                                    placeholder="">
+                                    placeholder="" required>
                                 <small id="helpId" class="form-text text-muted"></small>
                             </div>
 

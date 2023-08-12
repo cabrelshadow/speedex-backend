@@ -16,11 +16,11 @@ import {
 	MenuItem,
 	MenuList,
 	Spacer,
-	useToast ,
+	useToast,
 	Text,
 	useDisclosure,
 } from "@chakra-ui/react";
-import { FaChevronDown, FaMessage, FaPhone, } from "react-icons/fa6";
+import { FaChevronDown, FaMessage, FaPhone } from "react-icons/fa6";
 import React from "react";
 import Dialog from "./Dialog";
 import { BASE_URL } from "../api/common";
@@ -30,15 +30,19 @@ function CommandeItem({ commande }) {
 	const userData = JSON.parse(sessionStorage.getItem("userData"));
 	const toast = useToast({ position: "top-right" });
 	function doAction(state) {
+		console.log(state);
 		fetch(`${BASE_URL}action/${commande.id}`, {
 			method: "POST",
-			headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` },
+			headers: {
+				Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+				"Content-Type": "application/json",
+			},
 			body: JSON.stringify({ status: state, user_id: userData.id }),
 		})
 			.then((res) => res.ok && window.location.reload())
 			.catch((err) => {
 				toast("error", "une erreur s'est produite");
-				throw err
+				throw err;
 			});
 	}
 	return (

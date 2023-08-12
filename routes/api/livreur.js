@@ -79,6 +79,7 @@ router.post("/check", protect(), (req, res) => {
 });
 router.post("/action/:cmd_id", async (req, res) => {
 	const { user_id, status } = req.body;
+	console.log(user_id);
 	if (user_id) {
 		await db.Commande.update(
 			{

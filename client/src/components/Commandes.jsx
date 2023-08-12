@@ -19,7 +19,7 @@ function Commandes() {
 	};
 	React.useEffect(() => {
 		fetchCommandes();
-	}, [Commandes]);
+	}, []);
 	return (
 		<Container
 			maxW={{ base: "full", xl: "9xl" }}
@@ -33,8 +33,11 @@ function Commandes() {
 						xl: "repeat(4,4fr)",
 					}}
 					gap={5}>
-					{Commandes.map((commande) => (
-						<CommandeItem commande={commande} />
+					{Commandes.map((commande, i) => (
+						<CommandeItem
+							commande={commande}
+							key={i}
+						/>
 					))}
 				</Grid>
 			) : (

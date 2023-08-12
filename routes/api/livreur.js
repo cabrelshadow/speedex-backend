@@ -13,7 +13,7 @@ router.get("/commandes", protect(), async (req, res) => {
 				[Op.and]: [
 					{ user_id: req.user.id },
 					{ delievred: { [Op.or]: [false, null] } },
-					{ status: { [Op.not]: ["Annulée", "Livrée"] } },
+					{ status_commande: { [Op.not]: ["Annulée", "Livrée"] } },
 				],
 			},
 			include: ["User", "Magasin"],

@@ -146,7 +146,7 @@ const httpServer = http.createServer(app);
 httpServer.listen(port, () => {
 	console.log("Run server on port " + port);
 });
-/* const io = new Server(httpServer, { cors: { origin: "*" } });
+const io = new Server(httpServer, { cors: { origin: "*" } });
 
 io.on("connection", async (socket) => {
 	console.log("a user connect");
@@ -158,4 +158,3 @@ io.on("connection", async (socket) => {
 });
 
 app.io = io;
- */

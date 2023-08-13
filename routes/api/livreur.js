@@ -13,6 +13,7 @@ router.get("/commandes", protect(), async (req, res) => {
 				[Op.and]: [
 					{ user_id: req.user.id },
 					{ delievred: { [Op.or]: [false, null] } },
+					{ status_commande: { [Op.not]: ["Annulée", "Livrée"] } },
 				],
 			},
 			include: ["User", "Magasin"],
@@ -79,6 +80,7 @@ router.post("/check", protect(), (req, res) => {
 });
 router.post("/action/:cmd_id", async (req, res) => {
 	const { user_id, status } = req.body;
+	console.log(user_id);
 	if (user_id) {
 		await db.Commande.update(
 			{

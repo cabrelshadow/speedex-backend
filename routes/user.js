@@ -15,6 +15,15 @@ router.get("/", ensureAuthenticated, async (req, res) => {
 
 router.post("/add-user", ensureAuthenticated, async (req, res, next) => {
 	req.body.password = hashSync(req.body.password, 10);
+	const { cni } = req.body;
+	const getcni = await db.User.findOne({ where: { cni } });
+	if (getcni) {
+		req.session.messages.push({
+			type: "danger",
+			msg: "cet utilisateur existe deja",
+		});
+		return res.redirect(req.headers.referer);
+	}
 	await db.User.create(req.body)
 		.then((result) => {
 			req.session.messages.push({

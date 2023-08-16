@@ -10,6 +10,7 @@ var sqlite = require("better-sqlite3");
 var SqliteStore = require("better-sqlite3-session-store")(session);
 var sessionsDB = new sqlite("db/sessions.db");
 const cookieParser = require("cookie-parser");
+const flash = require("connect-flash");
 const {
 	if_admin,
 	if_role,
@@ -105,6 +106,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 jwtAuth(passport);
 localAuth(passport);
+// Connect flash
+app.use(flash());
 app.use((err, req, res, next) => {
 	// Handle the error
 	console.log(err);
@@ -115,6 +118,7 @@ app.use(function (req, res, next) {
 	res.locals.user = req.user || null;
 	res.locals.messages = req.session.messages || [];
 	req.session.messages = [];
+	res.locals.error = req.flash("error") || null;
 	next();
 });
 

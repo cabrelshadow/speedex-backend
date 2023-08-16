@@ -65,13 +65,13 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                      <label for="quantite" class="form-label">Quantite</label>
+                      <label for="quantite" class="form-label" >Quantite</label>
                       <input type="number"
                         class="form-control" name="quantite" id="quantite" aria-describedby="helpId" placeholder="" value="{{quantite}}" required>
                       <small id="helpId" class="form-text text-muted"></small>
                     </div>
                     <div class="mb-3">
-                        <label for="quantite" class="form-label">Quantite</label>
+                        <label for="quantite" class="form-label">Prix</label>
                         <input type="number" class="form-control" name="quantite" id="quantite" aria-describedby="helpId" placeholder=""
                             value="{{price}}" required>
                         <small id="helpId" class="form-text text-muted"></small>
@@ -133,7 +133,7 @@
             <div class="modal-body">
                 <form action="/admin/stocks/add" method="post">
                     <div class="mb-3">
-                        <label for="article" class="form-label">Article</label>
+                        <label for="article" class="form-label">Article <span class="text-danger">*</span></label>
                         <select class="form-select" name="article_id" id="article">
                             <option value="" selected>Selectionner un article</option>
                             {{#each articles}}
@@ -143,21 +143,21 @@
                     </div>
 
                     <div class="mb-3">
-                      <label for="prix" class="form-label">Prix</label>
+                      <label for="prix" class="form-label">Prix<span class="text-danger">*</span></label>
                       <input type="number"
-                        class="form-control" name="price" id="prix" aria-describedby="helpId" placeholder="">
+                        class="form-control" name="price" id="prix" aria-describedby="helpId" placeholder="" required>
                       <small id="helpId" class="form-text text-muted"></small>
                     </div>
                    
 
                     <div class="mb-3">
-                      <label for="quantite" class="form-label">Quantite</label>
+                      <label for="quantite" class="form-label">Quantite<span class="text-danger">*</span></label>
                       <input type="number"
-                        class="form-control" name="quantite" id="quantite" aria-describedby="helpId" placeholder="">
+                        class="form-control" name="quantite" id="quantite" aria-describedby="helpId" placeholder="" required>
                       <small id="helpId" class="form-text text-muted"></small>
                     </div>
                     <div class="mb-3">
-                        <label for="user" class="form-label">Magasin</label>
+                        <label for="user" class="form-label">Magasin<span class="text-danger">*</span></label>
                         <select class="form-select" name="magasin_id" id="user">
                             <option value="" selected>Selectionner un magasin</option>
                             {{#each magasins}}

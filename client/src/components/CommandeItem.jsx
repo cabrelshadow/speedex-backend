@@ -71,6 +71,9 @@ function CommandeItem({ commande }) {
 								<b>Ville de livraison</b>: {commande.quartier}
 							</Text>
 							<Text>
+								<b>prix</b>: {commande.total} <span>XAF</span>
+							</Text>
+							<Text>
 								<b>Adresse de livraison</b>: {commande.address_livraison}
 							</Text>
 						</Box>

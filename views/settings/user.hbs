@@ -154,14 +154,14 @@
 <!-- Modal -->
 <div class="modal fade" id="add_type" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <div class="modal-content" validation >
             <div class="modal-header">
                 <h5 class="modal-title">Ajouter un Utilisateur</h5>
-                <button type="button" class="btn-primary" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
-                    <form action="/admin/user/add-user" method="post">
+                    <form action="/admin/user/add-user" method="post" all-required>
                         <div class="mb-3">
                             <label for="fullname" class="form-label">Nom complet<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" name="fullname" id="fullname" aria-describedby="helpId"
@@ -171,38 +171,38 @@
                         <div class="mb-3">
                             <label for="username" class="form-label">Nom d'Utilisateur</label>
                             <input type="text" class="form-control" name="username" id="username" aria-describedby="helpId" placeholder="" required>
-                            <small id="helpId" class="form-text text-muted"></small>
+                            <small id="username_helpId" class="form-text text-muted"></small>
                         </div>
                         <div class="mb-3">
                           <label for="address" class="form-label">Adresse<span class="text-danger">*</span></label>
                           <input type="text"
                             class="form-control" name="address" id="address" aria-describedby="helpId" placeholder="" required>
-                          <small id="helpId" class="form-text text-muted"></small>
+                          <small id="address_helpId" class="form-text text-muted"></small>
                         </div>
                         <div class="mb-3">
                             <label for="ville" class="form-label">Ville<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" name="ville" id="ville" aria-describedby="helpId" placeholder="" required>
-                            <small id="helpId" class="form-text text-muted"></small>
+                            <small id="ville_helpId" class="form-text text-muted"></small>
                         </div>
                         <div class="mb-3">
                             <label for="street_address" class="form-label">Adresse du quartier<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" name="street_address" id="street_address" aria-describedby="helpId" placeholder="" required>
-                            <small id="helpId" class="form-text text-muted"></small>
+                            <small id="street_helpId" class="form-text text-muted"></small>
                         </div>
                         <div class="mb-3">
                             <label for="cni" class="form-label">Numero CNI<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" name="cni" id="cni" aria-describedby="helpId" placeholder="" required>
-                            <small id="helpId" class="form-text text-muted"></small>
+                            <small id="cni_helpId" class="form-text text-muted"></small>
                         </div>
                         <div class="mb-3">
                             <label for="date_delivrance" class="form-label">Date de délivrance</label>
                             <input type="date" class="form-control" name="date_delivrance" id="date_delivrance" aria-describedby="helpId" placeholder="">
-                            <small id="helpId" class="form-text text-muted"></small>
+                            <small id="date_helpId" class="form-text text-muted"></small>
                         </div>
                         <div class="mb-3">
                             <label for="lieu_delivrance" class="form-label">Lieu de délivrance</label>
                             <input type="text" class="form-control" name="lieu_delivrance" id="lieu_delivrance" aria-describedby="helpId" placeholder="">
-                            <small id="helpId" class="form-text text-muted"></small>
+                            <small id="lieu_helpId" class="form-text text-muted"></small>
                         </div>
                         <div class="mb-3">
                             <label for="role_id" class="form-label">Role<span class="text-danger">*</span></label>
@@ -236,7 +236,7 @@
     fullnames.forEach(fullname=>{
         fullname.addEventListener("keyup", (e) => {
             e.preventDefault();
-            document.querySelector("#username").value = String(fullname.value).split(" ").filter(c=>c!==" ").join("").substr(0, Math.round(String(fullname.value).length / 2)) + (Math.ceil(Math.random(300000) * 1000) + 9000)
+            document.querySelector("#username").value = String(fullname.value).split(" ").filter(c=>c!==" ").join("").substr(0, Math.round(String(fullname.value).length / 2)).toLocaleLowerCase() + (Math.ceil(Math.random(300000) * 1000) + 9000)
         })
     })
 </script>

@@ -46,7 +46,7 @@
 
               <div class="modal fade" id="edit{{id}}" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleStocks" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
-        <div class="modal-content">
+        <div class="modal-content" validation>
             <div class="modal-header">
                 <h5 class="modal-title" id="modalTitleStocks">Editer le stock</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -55,7 +55,7 @@
                 <form action="/admin/stocks/edit-stock/{{id}}" method="post">
                     <div class="mb-3">
                         <label for="article" class="form-label">Article</label>
-                        <select class="form-select" name="article_id" id="article">
+                        <select class="form-select" name="article_id" id="article" required>
                             <option value="" selected>Selectionner un article</option>
                             {{#each ../articles}}
                                 <option value="{{id}}" {{#if_equal ../article_id id}}
@@ -78,7 +78,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="user" class="form-label">Magasin</label>
-                        <select class="form-select" name="magasin_id" id="user">
+                        <select class="form-select" name="magasin_id" id="user" required>
                             <option value="" selected>Selectionner un magasin</option>
                             {{#each ../magasins}}
                             
@@ -125,7 +125,7 @@
 <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
 <div class="modal fade" id="addStocks" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleStocks" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
-        <div class="modal-content">
+        <div class="modal-content" validation>
             <div class="modal-header">
                 <h5 class="modal-title" id="modalTitleStocks">Ajouter un stocks</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -134,7 +134,7 @@
                 <form action="/admin/stocks/add" method="post">
                     <div class="mb-3">
                         <label for="article" class="form-label">Article <span class="text-danger">*</span></label>
-                        <select class="form-select" name="article_id" id="article">
+                        <select class="form-select" name="article_id" id="article" required>
                             <option value="" selected>Selectionner un article</option>
                             {{#each articles}}
                                 <option value="{{id}}">{{name}}</option>
@@ -158,8 +158,8 @@
                     </div>
                     <div class="mb-3">
                         <label for="user" class="form-label">Magasin<span class="text-danger">*</span></label>
-                        <select class="form-select" name="magasin_id" id="user">
-                            <option value="" selected>Selectionner un magasin</option>
+                        <select class="form-select" name="magasin_id" id="user" required>
+                            <option value="" selected >Selectionner un magasin</option>
                             {{#each magasins}}
                             <option value="{{id}}">{{name}}</option>
                             {{/each}}

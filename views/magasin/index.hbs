@@ -59,7 +59,7 @@
     <div class="modal fade" id="addMagasin" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
         role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
-            <div class="modal-content">
+            <div class="modal-content" validation>
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalTitleId">Créer un magasin</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -75,8 +75,8 @@
 
                         <div class="mb-3">
                             <label for="ville_id" class="form-label">Ville<span class="text-danger">*</span></label>
-                            <select class="form-select" name="ville_id" id="ville_id" >
-                                <option selected>Selectionner la ville</option>
+                            <select class="form-select" name="ville_id" id="ville_id" required>
+                                <option selected value="">Selectionner la ville</option>
                                 {{#each villes}}
                                   <option value="{{id}}">{{nomville}}</option>  
                                 {{/each}}
@@ -85,8 +85,8 @@
                                  
                             <div class="mb-3">
                             <label for="quartier" class="form-label">Quartier<span class="text-danger">*</span></label>
-                            <select class="form-select" name="quartier_id" id="quartier">
-                                <option selected>Selectionner la quartier</option>
+                            <select class="form-select" name="quartier_id" id="quartier" required>
+                                <option selected value="">Selectionner la quartier</option>
                             </select>
                         </div>
 
@@ -97,7 +97,7 @@
                                 placeholder="" required>
                             <small id="helpId" class="form-text text-muted"></small>
                         </div>
-                        <select class="form-select" name="user_id" id="user">
+                        <select class="form-select" name="user_id" id="user" required>
                             <option value="" selected>Selectionner un partenaire</option>
                             {{#each users}}
                             <option value="{{id}}">{{fullname}}</option>

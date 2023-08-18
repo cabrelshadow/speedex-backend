@@ -75,3 +75,27 @@ function if_role(user, value, opts) {
 {{/calculate}}
 
 ````
+
+# validation method
+
+````html
+
+<form validation>
+  ....
+  <button type="submit">Submit</button>
+</form>
+
+````
+
+# validation method add required to all field
+
+````html
+
+<form validation>
+  <div all-required>
+    ....
+  </div>
+  <button type="submit">Submit</button>
+</form>
+
+````

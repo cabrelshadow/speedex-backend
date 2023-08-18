@@ -113,7 +113,7 @@
 <div class="modal fade" id="addCategorie" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
     aria-labelledby="addRoleTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
-        <div class="modal-content">
+        <div class="modal-content" validation>
             <div class="modal-header">
                 <h5 class="modal-title" id="addRoleTitle">Ajouter un article </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -122,7 +122,7 @@
                 <form action="/admin/articles/add" method="post">
                     <div class="mb-3">
                         <label for="name" class="form-label">Nom <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="name" id="name" aria-describedby="helpId"
+                        <input type="text" class="form-control" name="name" id="name" required aria-describedby="helpId"
                             placeholder="">
                         <small id="helpId" class="form-text text-muted"></small>
                     </div>
@@ -133,7 +133,7 @@
                     </div> --}}
                     <div class="mb-3">
                         <label for="categorie" class="form-label">Catégorie<span class="text-danger">*</span></label>
-                        <select class="form-select" name="categorie_id" id="categorie">
+                        <select class="form-select" name="categorie_id" id="categorie" required>
                             <option selected value="">Selectionner une catégorie</option>
                             {{#each categories}}
                                <option value="{{id}}">{{name}}</option> 

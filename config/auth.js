@@ -7,6 +7,7 @@ module.exports = {
 		// req.flash("error_msg", "Not Authorized");
 		let path = "/auth/login";
 		path += req.headers.referer ? `?next=${req.headers.referer}` : "";
+		req.flash("error_message", "Veuillez-vous connecté");
 		return res.redirect(path);
 	},
 

@@ -90,12 +90,6 @@
                                     aria-describedby="helpId" placeholder="{{address_livraison}}">
                                 <small id="helpId" class="form-text text-muted"></small>
                             </div>
-                            {{!-- <div class="form-group">
-                                <label for="date_livraison" class="form-label">Date et heure livraison</label>
-                                <input type="text" class="form-control" name="date_livraison" id="date_livraison" aria-describedby="helpId"
-                                    placeholder="">
-                                <small id="helpId" class="form-text text-muted"></small>
-                            </div> --}}
                             <div class="form-group">
                                 <label for="status" class="form-label">Status</label>
                                 <select class="form-select" id="status" name="status">
@@ -133,8 +127,131 @@
             </div>
 
         {{/each}}
+       
 
     </div>
 </div>
 
 
+<script type="text/babel">
+
+    function CommandeItem({commande,users}){
+        return (
+
+            <div className="col-sm-6 mb-3">
+                    <div className="card">
+                        <div className="card-body">
+                            <h5 className="card-title text-info">Numero de commande: <span style="font-weight: bold;">{ commande.numero_commande }</span></h5>
+                            <p className="card-text">Canal vente: <span style="font-weight: bold; color:black">{commande["Magasin.name"]}</span> </p>
+                            <p className="card-text">Nom Client: <span style="font-weight: bold; color:black">{commande.name }</span> </p>
+                            <p className="card-text ">Numero Client:<span style="font-weight: bold; color:black">{commande.numero_client }</span>
+                                <i className='fas fa-phone-alt ms-4'></i>
+                                <i className='fas fa-comment-alt ms-2'></i>
+                                <i className='fas fa-comment ms-2'></i>
+                            </p>
+                            <p className="card-text"> <a href="#" data-bs-toggle="modal" data-bs-target="#articleShow" className="btn btn-sm btn-info">Liste des produits commandés</a></p>
+                            <p className="card-text">Prix Total:<span style="font-weight: bold; color:black"> {commande.total } fcfa</span> </p>
+                        <p className="card-text">Quartier livraison: {commande.quartier }</p>
+                        <p className="card-text">Adresse livraison:<span style="font-weight: bold; color:black">{commande.address_livraison } </span> </p>
+                        <p className="card-text">Status:  <span className="badge rounded-pill bg-danger">En cours</span></p>
+                    <div>
+                        {commande.user_id? <a href="#" className="badge bg-primary">Déjà assigné</a>: <button className="btn btn-outline-info" data-bs-toggle="modal" data-bs-target={"#action"+commande.id}>
+                                    Editer
+                                </button>}
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div className="modal fade" id="articleShow" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                <div className="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+                    <div className="modal-content">    
+                    <div className="modal-body">
+                        <div className="row">
+                            {typeof commande.articles_commandes==="object"&&commande.articles_commandes.map((article)=>(
+                                <div className="col-sm-12 col-lg-6">
+                                    <div className="card">
+                                        <div className="card-head">
+                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div className="card-body">
+                                            <h4 className="card-title">{ article.name }</h4>
+                                            <p className="card-text">{article.price }</p>
+                                        </div>
+                                        <ul className="list-group list-group-flush">
+                                            <li className="list-group-item">Quantité: {article.quantite }</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+            </div>
+                </div >
+            </div >
+            <div className="modal" id={'action'+commande.id} tabindex="-1" aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title">Modification</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div className="modal-body">
+                            <form action={"/callcenter/edit/"+commande.id} method="post">
+                                <div className="form-group">
+                                    <label for="quartier_livraison" className="form-label">Quartier livraison</label>
+                                    <input type="text" className="form-control" name="quartier" id="quartier_livraison" aria-describedby="helpId"
+                                        placeholder=""/>
+                                        <small id="helpId" className="form-text text-muted"></small>
+                                </div>
+                                <div className="form-group">
+                                    <label for="adresse_livraison" className="form-label">Adresse livraison</label>
+                                    <input type="text" className="form-control" name="adresse_livraison" id="adresse_livraison" value={commande.address_livraison}
+                                        aria-describedby="helpId" placeholder={commande.address_livraison}/>
+                                        <small id="helpId" className="form-text text-muted"></small>
+                                </div>
+                                <div className="form-group">
+                                    <label for="status" className="form-label">Status</label>
+                                    <select className="form-select" id="status" name="status">
+                                        <option selected>Choisir une option</option>
+                                        <option value="Confirmer">Confirmer</option>
+                                        <option value="Occupée">Occupée</option>
+                                        <option value="Boite vocale">Boite vocale</option>
+                                        <option value="Reporteé">Reportée</option>
+                                        <option value="Annulée">Annulée</option>
+                                    </select>
+                                </div>
+                                <div className="mb-3">
+                                    <label for="user_id" className="form-label">Assigner un livreur</label>
+                                    <select className="form-select" name="user_id" id="user_id">
+                                        <option selected disabled>Selectionner un livreur </option>
+                                        {users.map((user)=>(
+                                            <option value={user.id}>{commande.fullname}</option>
+                                        ))}
+
+                                    </select>
+                                </div>
+                                <div className="form-group">
+                                    <label for="comment">Commentaire</label>
+                                    <textarea className="form-control" placeholder="Commentaire" id="comment" name="comment"
+                                        style="height: 100px"></textarea>
+                                </div>
+                        </div>
+                        <div className="modal-footer">
+                            <button type="submit" className="btn btn-outline-info">Valide</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+        )
+    }
+    function Commande() {
+            return (
+                    <CommandeItem/>
+            )
+        }
+    const root  = document.querySelector("[commander-render]")
+    const render = reactDOM.createRoot(root)
+    render.render(<Commande/>)
+</script>

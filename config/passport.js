@@ -10,6 +10,7 @@ function localAuth(passport) {
 			{ usernameField: "username" },
 			(username, password, done) => {
 				// Match user
+
 				db.User.findOne({
 					where: {
 						username: username,
@@ -18,7 +19,9 @@ function localAuth(passport) {
 				}).then((user) => {
 					if (!user) {
 						console.log("No User Found");
-						return done(null, false, { message: "No User Found" });
+						return done(null, false, {
+							message: "Nom d'utilisateur ou mot de passe incorrect",
+						});
 					}
 					// Match password
 					bcrypt.compare(password, user.password, (err, isMatch) => {
@@ -29,7 +32,9 @@ function localAuth(passport) {
 						} else {
 							//console.log("Incorrect");
 
-							return done(null, false, { message: "Password Incorrect" });
+							return done(null, false, {
+								message: "Nom d'utilisateur ou mot de passe incorrect",
+							});
 						}
 					});
 				});

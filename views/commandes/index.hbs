@@ -155,7 +155,7 @@
                                 <div class="mb-3">
                                     <label for="magasin_id" class="form-label">Magasin <span class="text-danger">*</span></label>
                                     <select class="form-select" name="magasin_id" id="magasin_id">
-                                        <option selected>Selectionner le magasin</option>
+                                        <option selected value="">Selectionner le magasin</option>
                                     </select>
                                 </div>
                                 <div class="mb-3">
@@ -197,18 +197,20 @@
                                 <div class="mb-3">
                                     <label for="address_livraison" class="form-label">Ville<span class="text-danger">*</span></label>
                                     <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                                        <option>Selectionner la ville</option>
-                                        <option value="1">Douala</option>
-                                        <option value="2">Yaounde</option>
+                                        <option value="">Selectionner la ville</option>
+                                        {{#each villes}}
+                                            <option value="{{id}}">{{nomville}}</option>
+                                        {{/each}}
                                     </select>
                                     <small id="helpId" class="form-text text-muted"></small>
                                 </div>
                                 <div class="mb-3">
                                     <label for="address_livraison" class="form-label">Quartier<span class="text-danger">*</span></label>
                                     <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                                        <option>Selectionner le Quartier</option>
-                                        <option value="1">Sable</option>
-                                        <option value="2">Sadi</option>
+                                        <option value="">Selectionner le Quartier</option>
+                                        {{#each quartiers}}
+                                            <option value="{{id}}">{{nomquartier}}</option>
+                                        {{/each}}
                                     </select>
                                     <small id="helpId" class="form-text text-muted"></small>
                                 </div>
@@ -315,6 +317,7 @@
     document.addEventListener("DOMContentLoaded", function () {
         var currentStep = 0;
         var steps = document.querySelectorAll(".stepper .row .col");
+        
         // Hide all steps except the first one
         for (var i = 1; i < steps.length; i++) {
             steps[i].style.display = "none";
@@ -323,11 +326,30 @@
         var prevButtons = document.querySelectorAll(".prev-button");
         // Add event listeners to next buttons
         nextButtons.forEach(function (button) {
-            button.addEventListener("click", function () {
-                if (currentStep < steps.length - 1) {
-                    steps[currentStep].style.display = "none";
-                    currentStep++;
-                    steps[currentStep].style.display = "block";
+            button.addEventListener("click", function (e) {
+                const emptyField = []
+                steps[currentStep].children.forEach((multiInputs)=>{
+                    [...multiInputs.querySelectorAll("input"), ...multiInputs.querySelectorAll("select")].forEach((mInput,k) => {
+                        if (mInput.value === "" || !mInput.value) {
+                            mInput.style.borderColor = "red"
+                            emptyField.push(mInput)
+                            e.preventDefault()
+                        }else{
+                            emptyField.map((_,ek)=>ek!==k)
+                            mInput.style.borderColor = "green"
+                        }
+                    })
+                    
+                })     
+                if(emptyField.length>0){
+                    return e.preventDefault();
+                }else {
+                    
+                    if (currentStep < steps.length - 1) {
+                        steps[currentStep].style.display = "none";
+                        currentStep++;
+                        steps[currentStep].style.display = "block";
+                    }
                 }
             });
         });
@@ -381,9 +403,6 @@
             }
         })
     })
-
-
-
     document.querySelector("#partenaire_id") && document.querySelector("#partenaire_id").addEventListener("change", (e) => {
         const magasinSelect = document.querySelector("#magasin_id")
         const value = e.target.value

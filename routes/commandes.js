@@ -41,13 +41,16 @@ router.get("/", ensureAuthenticated, async (req, res) => {
 	const parternaires = getUsers.filter(
 		(user) => String(user["Role.name"]).toLocaleLowerCase() === "partenaire",
 	);
-	console.log(Commandes);
+	const quartiers = await db.Quartier.findAll({ raw: true });
+	const villes = await db.Ville.findAll({ raw: true });
 	return res.render("commandes/", {
 		Commandes,
 		articles,
 		magasins,
 		users,
 		parternaires,
+		quartiers,
+		villes,
 	});
 });
 router.get("/live", ensureAuthenticated, async (req, res) => {

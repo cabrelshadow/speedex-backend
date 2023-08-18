@@ -71,17 +71,17 @@
 <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
 <div class="modal fade" id="addRole" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="addRoleTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
-        <div class="modal-content">
+        <div class="modal-content" validation>
             <div class="modal-header">
                 <h5 class="modal-title" id="addRoleTitle">Ajouter une ville</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="/admin/ville/add-ville" method="post">
+                <form action="/admin/ville/add-ville" method="post" >
                   <div class="mb-3">
                     <label for="nomville" class="form-label">Nom ville</label>
                     <input type="text"
-                      class="form-control" name="nomville" id="nomville" aria-describedby="helpId" placeholder="">
+                      class="form-control" name="nomville" id="nomville" aria-describedby="helpId" placeholder="" required>
                     <small id="helpId" class="form-text text-muted"></small>
                   </div>
                  

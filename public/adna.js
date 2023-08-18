@@ -103,3 +103,37 @@ showCountries.forEach((showCountrie) => {
 		}
 	});
 });
+
+const validations = document.querySelectorAll("[validation]");
+
+validations.forEach((validate) => {
+	const allRequired = validate.querySelector("[all-required]");
+	if (allRequired) {
+		[
+			...allRequired.querySelectorAll("input"),
+			...allRequired.querySelectorAll("select"),
+		].forEach((allR) => {
+			!allR.hasAttribute("[required]") && allR.setAttribute("required", true);
+		});
+	}
+	validate
+		.querySelector("button[type='submit']")
+		.addEventListener("click", (e) => {
+			const Inputs = [
+				...validate.querySelectorAll("input[required]"),
+				...validate.querySelectorAll("select[required]"),
+			];
+			Inputs.forEach((input) => {
+				if (input.value === "") {
+					input.style.borderWidth = "2px";
+					input.style.borderStyle = "solid";
+					input.style.borderColor = "red";
+					e.preventDefault();
+				} else {
+					input.style.borderWidth = "2px";
+					input.style.borderStyle = "solid";
+					input.style.borderColor = "green";
+				}
+			});
+		});
+});

@@ -5,11 +5,18 @@ router.get("/login", (req, res) => {
 });
 
 router.post("/login", async (req, res, next) => {
+	const fieldEmpty =
+		!!Object.keys(req.body).filter((k) => Object.values(req.body).at(k) === "")
+			.length > 0;
+	if (fieldEmpty) {
+		req.flash("error", "Veuillez renseigner tous les champs...");
+		return res.redirect(req.headers.referer);
+	}
 	passport.authenticate("local", {
 		failureRedirect: "/auth/login",
 		//successRedirect: "/",
 		successRedirect: "/auth/redirectLogin",
-		// failureFlash: true,
+		failureFlash: true,
 	})(req, res, next);
 });
 router.get("/redirectLogin", (req, res, next) => {

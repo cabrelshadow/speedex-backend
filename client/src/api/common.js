@@ -1,1 +1,1 @@
-export const BASE_URL = `http://localhost:8000/api/livreur/`;
+export const BASE_URL = `https://speedex.onrender.com/api/livreur/`;

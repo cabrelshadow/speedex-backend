@@ -20,7 +20,7 @@
                                 <th scope="col" width="20%">Date creation</th>
                                 <th scope="col" width="20%">Date Livraison</th>
                                 <th scope="col" width="20%">Status commande</th>
-                                <th scope="col" width="20%">Livrée</th>
+                                <th scope="col" width="20%"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -46,7 +46,7 @@
                                     <td>{{#if delievred}}
                                         <span class="badge bg-success">Commande livrée</span>
                                         {{else}}
-                                        <span class="badge bg-danger">Commande {{status}}</span>
+                                        <span class="badge bg-danger">Commande Annulée{{status}}</span>
                                     {{/if}}</td>
                                 </tr>
                             {{/each}}

@@ -60,15 +60,15 @@
                                 <td>{{name}}</td>
                                 <td>{{address_livraison}}</td>
                                 <td><span class="badge bg-danger">{{status_commande}}</span></td>
-                                <td><span class="badge bg-info">En cours</span></td>
+                                <td><span class="badge bg-info">{{status_commande}}</span></td>
                                 <td>{{#dateFormat createdAt "LLL"}}
                                     {{/dateFormat}}</td>
                                 <td>
                                     {{#if user_call_center}}
                                     Assigné à <span
-                                        class="badge rounded-pill bg-warning">{{call_center.fullname}}</span>
+                                        class="badge rounded-pill bg-info">{{call_center.fullname}}</span>
                                     {{else}}
-                                    <button class="btn btn-outline-info" data-bs-toggle="modal"
+                                    <button class="btn btn-primary" data-bs-toggle="modal"
                                         data-bs-target="#assignUser{{id}}">
                                         <i class="fas fa-share"></i>
                                         Assigner
@@ -107,7 +107,7 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-danger"
                                                     data-bs-dismiss="modal">Fermer</button>
-                                                <button type="submit" class="btn btn-info">Enregistrer</button>
+                                                <button type="submit" class="btn btn-primary">Enregistrer</button>
                                                 </form>
                                             </div>
                                         </div>

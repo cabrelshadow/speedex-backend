@@ -23,7 +23,7 @@ const expressHandlebars = require("express-handlebars");
 const {
 	allowInsecurePrototypeAccess,
 } = require("@handlebars/allow-prototype-access");
-const { Server } = require("socket.io");
+/* const { Server } = require("socket.io"); */
 app.use(cors());
 app.use(express.static("public"));
 app.use(express.json());
@@ -150,7 +150,7 @@ const httpServer = http.createServer(app);
 httpServer.listen(port, () => {
 	console.log("Run server on port " + port);
 });
-const io = new Server(httpServer, { cors: { origin: "*" } });
+/* const io = new Server(httpServer, { cors: { origin: "*" } });
 
 io.on("connection", async (socket) => {
 	console.log("a user connect");
@@ -162,3 +162,4 @@ io.on("connection", async (socket) => {
 });
 
 app.io = io;
+ */

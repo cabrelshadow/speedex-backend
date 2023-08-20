@@ -14,10 +14,10 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "ciscodev",
+    "password": "ku5gUfQ7LAcSrnyCQZGzkFaDIJAvUcst",
+    "database": "speedexdb",
+    "host": "postgres://ciscodev:ku5gUfQ7LAcSrnyCQZGzkFaDIJAvUcst@dpg-cjgvnvk1ja0c738rrcgg-a.oregon-postgres.render.com/speedexdb",
+    "dialect": "postgres"
   }
 }
